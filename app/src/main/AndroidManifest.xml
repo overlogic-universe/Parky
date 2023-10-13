@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Parky"
         tools:targetApi="33" >
         <activity
-            android:name=".HomeAdminActivity"
+            android:name=".ui.HomeAdminActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
