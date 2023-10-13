@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">parky</string>
+    <string name="app_name">Parky</string>
     <string name="welcome_back">Welcome Back!</string>
     <string name="login_in_to_your_existant_account">Login in to your existant account</string>
     <string name="password">Password</string>
