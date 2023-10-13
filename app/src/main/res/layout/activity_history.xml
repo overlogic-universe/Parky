@@ -13,7 +13,7 @@
         android:background="@color/primaryColor"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        android:paddingTop="20dp">
+        android:paddingTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                 android:fontFamily="@font/poppinsmedium"
                 android:text="@string/motor_masuk"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
                 android:fontFamily="@font/poppinsmedium"
                 android:text="@string/motor_keluar"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
