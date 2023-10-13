@@ -56,7 +56,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@drawable/border_radius"/>
+                android:background="@drawable/border_radius_15"
+                android:backgroundTint="@color/grey"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,9 +71,12 @@
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_circle_down_24" />
 
             <View
+                android:id="@+id/v_history"
                 android:layout_width="match_parent"
+                android:clickable="true"
                 android:layout_height="100dp"
-                android:background="@drawable/border_radius"/>
+                android:background="@drawable/border_radius_15"
+                android:backgroundTint="@color/grey"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,7 +92,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/border_radius"/>
+                android:background="@drawable/border_radius_15"
+                android:backgroundTint="@color/grey"/>
         </LinearLayout>
 
     </ScrollView>
