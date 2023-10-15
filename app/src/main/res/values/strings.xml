@@ -15,4 +15,9 @@
     <string name="_12_23_49">12:23:49</string>
     <string name="sedang_parkir">Sedang parkir</string>
     <string name="pengaturan">Pengaturan</string>
+    <string name="f04042005">F04042005</string>
+    <string name="back_to_admin_home_page">back to admin home page</string>
+    <string name="selamat_datang">Selamat Datang,</string>
+    <string name="admin">ADMIN</string>
+    <string name="header_image_login">header image login</string>
 </resources>
