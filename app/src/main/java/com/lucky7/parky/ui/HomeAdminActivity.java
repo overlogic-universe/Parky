@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.TextView;
 
 import com.lucky7.parky.R;
 
@@ -18,12 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeAdminActivity extends AppCompatActivity {
-    private View viewHistory;
+    private TextView tvHistory;
+    private TextView tvUser;
     ViewPager2 viewPager2;
     private Handler slideHandler = new Handler();
 
     private void initView(){
-        viewHistory = findViewById(R.id.v_history);
+        tvHistory = findViewById(R.id.tv_history);
+        tvUser = findViewById(R.id.tv_user);
         viewPager2 = findViewById(R.id.viewPager);
     }
 
@@ -71,11 +74,17 @@ public class HomeAdminActivity extends AppCompatActivity {
             }
         });
 
-
-        viewHistory.setOnClickListener(v->{
+//onclick listener
+        tvHistory.setOnClickListener(v->{
             startActivity(new Intent(this, HistoryActivity.class));
         });
+
+        tvUser.setOnClickListener(v->{
+            startActivity(new Intent(this, UserListActivity.class));
+        });
     }
+
+
 
     private Runnable sliderRunnable = new Runnable() {
         @Override

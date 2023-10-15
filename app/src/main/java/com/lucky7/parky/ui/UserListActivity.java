@@ -7,20 +7,21 @@ import android.widget.ImageView;
 
 import com.lucky7.parky.R;
 
-public class HistoryActivity extends AppCompatActivity {
-    private ImageView ivArrowBack;
+public class UserListActivity extends AppCompatActivity {
+    private ImageView ivBackToHomeAdmin;
 
     private void initView(){
-        ivArrowBack = findViewById(R.id.iv_back_to_home_admin);
+        ivBackToHomeAdmin = findViewById(R.id.iv_back_to_home_admin);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
+        setContentView(R.layout.activity_user_list);
 
         initView();
 
-        ivArrowBack.setOnClickListener(v->{
+        ivBackToHomeAdmin.setOnClickListener(v->{
             super.getOnBackPressedDispatcher().onBackPressed();
         });
     }
