@@ -87,11 +87,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:drawableStart="@drawable/baseline_school_24"
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/poppinsbold"
                 android:text="@string/universitas_muhammadiyah_surakarta"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/baseline_school_24" />
         </LinearLayout>
 
         <View
