@@ -1,9 +1,9 @@
-package com.lucky7.parky.ui;
+package com.lucky7.parky.model;
 
 public class SlideItem {
     private int image;
 
-    SlideItem(int image){
+    public SlideItem(int image){
         this.image = image;
     }
 

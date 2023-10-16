@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.lucky7.parky.R;
+import com.lucky7.parky.model.SlideItem;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;

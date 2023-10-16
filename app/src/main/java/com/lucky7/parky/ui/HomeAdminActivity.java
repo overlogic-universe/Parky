@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lucky7.parky.R;
+import com.lucky7.parky.model.SlideItem;
 
 import java.util.ArrayList;
 import java.util.List;
