@@ -64,22 +64,11 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <LinearLayout
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:src="@drawable/baseline_delete_24" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:src="@drawable/baseline_edit_24" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/baseline_delete_24" />
-                </LinearLayout>
             </LinearLayout>
 
 
@@ -90,7 +79,7 @@
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/poppinsbold"
                 android:text="@string/universitas_muhammadiyah_surakarta"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:drawableStartCompat="@drawable/baseline_school_24" />
         </LinearLayout>
 
