@@ -15,8 +15,8 @@ import java.util.List;
 
 public class SlideAdapter extends  RecyclerView.Adapter<SlideAdapter.SlideViewHolder>{
 
-    private List<SlideItem> slideItems;
-    private ViewPager2 viewPager2;
+    private final List<SlideItem> slideItems;
+    private final ViewPager2 viewPager2;
 
     SlideAdapter(List<SlideItem> slideItems, ViewPager2 viewPager2) {
         this.slideItems = slideItems;
@@ -49,8 +49,8 @@ public class SlideAdapter extends  RecyclerView.Adapter<SlideAdapter.SlideViewHo
         return slideItems.size();
     }
 
-    class SlideViewHolder extends RecyclerView.ViewHolder{
-        private RoundedImageView imageView;
+    static class SlideViewHolder extends RecyclerView.ViewHolder{
+        private final RoundedImageView imageView;
 
         public SlideViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,7 +62,7 @@ public class SlideAdapter extends  RecyclerView.Adapter<SlideAdapter.SlideViewHo
         }
     }
 
-    private  Runnable runnable = new Runnable() {
+    private final Runnable runnable = new Runnable() {
         @Override
         public void run() {
             slideItems.addAll(slideItems);

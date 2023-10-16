@@ -49,6 +49,7 @@ public class HomeAdminActivity extends AppCompatActivity {
 
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);
+        viewPager2.setCurrentItem(2, false);
         viewPager2.setOffscreenPageLimit(5);
         viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
@@ -86,7 +87,7 @@ public class HomeAdminActivity extends AppCompatActivity {
 
 
 
-    private Runnable sliderRunnable = new Runnable() {
+    private final Runnable sliderRunnable = new Runnable() {
         @Override
         public void run() {
             viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
