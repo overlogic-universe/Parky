@@ -1,13 +1,14 @@
-package com.lucky7.parky.ui;
+package com.lucky7.parky.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.lucky7.parky.R;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBackToHomeAdmin;
 
     private void initView(){
@@ -21,8 +22,13 @@ public class UserListActivity extends AppCompatActivity {
 
         initView();
 
-        ivBackToHomeAdmin.setOnClickListener(v->{
+        ivBackToHomeAdmin.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.iv_back_to_home_admin){
             super.getOnBackPressedDispatcher().onBackPressed();
-        });
+        }
     }
 }

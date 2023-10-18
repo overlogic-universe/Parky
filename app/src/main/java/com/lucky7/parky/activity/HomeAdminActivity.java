@@ -1,4 +1,4 @@
-package com.lucky7.parky.ui;
+package com.lucky7.parky.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,19 +12,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.lucky7.parky.R;
+import com.lucky7.parky.adapter.SlideAdapter;
 import com.lucky7.parky.model.SlideItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeAdminActivity extends AppCompatActivity {
+public class HomeAdminActivity extends AppCompatActivity implements View.OnClickListener  {
     private ImageView ivHistory;
     private ImageView ivUser;
     ViewPager2 viewPager2;
-    private Handler slideHandler = new Handler();
+    private final Handler slideHandler = new Handler();
 
     private void initView(){
         ivHistory = findViewById(R.id.iv_history);
@@ -77,14 +77,20 @@ public class HomeAdminActivity extends AppCompatActivity {
             }
         });
 
-//onclick listener
-        ivHistory.setOnClickListener(v->{
-            startActivity(new Intent(this, HistoryActivity.class));
-        });
+        //onclick listener
+        ivHistory.setOnClickListener(this);
+        ivUser.setOnClickListener(this);
 
-        ivUser.setOnClickListener(v->{
+    }
+
+    //onclick listener
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.iv_history) {
+            startActivity(new Intent(this, HistoryActivity.class));
+        } else if (v.getId() == R.id.iv_user) {
             startActivity(new Intent(this, UserListActivity.class));
-        });
+        }
     }
 
 

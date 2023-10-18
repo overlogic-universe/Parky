@@ -1,14 +1,15 @@
-package com.lucky7.parky.ui;
+package com.lucky7.parky.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import com.lucky7.parky.R;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnLogin;
 
     private void initView(){
@@ -22,8 +23,13 @@ public class LoginActivity extends AppCompatActivity {
 
         initView();
 
-        btnLogin.setOnClickListener(v -> {
+        btnLogin.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.btn_login){
             startActivity(new Intent(this, HomeAdminActivity.class));
-        });
+        }
     }
 }

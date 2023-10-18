@@ -1,4 +1,4 @@
-package com.lucky7.parky.ui;
+package com.lucky7.parky.fragment;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.lucky7.parky.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UserListFragment#newInstance} factory method to
+ * Use the {@link HistoryListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserListFragment extends Fragment {
+public class HistoryListFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class UserListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UserListFragment() {
+    public HistoryListFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class UserListFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment UserListFragment.
+     * @return A new instance of fragment HistoryListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static UserListFragment newInstance(String param1, String param2) {
-        UserListFragment fragment = new UserListFragment();
+    public static HistoryListFragment newInstance(String param1, String param2) {
+        HistoryListFragment fragment = new HistoryListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class UserListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_list, container, false);
+        return inflater.inflate(R.layout.fragment_history_list, container, false);
     }
 }

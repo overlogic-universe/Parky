@@ -1,4 +1,4 @@
-package com.lucky7.parky.ui;
+package com.lucky7.parky.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +19,7 @@ public class SlideAdapter extends  RecyclerView.Adapter<SlideAdapter.SlideViewHo
     private final List<SlideItem> slideItems;
     private final ViewPager2 viewPager2;
 
-    SlideAdapter(List<SlideItem> slideItems, ViewPager2 viewPager2) {
+    public SlideAdapter(List<SlideItem> slideItems, ViewPager2 viewPager2) {
         this.slideItems = slideItems;
         this.viewPager2 = viewPager2;
     }
