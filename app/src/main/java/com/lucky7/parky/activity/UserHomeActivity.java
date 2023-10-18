@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.lucky7.parky.R;
 
-public class UserActivity extends AppCompatActivity {
+public class UserHomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user);
+        setContentView(R.layout.activity_user_home);
     }
 }

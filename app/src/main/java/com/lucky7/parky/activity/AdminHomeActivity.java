@@ -20,7 +20,7 @@ import com.lucky7.parky.model.SlideItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeAdminActivity extends AppCompatActivity implements View.OnClickListener  {
+public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener  {
     private ImageView ivHistory;
     private ImageView ivUser;
     ViewPager2 viewPager2;
@@ -35,7 +35,7 @@ public class HomeAdminActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_admin);
+        setContentView(R.layout.activity_admin_home);
 
         initView();
 

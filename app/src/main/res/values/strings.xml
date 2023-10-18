@@ -26,4 +26,9 @@
     <string name="universitas_muhammadiyah_surakarta">Universitas Muhammadiyah Surakarta</string>
     <string name="parky_logo">parky logo</string>
     <string name="daftar_pengguna">Daftar Pengguna</string>
+    <string name="decoration">decoration</string>
+    <string name="username">Username</string>
+    <string name="waktu">Waktu</string>
+    <string name="plat">Plat</string>
+    <string name="scan_here">SCAN HERE</string>
 </resources>

@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_login){
-            startActivity(new Intent(this, HomeAdminActivity.class));
+            startActivity(new Intent(this, UserHomeActivity.class));
         }
     }
 }

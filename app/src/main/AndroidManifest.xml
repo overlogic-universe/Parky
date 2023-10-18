@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Parky"
         tools:targetApi="33">
         <activity
-            android:name=".activity.UserActivity"
+            android:name=".activity.UserHomeActivity"
             android:exported="false" />
         <activity
             android:name=".activity.UserListActivity"
@@ -22,7 +22,7 @@
             android:name=".activity.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.HomeAdminActivity"
+            android:name=".activity.AdminHomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
