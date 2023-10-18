@@ -37,6 +37,7 @@
             android:layout_marginBottom="50dp"/>
 
         <EditText
+            android:id="@+id/ed_email"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:drawableStart="@drawable/ic_baseline_alternate_email_24"
@@ -49,6 +50,7 @@
             android:focusableInTouchMode="true"
             />
         <EditText
+            android:id="@+id/ed_pass"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:drawableStart="@drawable/ic_baseline_lock_open_24"
@@ -58,7 +60,6 @@
             android:layout_marginHorizontal="5dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-
             />
 
         <TextView
