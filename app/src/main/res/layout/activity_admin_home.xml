@@ -125,18 +125,22 @@
                         android:layout_height="0dp"
                         android:layout_weight="1" />
 
-                    <TextView
+                    <ImageView
+                        android:id="@+id/iv_admin"
                         android:layout_width="150dp"
                         android:layout_height="80dp"
+                        android:clickable="true"
                         android:background="@drawable/admin"
                          />
                 </LinearLayout>
 
-                <TextView
+                <ImageView
+                    android:id="@+id/iv_scan_code_admin"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="15dp"
+                    android:clickable="true"
                     android:background="@drawable/scan" />
             </LinearLayout>
         </LinearLayout>
