@@ -28,14 +28,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener  {
-    private ImageView ivHistory;
-    private ImageView ivUser;
+    private ImageView ivHistory, ivUser, ivAdmin;
     ViewPager2 viewPager2;
     private final Handler slideHandler = new Handler();
 
     private void initView(){
         ivHistory = findViewById(R.id.iv_history);
         ivUser = findViewById(R.id.iv_user);
+        ivAdmin = findViewById(R.id.iv_admin);
         viewPager2 = findViewById(R.id.viewPager);
     }
 
@@ -87,6 +87,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         //onclick listener
         ivHistory.setOnClickListener(this);
         ivUser.setOnClickListener(this);
+        ivAdmin.setOnClickListener(this);
 
     }
 
@@ -97,6 +98,8 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             startActivity(new Intent(this, HistoryActivity.class));
         } else if (v.getId() == R.id.iv_user) {
             startActivity(new Intent(this, UserListActivity.class));
+        } else if (v.getId() == R.id.iv_admin) {
+            showBottomSheet();
         }
     }
 
