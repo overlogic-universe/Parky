@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener  {
-    private ImageView ivHistory, ivUser, ivAdmin;
+    private ImageView ivHistory, ivUser, ivAdmin, ivScanCode;
     ViewPager2 viewPager2;
     private final Handler slideHandler = new Handler();
 
@@ -36,6 +36,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         ivHistory = findViewById(R.id.iv_history);
         ivUser = findViewById(R.id.iv_user);
         ivAdmin = findViewById(R.id.iv_admin);
+        ivScanCode = findViewById(R.id.iv_scan_code_admin);
         viewPager2 = findViewById(R.id.viewPager);
     }
 
@@ -88,6 +89,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         ivHistory.setOnClickListener(this);
         ivUser.setOnClickListener(this);
         ivAdmin.setOnClickListener(this);
+        ivScanCode.setOnClickListener(this);
 
     }
 
@@ -98,7 +100,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             startActivity(new Intent(this, HistoryActivity.class));
         } else if (v.getId() == R.id.iv_user) {
             startActivity(new Intent(this, UserListActivity.class));
-        } else if (v.getId() == R.id.iv_admin) {
+        } else if (v.getId() == R.id.iv_scan_code_admin) {
             showBottomSheet();
         }
     }
@@ -106,7 +108,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
     private void showBottomSheet() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.bottom_sheet_scan);
+        dialog.setContentView(R.layout.fragment_scan_bottom_sheet);
 
         dialog.show();
         Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

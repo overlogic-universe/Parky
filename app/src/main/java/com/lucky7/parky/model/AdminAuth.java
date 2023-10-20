@@ -1,8 +1,12 @@
 package com.lucky7.parky.model;
 
-public class AdminAuth extends Auth{
-    public void doLogin(){
+public class AdminAuth {
+
+
+    public void dologin() {
+
     }
+
     public void deleteUser(){
     }
 }

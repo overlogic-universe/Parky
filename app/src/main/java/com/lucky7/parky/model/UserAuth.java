@@ -1,12 +1,11 @@
 package com.lucky7.parky.model;
 
-public class UserAuth extends Auth{
+public class UserAuth {
     String parkStatus;
     String nim;
     String plat;
     String barcodeId;
 
-@Override    
 public void dologin(){
 
     }

@@ -6,8 +6,5 @@ public abstract class Auth{
     String password;
     String id;
 
-public void doLogin(){
-
-}
-
+    public abstract void dologin();
 }
