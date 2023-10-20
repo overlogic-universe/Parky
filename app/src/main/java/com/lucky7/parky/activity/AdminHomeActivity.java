@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.lucky7.parky.R;
@@ -27,12 +28,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener  {
+public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivHistory, ivUser, ivAdmin, ivScanCode;
     ViewPager2 viewPager2;
     private final Handler slideHandler = new Handler();
 
-    private void initView(){
+    private void initView() {
         ivHistory = findViewById(R.id.iv_history);
         ivUser = findViewById(R.id.iv_user);
         ivAdmin = findViewById(R.id.iv_admin);
@@ -68,8 +69,8 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         compositePageTransform.addTransformer(new ViewPager2.PageTransformer() {
             @Override
             public void transformPage(@NonNull View page, float position) {
-               float r = 1- Math.abs(position);
-               page.setScaleY(0.85f + r * 0.15f);
+                float r = 1 - Math.abs(position);
+                page.setScaleY(0.85f + r * 0.15f);
             }
         });
 
@@ -109,6 +110,12 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.fragment_scan_bottom_sheet);
+
+        ImageView backButton = dialog.findViewById(R.id.iv_back_from_bottom_sheet); // Ubah dengan ID yang sesuai
+        backButton.setOnClickListener(v -> {
+                    dialog.dismiss();
+                }
+        );
 
         dialog.show();
         Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
