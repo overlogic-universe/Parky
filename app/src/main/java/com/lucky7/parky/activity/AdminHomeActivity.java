@@ -2,13 +2,16 @@ package com.lucky7.parky.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -17,7 +20,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.lucky7.parky.R;
@@ -32,6 +34,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
     private ImageView ivHistory, ivUser, ivAdmin, ivScanCode;
     ViewPager2 viewPager2;
     private final Handler slideHandler = new Handler();
+    boolean isAccept = false;
 
     private void initView() {
         ivHistory = findViewById(R.id.iv_history);
@@ -44,9 +47,11 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_admin_home);
 
         initView();
+
 
         List<SlideItem> slideItems = new ArrayList<>();
 
@@ -102,26 +107,8 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         } else if (v.getId() == R.id.iv_user) {
             startActivity(new Intent(this, UserListActivity.class));
         } else if (v.getId() == R.id.iv_scan_code_admin) {
-            showBottomSheet();
+            startActivity(new Intent(this, QRCodeScannerActivity.class));
         }
-    }
-
-    private void showBottomSheet() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.fragment_scan_bottom_sheet);
-
-        ImageView backButton = dialog.findViewById(R.id.iv_back_from_bottom_sheet);
-        backButton.setOnClickListener(v -> {
-                    dialog.dismiss();
-                }
-        );
-
-        dialog.show();
-        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
     private final Runnable sliderRunnable = new Runnable() {
@@ -130,6 +117,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
         }
     };
+
 
     @Override
     protected void onPause() {

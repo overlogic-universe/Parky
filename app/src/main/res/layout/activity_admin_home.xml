@@ -145,6 +145,7 @@
                     android:clickable="true"
                     android:background="@drawable/scan" />
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

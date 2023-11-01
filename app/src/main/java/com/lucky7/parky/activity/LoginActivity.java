@@ -38,15 +38,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(v.getId() == R.id.btn_login){
             String email = edEmail.getText().toString();
             String pass = edPass.getText().toString();
-            if(email.toLowerCase(Locale.ROOT).equals("admin@gmail.com") && pass.toLowerCase(Locale.ROOT).equals("admin123")){
-                startActivity(new Intent(this, AdminHomeActivity.class));
-                edEmail.setText("");
-                edPass.setText("");
-            } else if (email.toLowerCase(Locale.ROOT).equals("user@gmail.com") && pass.toLowerCase(Locale.ROOT).equals("user123")) {
-                startActivity(new Intent(this, UserHomeActivity.class));
-                edEmail.setText("");
-                edPass.setText("");
-            }
+            startActivity(new Intent(this, AdminHomeActivity.class));
+
+//            if(email.toLowerCase(Locale.ROOT).equals("admin@gmail.com") && pass.toLowerCase(Locale.ROOT).equals("admin123")){
+//                startActivity(new Intent(this, AdminHomeActivity.class));
+//                edEmail.setText("");
+//                edPass.setText("");
+//            } else if (email.toLowerCase(Locale.ROOT).equals("user@gmail.com") && pass.toLowerCase(Locale.ROOT).equals("user123")) {
+//                startActivity(new Intent(this, UserHomeActivity.class));
+//                edEmail.setText("");
+//                edPass.setText("");
+//            }
         }
     }
 }
