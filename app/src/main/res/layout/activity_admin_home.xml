@@ -114,20 +114,22 @@
 
                     <ImageView
                         android:id="@+id/iv_user"
-                        android:layout_width="150dp"
+                        android:layout_width="0dp"
                         android:layout_height="80dp"
+                        android:layout_weight="1"
                         android:background="@drawable/user"
                         android:clickable="true"
                          />
 
                     <View
-                        android:layout_width="0dp"
+                        android:layout_width="20dp"
                         android:layout_height="0dp"
-                        android:layout_weight="1" />
+                         />
 
                     <ImageView
                         android:id="@+id/iv_admin"
-                        android:layout_width="150dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="80dp"
                         android:clickable="true"
                         android:background="@drawable/admin"

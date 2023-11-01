@@ -111,7 +111,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.fragment_scan_bottom_sheet);
 
-        ImageView backButton = dialog.findViewById(R.id.iv_back_from_bottom_sheet); // Ubah dengan ID yang sesuai
+        ImageView backButton = dialog.findViewById(R.id.iv_back_from_bottom_sheet);
         backButton.setOnClickListener(v -> {
                     dialog.dismiss();
                 }
