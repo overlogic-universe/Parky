@@ -62,40 +62,16 @@
             android:drawableEnd="@drawable/baseline_search_24"
             android:hint="@string/cari_berdasarkan_plat"
             android:paddingHorizontal="20dp"
-            android:textColorHint="@color/grey" />
+            android:textColorHint="@color/grey"
+            android:layout_marginBottom="10dp"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:fontFamily="@font/poppinsmedium"
-                android:text="@string/motor_masuk"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinsmedium"
-                android:text="@string/motor_keluar"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
-        android:layout_below="@id/ll_header_history">
+        android:layout_below="@id/ll_header_history"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
