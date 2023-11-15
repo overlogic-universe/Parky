@@ -1,4 +1,4 @@
-package com.lucky7.parky;
+package com.lucky7.parky.fragment;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.lucky7.parky.R;
 
 public class ChangePasswordFragment extends Fragment {
     public ChangePasswordFragment() {

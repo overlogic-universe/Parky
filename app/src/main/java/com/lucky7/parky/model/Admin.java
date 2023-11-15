@@ -1,7 +1,6 @@
 package com.lucky7.parky.model;
 
-public class AdminAuth {
-
+public class Admin extends Authentication {
 
     public void dologin() {
 

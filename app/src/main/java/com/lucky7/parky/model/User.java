@@ -1,6 +1,6 @@
 package com.lucky7.parky.model;
 
-public class UserAuth {
+public class User extends  Authentication {
     String parkStatus;
     String nim;
     String plat;

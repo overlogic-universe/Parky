@@ -1,10 +1,12 @@
 package com.lucky7.parky.model;
 
-public abstract class Auth{
+public class Authentication {
     String name;
     String email;
     String password;
     String id;
 
-    public abstract void dologin();
+    public void dologin() {
+
+    }
 }
