@@ -6,6 +6,10 @@ public class User extends  Authentication {
     String plat;
     String barcodeId;
 
+    public User(String name,String email ,String password){
+        super(name, email, password);
+    }
+
 public void dologin(){
 
     }
