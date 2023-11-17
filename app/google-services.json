@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "130806571442",
+    "project_id": "parky-d9fed",
+    "storage_bucket": "parky-d9fed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130806571442:android:d37eb7d8573b35d6ad44ab",
+        "android_client_info": {
+          "package_name": "com.lucky7.parky"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3PInuMtrGcPhJy6LGEai_2xKVm2ExY_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
