@@ -6,8 +6,7 @@ public class Authentication {
     String email;
     String password;
 
-    public Authentication(String name, String email, String password) {
-        this.name = name;
+    public Authentication(String email, String password) {
         this.email = email;
         this.password = password;
     }
