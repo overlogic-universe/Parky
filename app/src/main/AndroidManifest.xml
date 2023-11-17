@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Parky"
         tools:targetApi="33">
         <activity
+            android:name=".activity.AddUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.QRCodeScannerActivity"
             android:exported="false" />
         <activity

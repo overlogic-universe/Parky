@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AddUserActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/login_img"
+            android:contentDescription="@string/header_image_login" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="40dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hello_admin"
+                android:textSize="30sp"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/poppinsbold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_user_data"
+                android:textColor="@color/grey"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="50dp"/>
+
+            <EditText
+                android:id="@+id/ed_username"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:hint="@string/username"
+                android:textColorHint="@color/grey"
+                android:drawablePadding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                />
+
+            <EditText
+                android:id="@+id/ed_user_nim"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableStart="@drawable/baseline_contact_emergency_24"
+                android:hint="@string/nim"
+                android:textColorHint="@color/grey"
+                android:drawablePadding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                />
+
+            <EditText
+                android:id="@+id/ed_user_plate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableStart="@drawable/baseline_directions_car_24"
+                android:hint="@string/plate"
+                android:textColorHint="@color/grey"
+                android:drawablePadding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                />
+
+            <EditText
+                android:id="@+id/ed_user_email"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableStart="@drawable/ic_baseline_alternate_email_24"
+                android:hint="@string/email_address"
+                android:textColorHint="@color/grey"
+                android:drawablePadding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                />
+            <EditText
+                android:id="@+id/ed_user_pass"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableStart="@drawable/ic_baseline_lock_open_24"
+                android:hint="@string/password"
+                android:textColorHint="@color/grey"
+                android:drawablePadding="10dp"
+                android:layout_marginHorizontal="5dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forgot_your_password"
+                android:textColor="@color/primaryColor"
+                android:layout_gravity="end"
+                android:fontFamily="@font/poppinsmedium"
+                />
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="@string/login"
+                android:fontFamily="@font/poppinsmedium"
+                android:textSize="14sp"
+                android:layout_marginVertical="20dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightGrey"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

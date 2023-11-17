@@ -108,6 +108,8 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             startActivity(new Intent(this, UserListActivity.class));
         } else if (v.getId() == R.id.iv_scan_code_admin) {
             startActivity(new Intent(this, QRCodeScannerActivity.class));
+        } else if (v.getId() == R.id.iv_admin) {
+            startActivity(new Intent(this, AddUserActivity.class));
         }
     }
 

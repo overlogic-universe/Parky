@@ -3,7 +3,7 @@ package com.lucky7.parky.model;
 public class User extends  Authentication {
     String parkStatus;
     String nim;
-    String plat;
+    String plate;
     String barcodeId;
 
     public User(String email ,String password){
@@ -58,12 +58,12 @@ public class User extends  Authentication {
         this.nim = nim;
     }
 
-    public String getPlat() {
-        return plat;
+    public String getPlate() {
+        return plate;
     }
 
-    public void setPlat(String plat) {
-        this.plat = plat;
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 
     public String getBarcodeId() {

@@ -40,4 +40,9 @@
     <string name="massukan_password_baru">massukan password baru</string>
     <string name="konfirmasi_password_baru">konfirmasi password baru</string>
     <string name="submit">Submit</string>
+    <string name="hello_admin">Hello Admin!</string>
+    <string name="add_user_data">Add user data</string>
+    <string name="name">Name</string>
+    <string name="plate">Plate</string>
+    <string name="nim">NIM</string>
 </resources>
