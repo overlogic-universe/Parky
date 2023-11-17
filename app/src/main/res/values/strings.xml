@@ -45,4 +45,5 @@
     <string name="name">Name</string>
     <string name="plate">Plate</string>
     <string name="nim">NIM</string>
+    <string name="back_from_user_add_activity">back from user add activity</string>
 </resources>

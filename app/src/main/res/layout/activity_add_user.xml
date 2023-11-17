@@ -7,133 +7,139 @@
     android:layout_height="match_parent"
     tools:context=".activity.AddUserActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/iv_back_from_add_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:clickable="true"
+            android:contentDescription="@string/back_from_user_add_activity"
+            android:src="@drawable/baseline_arrow_back_ios_new_24_black" />
+
+        <ImageView
+            android:id="@+id/iv_add_user"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/login_img"
-            android:contentDescription="@string/header_image_login" />
+            android:contentDescription="@string/header_image_login"
+            android:src="@drawable/login_img" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="40dp"
+            android:layout_below="@id/iv_add_user"
             android:orientation="vertical"
-            >
+            android:paddingHorizontal="40dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hello_admin"
-                android:textSize="30sp"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppinsbold"
-                />
+                android:text="@string/hello_admin"
+                android:textSize="30sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/add_user_data"
-                android:textColor="@color/grey"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="50dp"/>
+                android:layout_marginBottom="50dp"
+                android:text="@string/add_user_data"
+                android:textColor="@color/grey" />
 
             <EditText
                 android:id="@+id/ed_username"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableStart="@drawable/baseline_person_24"
-                android:hint="@string/username"
-                android:textColorHint="@color/grey"
-                android:drawablePadding="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawablePadding="10dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                />
+                android:hint="@string/username"
+                android:textColorHint="@color/grey" />
 
             <EditText
                 android:id="@+id/ed_user_nim"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableStart="@drawable/baseline_contact_emergency_24"
-                android:hint="@string/nim"
-                android:textColorHint="@color/grey"
-                android:drawablePadding="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/baseline_contact_emergency_24"
+                android:drawablePadding="10dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                />
+                android:hint="@string/nim"
+                android:textColorHint="@color/grey" />
 
             <EditText
                 android:id="@+id/ed_user_plate"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableStart="@drawable/baseline_directions_car_24"
-                android:hint="@string/plate"
-                android:textColorHint="@color/grey"
-                android:drawablePadding="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/baseline_directions_car_24"
+                android:drawablePadding="10dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                />
+                android:hint="@string/plate"
+                android:textColorHint="@color/grey" />
 
             <EditText
                 android:id="@+id/ed_user_email"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableStart="@drawable/ic_baseline_alternate_email_24"
-                android:hint="@string/email_address"
-                android:textColorHint="@color/grey"
-                android:drawablePadding="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/ic_baseline_alternate_email_24"
+                android:drawablePadding="10dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                />
+                android:hint="@string/email_address"
+                android:textColorHint="@color/grey" />
+
             <EditText
                 android:id="@+id/ed_user_pass"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:drawableStart="@drawable/ic_baseline_lock_open_24"
-                android:hint="@string/password"
-                android:textColorHint="@color/grey"
-                android:drawablePadding="10dp"
                 android:layout_marginHorizontal="5dp"
+                android:drawableStart="@drawable/ic_baseline_lock_open_24"
+                android:drawablePadding="10dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                />
+                android:hint="@string/password"
+                android:textColorHint="@color/grey" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/forgot_your_password"
-                android:textColor="@color/primaryColor"
                 android:layout_gravity="end"
                 android:fontFamily="@font/poppinsmedium"
-                />
+                android:text="@string/forgot_your_password"
+                android:textColor="@color/primaryColor" />
 
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:text="@string/login"
-                android:fontFamily="@font/poppinsmedium"
-                android:textSize="14sp"
                 android:layout_marginVertical="20dp"
-                />
+                android:fontFamily="@font/poppinsmedium"
+                android:text="@string/login"
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/lightGrey"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginBottom="10dp"
+                android:background="@color/lightGrey" />
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

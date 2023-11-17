@@ -47,7 +47,7 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:contentDescription="parky logo"
+                android:contentDescription="@string/parky_logo"
                 android:src="@drawable/logo_parky_transparent" />
 
         </LinearLayout>

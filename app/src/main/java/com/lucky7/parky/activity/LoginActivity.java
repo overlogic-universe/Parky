@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public Boolean validatePassword(String pass) {
         if (pass.isEmpty()) {
-            edEmail.setError("Password cannot be empty");
+            edPass.setError("Password cannot be empty");
             return false;
         } else {
             edEmail.setError(null);
