@@ -57,13 +57,13 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:autofillHints="search user"
             android:background="@drawable/border_radius_15"
             android:drawableEnd="@drawable/baseline_search_24"
             android:hint="@string/cari_berdasarkan_plat"
             android:paddingHorizontal="20dp"
-            android:textColorHint="@color/grey"
-            android:layout_marginBottom="10dp"/>
+            android:textColorHint="@color/grey" />
 
     </LinearLayout>
 
