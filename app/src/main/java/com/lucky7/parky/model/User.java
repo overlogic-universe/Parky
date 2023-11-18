@@ -6,6 +6,7 @@ public class User extends Authentication {
     private String plate;
     private String barcodeId;
 
+    public User(){};
     public User(String email, String password) {
         super(email, password);
     }

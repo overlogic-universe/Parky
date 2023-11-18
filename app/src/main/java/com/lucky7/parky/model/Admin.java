@@ -3,6 +3,8 @@ package com.lucky7.parky.model;
 public class Admin extends Authentication {
 
 
+    public Admin(){};
+
     public Admin(String email, String password) {
         super(email, password);
 
