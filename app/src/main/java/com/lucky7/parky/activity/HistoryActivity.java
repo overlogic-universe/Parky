@@ -8,12 +8,13 @@ import android.widget.ImageView;
 
 import com.lucky7.parky.R;
 
-public class HistoryActivity extends AppCompatActivity implements View.OnClickListener{
+public class HistoryActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivArrowBack;
 
-    private void initView(){
+    private void initView() {
         ivArrowBack = findViewById(R.id.iv_back_to_home_admin);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.iv_back_to_home_admin){
+        if (v.getId() == R.id.iv_back_to_home_admin) {
             super.getOnBackPressedDispatcher().onBackPressed();
         }
     }

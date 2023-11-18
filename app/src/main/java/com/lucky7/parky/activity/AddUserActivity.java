@@ -24,7 +24,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.iv_back_from_add_user){
+        if (v.getId() == R.id.iv_back_from_add_user) {
             getOnBackPressedDispatcher().onBackPressed();
         }
     }

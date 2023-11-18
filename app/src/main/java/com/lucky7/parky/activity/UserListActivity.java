@@ -11,7 +11,7 @@ import com.lucky7.parky.R;
 public class UserListActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBackToHomeAdmin;
 
-    private void initView(){
+    private void initView() {
         ivBackToHomeAdmin = findViewById(R.id.iv_back_to_home_admin);
     }
 
@@ -27,7 +27,7 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.iv_back_to_home_admin){
+        if (v.getId() == R.id.iv_back_to_home_admin) {
             super.getOnBackPressedDispatcher().onBackPressed();
         }
     }

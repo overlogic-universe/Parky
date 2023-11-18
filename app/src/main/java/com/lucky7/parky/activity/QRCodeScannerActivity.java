@@ -17,7 +17,7 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 import com.lucky7.parky.R;
 
-public class QRCodeScannerActivity extends AppCompatActivity implements View.OnClickListener{
+public class QRCodeScannerActivity extends AppCompatActivity implements View.OnClickListener {
     private CodeScanner mCodeScanner;
 
     @Override
@@ -47,7 +47,7 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.scanner_view){
+        if (v.getId() == R.id.scanner_view) {
             mCodeScanner.startPreview();
 
         } else if (v.getId() == R.id.iv_back_from_scanner) {
@@ -56,17 +56,15 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
     }
 
 
-
-
-    private void permissionCheck(){
-        if(checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String []{ Manifest.permission.CAMERA }, 12);
+    private void permissionCheck() {
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 12);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode != 12){
+        if (requestCode != 12) {
             permissionCheck();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -83,4 +81,4 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
         mCodeScanner.releaseResources();
         super.onPause();
     }
-    }
+}
