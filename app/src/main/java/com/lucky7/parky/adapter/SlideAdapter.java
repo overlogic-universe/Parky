@@ -14,7 +14,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
-public class SlideAdapter extends  RecyclerView.Adapter<SlideAdapter.SlideViewHolder>{
+public class SlideAdapter extends RecyclerView.Adapter<SlideAdapter.SlideViewHolder> {
 
     private final List<SlideItem> slideItems;
     private final ViewPager2 viewPager2;
@@ -40,7 +40,7 @@ public class SlideAdapter extends  RecyclerView.Adapter<SlideAdapter.SlideViewHo
     public void onBindViewHolder(@NonNull SlideViewHolder holder, int position) {
 
         holder.setImage(slideItems.get(position));
-        if(position == slideItems.size() - 2){
+        if (position == slideItems.size() - 2) {
             viewPager2.post(runnable);
         }
     }
@@ -50,7 +50,7 @@ public class SlideAdapter extends  RecyclerView.Adapter<SlideAdapter.SlideViewHo
         return slideItems.size();
     }
 
-    static class SlideViewHolder extends RecyclerView.ViewHolder{
+    static class SlideViewHolder extends RecyclerView.ViewHolder {
         private final RoundedImageView imageView;
 
         public SlideViewHolder(@NonNull View itemView) {
@@ -58,7 +58,7 @@ public class SlideAdapter extends  RecyclerView.Adapter<SlideAdapter.SlideViewHo
             imageView = itemView.findViewById(R.id.imageSlide);
         }
 
-        void setImage(SlideItem slideItem){
+        void setImage(SlideItem slideItem) {
             imageView.setImageResource(slideItem.getImage());
         }
     }
