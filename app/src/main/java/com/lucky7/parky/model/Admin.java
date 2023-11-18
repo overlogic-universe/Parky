@@ -3,8 +3,8 @@ package com.lucky7.parky.model;
 public class Admin extends Authentication {
 
 
-    public Admin(String email ,String password){
-        super( email, password);
+    public Admin(String email, String password) {
+        super(email, password);
 
     }
 
@@ -12,7 +12,7 @@ public class Admin extends Authentication {
 
     }
 
-    public void deleteUser(){
+    public void deleteUser() {
     }
 
     public String getName() {

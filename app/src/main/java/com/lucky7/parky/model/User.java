@@ -1,20 +1,20 @@
 package com.lucky7.parky.model;
 
-public class User extends  Authentication {
-    String parkStatus;
-    String nim;
-    String plate;
-    String barcodeId;
+public class User extends Authentication {
+    private String parkStatus;
+    private String nim;
+    private String plate;
+    private String barcodeId;
 
-    public User(String email ,String password){
+    public User(String email, String password) {
         super(email, password);
     }
 
-    public void changePass(){
+    public void changePass() {
 
     }
 
-    public void dologin(){
+    public void dologin() {
 
     }
 
@@ -73,7 +73,6 @@ public class User extends  Authentication {
     public void setBarcodeId(String barcodeId) {
         this.barcodeId = barcodeId;
     }
-
 
 
 }
