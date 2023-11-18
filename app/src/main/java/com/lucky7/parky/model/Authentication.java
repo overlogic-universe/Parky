@@ -5,6 +5,12 @@ public class Authentication {
     protected String email;
     protected String password;
 
+    public Authentication(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public Authentication(String email, String password) {
         this.email = email;
         this.password = password;

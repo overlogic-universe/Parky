@@ -9,6 +9,13 @@ public class User extends Authentication {
     public User(String email, String password) {
         super(email, password);
     }
+    public User(String name, String nim, String plate,String email, String password) {
+        super(name, email, password);
+        this.nim = nim;
+        this.plate = plate;
+        this.email = email;
+        this.password = password;
+    }
 
     public void changePass() {
 
