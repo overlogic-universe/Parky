@@ -53,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
-                        android:text="Plat : D93256F1"
+                        android:text="License plate : D93256F1"
                         android:textColor="@color/grey"
 
                         />
@@ -78,7 +78,7 @@
                 android:layout_marginTop="15dp"
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/poppinsbold"
-                android:text="@string/universitas_muhammadiyah_surakarta"
+                android:text="@string/muhammadiyah_university_of_surakarta"
                 android:textSize="12sp"
                 app:drawableStartCompat="@drawable/baseline_school_24" />
         </LinearLayout>

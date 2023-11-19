@@ -60,18 +60,18 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             String email =  edEmail.getText().toString();
             String password =  edPassword.getText().toString();
 
-            User user = new User(username,studentId, plate, "Sudah keluar" ,studentId,email, password );
+            User user = new User(username,studentId, plate, "Not Parked" ,studentId,email, password );
             reference.child("users").child(studentId).setValue(user)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             getOnBackPressedDispatcher().onBackPressed();
-                            Toast.makeText(this, "Berhasil menambahkan user.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "User successfully added", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(this, "Gagal menambahkan user.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "User failed to be added", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(e -> {
-                        Log.e("add user error", "Gagal menambahkan user: " + e.getMessage());
+                        Log.e("add user error", "User failed to be added: " + e.getMessage());
                         Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         }

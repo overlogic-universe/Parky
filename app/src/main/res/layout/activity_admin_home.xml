@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinsmedium"
                 android:paddingHorizontal="20dp"
-                android:text="@string/selamat_datang"
+                android:text="@string/welcome_back"
                 android:textSize="25sp" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/poppinsbold"
                 android:paddingHorizontal="20dp"
-                android:text="@string/aktivitas"
+                android:text="Activity"
                 android:textColor="@color/primaryColor"
                 android:textSize="20sp"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_circle_down_24" />
@@ -97,7 +97,7 @@
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/poppinsbold"
                 android:paddingHorizontal="20dp"
-                android:text="@string/pengaturan"
+                android:text="Settings"
                 android:textColor="@color/primaryColor"
                 android:textSize="20sp"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_circle_down_24" />

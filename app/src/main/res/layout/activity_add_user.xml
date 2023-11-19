@@ -91,7 +91,7 @@
                 android:drawablePadding="10dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="@string/plate"
+                android:hint="@string/license_plate"
                 android:textColorHint="@color/grey"
                 android:textSize="14sp"/>
 

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:adjustViewBounds="true"
-        android:contentDescription="@string/header_image_login"
+        android:contentDescription="Header image login"
         android:src="@drawable/login_img" />
 
     <LinearLayout
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="50dp"
-            android:text="@string/login_in_to_your_existant_account"
+            android:text="Log in to your existing account "
             android:textColor="@color/grey" />
 
         <EditText
@@ -77,7 +77,7 @@
             android:layout_height="55dp"
             android:layout_marginVertical="20dp"
             android:fontFamily="@font/poppinsmedium"
-            android:text="@string/login"
+            android:text="Login"
             android:textSize="14sp" />
 
         <View
