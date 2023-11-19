@@ -193,9 +193,9 @@
             <ImageView
                 android:id="@+id/iv_barcode"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/barcode"
-                android:translationY="-30dp"
+                android:layout_height="250dp"
+                android:translationY="-50dp"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="@id/ticket_shape"
                 app:layout_constraintStart_toStartOf="@id/ticket_shape"
                 app:layout_constraintTop_toBottomOf="@id/iv_line_ticket_shape" />
@@ -207,7 +207,7 @@
                 android:text="@string/scan_here"
                 android:textColor="@color/grey"
                 android:textSize="10sp"
-                android:translationY="-10dp"
+                android:translationY="-50dp"
                 app:layout_constraintEnd_toEndOf="@id/ticket_shape"
                 app:layout_constraintStart_toStartOf="@id/ticket_shape"
                 app:layout_constraintTop_toBottomOf="@id/iv_barcode" />
