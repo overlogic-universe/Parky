@@ -3,11 +3,23 @@ package com.lucky7.parky.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.DisplayCutout;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowInsets;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,19 +61,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String email = edEmail.getText().toString();
         String pass = edPass.getText().toString();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("users");
+
+        Log.d("dizzz" , email);
+        Log.d("dizzz" , pass);
+
 
         User user = new User(email, pass);
 
         if (v.getId() == R.id.btn_login) {
 
             if (!validateEmail(email) | !validatePassword(pass)) {
-
+                showLoginFailedDialog();
             } else {
                 if (email.toLowerCase(Locale.ROOT).equals("a") || pass.toLowerCase(Locale.ROOT).equals("a")) {
                     startActivity(new Intent(this, AdminHomeActivity.class));
-
                 } else {
                     checkUser(email, pass);
                 }
@@ -73,45 +86,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public Boolean validateEmail(String email) {
         if (email.isEmpty()) {
-            edEmail.setError("Email cannot be empty");
             return false;
         } else {
-            edEmail.setError(null);
             return true;
         }
     }
 
     public Boolean validatePassword(String pass) {
         if (pass.isEmpty()) {
-            edPass.setError("Password cannot be empty");
             return false;
         } else {
-            edEmail.setError(null);
             return true;
         }
     }
 
     public void checkUser(String userEmail, String userPassword) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("email").equalTo(userEmail);
+        Query checkUserDatabase = reference.orderByChild("nim").equalTo(userEmail);
 
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    edEmail.setError(null);
-                    String passwordFromDB = snapshot.child(userEmail.toLowerCase()).child("password").getValue(String.class);
+                    String passwordFromDB = snapshot.child(userEmail).child("password").getValue(String.class);
 
-                    if (!Objects.equals(passwordFromDB, userPassword.toLowerCase())) {
-                        edEmail.setError(null);
+                    if (Objects.equals(passwordFromDB, userPassword)) {
                         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
                         startActivity(intent);
                     } else {
-                        edPass.setError("Invalid Credentials");
                         edPass.requestFocus();
                     }
                 } else {
-                    edEmail.setError("User does not exist");
                     edEmail.requestFocus();
                 }
             }
@@ -121,5 +126,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
+    }
+
+    private void showLoginFailedDialog(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.login_failed_dialog);
+
+        dialog.show();
+        Objects.requireNonNull(dialog.getWindow()).getAttributes().windowAnimations = R.style.BottomSheetAnimation;
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 2000);
+
     }
 }

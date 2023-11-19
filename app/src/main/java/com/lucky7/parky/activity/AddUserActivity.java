@@ -61,19 +61,19 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             String password =  edPassword.getText().toString();
 
             User user = new User(username,NIM, plate, email, password );
-            reference.child("users").child(NIM).setValue(user)
+            reference.child("users").child(email).setValue(user)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(AddUserActivity.this, AdminHomeActivity.class);
+                            Intent intent = new Intent(this, AdminHomeActivity.class);
                             startActivity(intent);
-                            Toast.makeText(AddUserActivity.this, "Berhasil menambahkan user.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Berhasil menambahkan user.", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(AddUserActivity.this, "Gagal menambahkan user.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Gagal menambahkan user.", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnFailureListener(e -> {
                         Log.e("add user error", "Gagal menambahkan user: " + e.getMessage());
-                        Toast.makeText(AddUserActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         }
     }
