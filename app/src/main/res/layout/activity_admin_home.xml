@@ -11,31 +11,44 @@
         android:id="@+id/ll_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:paddingTop="15dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="112dp"
-            android:layout_height="40dp"
-            android:layout_gravity="start"
-            android:scaleType="fitCenter"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/logo_parky_with_text" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="112dp"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/logo_parky_with_text" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:src="@drawable/baseline_logout_24_blue" />
+
+        </LinearLayout>
+
         <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:background="@color/lightGrey" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="start"
-            android:scaleType="fitCenter"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:src="@drawable/baseline_logout_24_blue" />
     </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -47,7 +60,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingVertical="20dp">
+            android:paddingTop="15dp"
+            android:paddingBottom="20dp"
+            >
 
             <TextView
                 android:layout_width="wrap_content"

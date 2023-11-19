@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("dizzz", snapshot.toString());
                 if (snapshot.exists()) {
                     String passwordFromDB = snapshot.child(studentId).child("password").getValue(String.class);
 
