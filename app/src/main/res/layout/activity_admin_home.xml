@@ -17,6 +17,7 @@
             android:layout_width="112dp"
             android:layout_height="40dp"
             android:layout_gravity="start"
+            android:scaleType="fitCenter"
             android:layout_marginTop="10dp"
             android:src="@drawable/logo_parky_with_text" />
 
@@ -73,7 +74,7 @@
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/poppinsbold"
                 android:paddingHorizontal="20dp"
-                android:text="Activity"
+                android:text="@string/activity"
                 android:textColor="@color/primaryColor"
                 android:textSize="20sp"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_circle_down_24" />
@@ -97,7 +98,7 @@
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/poppinsbold"
                 android:paddingHorizontal="20dp"
-                android:text="Settings"
+                android:text="@string/settings"
                 android:textColor="@color/primaryColor"
                 android:textSize="20sp"
                 app:drawableEndCompat="@drawable/ic_baseline_arrow_circle_down_24" />
@@ -118,6 +119,7 @@
                         android:layout_width="0dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
+                        android:scaleType="fitCenter"
                         android:background="@drawable/user"
                         android:clickable="true" />
 
@@ -130,6 +132,7 @@
                         android:layout_width="0dp"
                         android:layout_height="80dp"
                         android:layout_weight="1"
+                        android:scaleType="fitCenter"
                         android:background="@drawable/admin"
                         android:clickable="true" />
                 </LinearLayout>
