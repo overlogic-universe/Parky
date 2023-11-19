@@ -1,5 +1,7 @@
 package com.lucky7.parky.model;
 
+import android.os.Parcel;
+
 public class Authentication {
     protected String name;
     protected String email;
@@ -45,4 +47,5 @@ public class Authentication {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

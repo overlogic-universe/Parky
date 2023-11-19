@@ -1,22 +1,28 @@
 package com.lucky7.parky.model;
 
-public class User extends Authentication {
-    private String parkStatus;
-    private String studentId;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class User extends Authentication implements Parcelable {
     private String plate;
+    private String studentId;
+    private String parkStatus;
     private String barcodeId;
 
     public User(){};
     public User(String email, String password) {
         super(email, password);
     }
-    public User(String name, String studentId, String plate,String email, String password) {
+    public User(String name, String studentId, String plate,String parkStatus, String barcodeId, String email, String password) {
         super(name, email, password);
-        this.studentId = studentId;
         this.plate = plate;
-        this.email = email;
-        this.password = password;
+        this.studentId = studentId;
+        this.parkStatus = parkStatus;
+        this.barcodeId = barcodeId;
     }
+
 
     public void changePass() {
 
@@ -58,11 +64,11 @@ public class User extends Authentication {
         this.parkStatus = parkStatus;
     }
 
-    public String getNim() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setNim(String studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
@@ -82,5 +88,40 @@ public class User extends Authentication {
         this.barcodeId = barcodeId;
     }
 
+
+    protected User(Parcel in) {
+        super(in.readString(), in.readString(), in.readString());
+        studentId = in.readString();
+        plate = in.readString();
+        parkStatus = in.readString();
+        barcodeId = in.readString();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(email);
+        parcel.writeString(password);
+        parcel.writeString(studentId);
+        parcel.writeString(plate);
+        parcel.writeString(parkStatus);
+        parcel.writeString(barcodeId);
+    }
 
 }

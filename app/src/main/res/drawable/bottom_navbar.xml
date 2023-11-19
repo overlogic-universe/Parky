@@ -1,19 +1,4 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="rectangle">
-            <corners android:radius="30dp" />
-            <solid android:color="#36000000" />
-            <padding
-                android:bottom="4dp"
-                android:left="4dp"
-                android:right="1dp"
-                android:top="1dp" />
-        </shape>
-    </item>
-    <item>
-        <shape android:shape="rectangle">
-            <corners android:radius="30dp" />
-            <solid android:color="@color/white" />
-        </shape>
-    </item>
-</layer-list>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white"/>
+    <corners android:radius="20dp"/>
+</shape>

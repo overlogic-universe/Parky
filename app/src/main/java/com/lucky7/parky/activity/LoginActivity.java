@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,61 +49,67 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         initView();
 
-
         btnLogin.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
-        String email = edStudentId.getText().toString();
+        String studentId = edStudentId.getText().toString();
         String pass = edPass.getText().toString();
-
-        User user = new User(email, pass);
 
         if (v.getId() == R.id.btn_login) {
 
-            if (!validateEmail(email) | !validatePassword(pass)) {
+            if (!validateEmail(studentId) | !validatePassword(pass)) {
                 showLoginFailedDialog("Please fill it in!");
             } else {
-                if (email.toLowerCase(Locale.ROOT).equals("a") || pass.toLowerCase(Locale.ROOT).equals("a")) {
+                if (studentId.toLowerCase(Locale.ROOT).equals("a") || pass.toLowerCase(Locale.ROOT).equals("a")) {
                     startActivity(new Intent(this, AdminHomeActivity.class));
                 } else {
-                    checkUser(email, pass);
+                    checkUser(studentId, pass);
                 }
             }
-
-
         }
     }
 
-    public Boolean validateEmail(String email) {
-        return !email.isEmpty();
+    public Boolean validateEmail(String studentId) {
+        return !studentId.isEmpty();
     }
 
     public Boolean validatePassword(String pass) {
         return !pass.isEmpty();
     }
 
-    public void checkUser(String userEmail, String userPassword) {
+    public void checkUser(String studentId, String studentPassword) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("nim").equalTo(userEmail);
+        Query checkUserDatabase = reference.orderByChild("studentId").equalTo(studentId);
 
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.d("dizzz", snapshot.toString());
                 if (snapshot.exists()) {
-                    String passwordFromDB = snapshot.child(userEmail).child("password").getValue(String.class);
+                    String passwordFromDB = snapshot.child(studentId).child("password").getValue(String.class);
 
-                    if (Objects.equals(passwordFromDB, userPassword)) {
+                    if (Objects.equals(passwordFromDB, studentPassword)) {
+                        String name = snapshot.child(studentId).child("name").getValue(String.class);
+                        String studentIdData = snapshot.child(studentId).child("studentId").getValue(String.class);
+                        String plate = snapshot.child(studentId).child("plate").getValue(String.class);
+                        String parkStatus = snapshot.child(studentId).child("parkStatus").getValue(String.class);
+                        String barcodeId = snapshot.child(studentId).child("barcodeId").getValue(String.class);
+                        String email = snapshot.child(studentId).child("email").getValue(String.class);
+
+                        User user = new User(name, studentIdData, plate, parkStatus, barcodeId, email, studentPassword);
+
                         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
+                        intent.putExtra(UserHomeActivity.EXTRA_USER, user);
                         startActivity(intent);
                     } else {
-                        showLoginFailedDialog("Your email or password is wrong");
+                        showLoginFailedDialog("Your student ID or password is wrong");
                         edPass.requestFocus();
                     }
                 } else {
-                    showLoginFailedDialog("Your email or password is wrong");
+                    showLoginFailedDialog("Your student ID or password is wrong");
                     edStudentId.requestFocus();
                 }
             }

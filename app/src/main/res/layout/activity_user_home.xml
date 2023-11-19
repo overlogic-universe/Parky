@@ -69,10 +69,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/poppinsbold"
-                android:text="@string/username"
                 android:textColor="@color/primaryColor"
                 android:textSize="35sp"
-                android:translationY="-40dp"
+                android:translationY="-30dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_selamat_datang_user" />
 
@@ -115,7 +114,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinssemibold"
-                android:text="12.12.2023"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/tv_date"
                 app:layout_constraintTop_toBottomOf="@id/tv_date" />
@@ -128,7 +126,7 @@
                 android:layout_marginEnd="50dp"
                 android:fontFamily="@font/poppinssemibold"
                 android:gravity="start"
-                android:text="NIM"
+                android:text="@string/nim"
                 android:textColor="@color/grey"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/tv_the_nim"
@@ -140,7 +138,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="50dp"
                 android:fontFamily="@font/poppinssemibold"
-                android:text="L200220267"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/ticket_shape"
                 app:layout_constraintTop_toBottomOf="@id/tv_nim" />
@@ -162,7 +159,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppinssemibold"
-                android:text="AD 9900 XS"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/tv_the_date"
                 app:layout_constraintTop_toBottomOf="@id/tv_plat" />
@@ -190,7 +186,6 @@
                 android:backgroundTint="@color/primaryColor"
                 android:fontFamily="@font/poppinssemibold"
                 android:paddingHorizontal="10dp"
-                android:text="@string/sedang_parkir"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@id/tv_the_nim"
@@ -234,9 +229,10 @@
         android:layout_marginHorizontal="100dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/bottom_navbar"
+        android:elevation="10dp"
         android:orientation="horizontal"
         android:paddingHorizontal="20dp"
-        android:paddingVertical="5dp"
+        android:paddingVertical="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
