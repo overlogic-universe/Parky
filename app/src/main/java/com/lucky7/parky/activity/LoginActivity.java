@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void showLoginFailedDialog(String message){
-        String loginFailedMessage =getResources().getString(R.string.login_failed);
+        String loginFailedMessage = getResources().getString(R.string.login_failed);
         loginFailedMessage = message;
 
         final Dialog dialog = new Dialog(this);
