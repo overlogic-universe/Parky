@@ -9,17 +9,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.DisplayCutout;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowInsets;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,11 +31,12 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnLogin;
-    private EditText edEmail, edPass;
+    private EditText edStudentId, edPass;
+
 
     private void initView() {
         btnLogin = findViewById(R.id.btn_login);
-        edEmail = findViewById(R.id.ed_email);
+        edStudentId = findViewById(R.id.ed_student_id);
         edPass = findViewById(R.id.ed_pass);
     }
 
@@ -58,20 +55,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        String email = edEmail.getText().toString();
+        String email = edStudentId.getText().toString();
         String pass = edPass.getText().toString();
-
-
-        Log.d("dizzz" , email);
-        Log.d("dizzz" , pass);
-
 
         User user = new User(email, pass);
 
         if (v.getId() == R.id.btn_login) {
 
             if (!validateEmail(email) | !validatePassword(pass)) {
-                showLoginFailedDialog();
+                showLoginFailedDialog("Please fill it in!");
             } else {
                 if (email.toLowerCase(Locale.ROOT).equals("a") || pass.toLowerCase(Locale.ROOT).equals("a")) {
                     startActivity(new Intent(this, AdminHomeActivity.class));
@@ -85,19 +77,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public Boolean validateEmail(String email) {
-        if (email.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !email.isEmpty();
     }
 
     public Boolean validatePassword(String pass) {
-        if (pass.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !pass.isEmpty();
     }
 
     public void checkUser(String userEmail, String userPassword) {
@@ -114,10 +98,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
                         startActivity(intent);
                     } else {
+                        showLoginFailedDialog("Your email or password is wrong");
                         edPass.requestFocus();
                     }
                 } else {
-                    edEmail.requestFocus();
+                    showLoginFailedDialog("Your email or password is wrong");
+                    edStudentId.requestFocus();
                 }
             }
 
@@ -128,10 +114,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void showLoginFailedDialog(){
+    private void showLoginFailedDialog(String message){
+        String loginFailedMessage =getResources().getString(R.string.login_failed);
+        loginFailedMessage = message;
+
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.login_failed_dialog);
+        dialog.setContentView(R.layout.failed_dialog);
+
+        TextView tvLoginFailedDialog = dialog.findViewById(R.id.login_failed_dialog);
+        tvLoginFailedDialog.setText(loginFailedMessage);
 
         dialog.show();
         Objects.requireNonNull(dialog.getWindow()).getAttributes().windowAnimations = R.style.BottomSheetAnimation;

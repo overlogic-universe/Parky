@@ -23,7 +23,7 @@ import com.lucky7.parky.model.User;
 public class AddUserActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBackFromUserAdd;
     private EditText edUsername;
-    private EditText edNIM;
+    private EditText edStudentId;
     private EditText edPlate;
     private EditText edEmail;
     private EditText edPassword;
@@ -36,7 +36,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
         ivBackFromUserAdd = findViewById(R.id.iv_back_from_add_user);
         edUsername = findViewById(R.id.ed_username);
-        edNIM = findViewById(R.id.ed_user_nim);
+        edStudentId = findViewById(R.id.ed_user_student_id);
         edPlate = findViewById(R.id.ed_user_plate);
         edEmail = findViewById(R.id.ed_user_email);
         edPassword = findViewById(R.id.ed_user_pass);
@@ -55,16 +55,16 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
             String username =  edUsername.getText().toString();
-            String NIM =  edNIM.getText().toString();
+            String studentId =  edStudentId.getText().toString();
             String plate =  edPlate.getText().toString();
             String email =  edEmail.getText().toString();
             String password =  edPassword.getText().toString();
 
-            User user = new User(username,NIM, plate, email, password );
-            reference.child("users").child(email).setValue(user)
+            User user = new User(username,studentId, plate, email, password );
+            reference.child("users").child(studentId).setValue(user)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(this, AdminHomeActivity.class);
+                            Intent intent = new Intent(AddUserActivity.this, AdminHomeActivity.class);
                             startActivity(intent);
                             Toast.makeText(this, "Berhasil menambahkan user.", Toast.LENGTH_SHORT).show();
                         } else {

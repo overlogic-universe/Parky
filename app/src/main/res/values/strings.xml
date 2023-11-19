@@ -47,4 +47,6 @@
     <string name="nim">NIM</string>
     <string name="back_from_user_add_activity">back from user add activity</string>
     <string name="your_email_or_password_is_wrong">Your email or password is wrong</string>
+    <string name="login_failed">%s</string>
+    <string name="student_id">Student Id</string>
 </resources>

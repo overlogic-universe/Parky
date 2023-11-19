@@ -3,7 +3,7 @@
     android:id="@+id/login_failed_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/your_email_or_password_is_wrong"
+        android:text="@string/login_failed"
         android:background="@drawable/border_radius_5"
         android:textColor="@color/white"
         android:paddingVertical="13dp"
