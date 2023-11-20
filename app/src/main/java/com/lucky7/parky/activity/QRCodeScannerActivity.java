@@ -40,6 +40,7 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
         ImageView ivBackFromScanner = findViewById(R.id.iv_back_from_scanner);
         mCodeScanner = new CodeScanner(this, scannerView);
 
+        permissionCheck();
 
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
