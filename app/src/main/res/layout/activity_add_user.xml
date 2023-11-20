@@ -135,7 +135,7 @@
                 android:layout_height="55dp"
                 android:layout_marginVertical="20dp"
                 android:fontFamily="@font/poppinsmedium"
-                android:text="Add User"
+                android:text="@string/add_user"
                 android:textSize="14sp" />
 
             <View

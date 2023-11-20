@@ -11,18 +11,22 @@ public class User extends Authentication implements Parcelable {
     private String parkStatus;
     private String barcodeId;
 
-    public User(){};
+    private String parkingTime;
+
+    public User() {
+    }
+
     public User(String email, String password) {
         super(email, password);
     }
-    public User(String name, String studentId, String plate,String parkStatus, String barcodeId, String email, String password) {
+
+    public User(String name, String studentId, String plate, String parkStatus, String barcodeId, String email, String password) {
         super(name, email, password);
         this.plate = plate;
         this.studentId = studentId;
         this.parkStatus = parkStatus;
         this.barcodeId = barcodeId;
     }
-
 
     public void changePass() {
 
@@ -88,6 +92,13 @@ public class User extends Authentication implements Parcelable {
         this.barcodeId = barcodeId;
     }
 
+    public String getParkingTime() {
+        return parkingTime;
+    }
+
+    public void setParkingTime(String parkingTime) {
+        this.parkingTime = parkingTime;
+    }
 
     protected User(Parcel in) {
         super(in.readString(), in.readString(), in.readString());
@@ -95,6 +106,7 @@ public class User extends Authentication implements Parcelable {
         plate = in.readString();
         parkStatus = in.readString();
         barcodeId = in.readString();
+        parkingTime = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -108,6 +120,7 @@ public class User extends Authentication implements Parcelable {
             return new User[size];
         }
     };
+
     @Override
     public int describeContents() {
         return 0;
@@ -122,6 +135,7 @@ public class User extends Authentication implements Parcelable {
         parcel.writeString(plate);
         parcel.writeString(parkStatus);
         parcel.writeString(barcodeId);
+        parcel.writeString(parkingTime);
     }
 
 }
