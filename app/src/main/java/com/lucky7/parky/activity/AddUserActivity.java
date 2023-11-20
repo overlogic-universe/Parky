@@ -71,7 +71,6 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
                         }
                     })
                     .addOnFailureListener(e -> {
-                        Log.e("add user error", "User failed to be added: " + e.getMessage());
                         Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
         }
