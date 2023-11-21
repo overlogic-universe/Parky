@@ -2,6 +2,7 @@ package com.lucky7.parky.activity;
 
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -19,25 +20,20 @@ import com.lucky7.parky.model.User;
 import com.lucky7.parky.util.BarcodeEncoder;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class UserHomeActivity extends AppCompatActivity {
     public static final String EXTRA_USER = "extra_user";
-
     private User user;
-
-
     private TextView tvUsername;
     private TextView tvDate;
     private TextView tvStudentId;
     private TextView tvPlate;
     private TextView tvStatus;
-
     private ImageView ivBarcode;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,5 +82,7 @@ public class UserHomeActivity extends AppCompatActivity {
         }catch (WriterException e){
             throw new RuntimeException(e);
         }
+
+
     }
 }

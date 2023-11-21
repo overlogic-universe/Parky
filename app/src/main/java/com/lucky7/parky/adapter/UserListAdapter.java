@@ -13,11 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lucky7.parky.R;
 import com.lucky7.parky.model.User;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Member;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListViewHolder> {
-    private final ArrayList<User> userList;
+    private ArrayList<User> userList;
     private OnItemClickListener itemClickListener;
 
     public UserListAdapter(ArrayList<User> list) {
@@ -26,11 +29,13 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListVi
 
     public static class ListViewHolder extends RecyclerView.ViewHolder {
         TextView username;
+        TextView studentId;
         TextView licensePlate;
         ImageButton deleteUser;
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.tv_username_list);
+            studentId = itemView.findViewById(R.id.tv_student_id_list);
             licensePlate = itemView.findViewById(R.id.tv_license_plate_list);
             deleteUser = itemView.findViewById(R.id.ib_delete_user);
         }
@@ -46,6 +51,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListVi
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         User user = userList.get(position);
         holder.username.setText(user.getName());
+        holder.studentId.setText(user.getStudentId());
         holder.licensePlate.setText(user.getPlate());
         holder.deleteUser.setOnClickListener(view -> {
             itemClickListener.onItemClick(userList.get(position));
@@ -63,5 +69,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListVi
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.itemClickListener = listener;
+    }
+
+    public void setFilteredList(ArrayList<User> filteredList){
+        this.userList = filteredList;
+        notifyDataSetChanged();
     }
 }

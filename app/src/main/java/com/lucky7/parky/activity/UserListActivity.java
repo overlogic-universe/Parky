@@ -2,6 +2,7 @@ package com.lucky7.parky.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,15 +25,21 @@ import com.lucky7.parky.adapter.UserListAdapter;
 import com.lucky7.parky.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserListActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBackToHomeAdmin;
     private RecyclerView rvUserList;
     private final ArrayList<User> userList = new ArrayList<>();
+    private SearchView searchView;
+    private UserListAdapter userListAdapter;
+
 
     private void initView() {
         ivBackToHomeAdmin = findViewById(R.id.iv_back_to_home_admin);
         rvUserList = findViewById(R.id.rv_user_list);
+        searchView = findViewById(R.id.search_user_list);
+
     }
 
     @Override
@@ -46,7 +53,24 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
 
         getUserList();
 
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return false;
+            }
+        });
+
+
         ivBackToHomeAdmin.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -81,13 +105,14 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
 
     private void showUserList(){
         rvUserList.setLayoutManager(new LinearLayoutManager(this));
-        UserListAdapter userListAdapter = new UserListAdapter(userList);
+        userListAdapter = new UserListAdapter(userList);
         rvUserList.setAdapter(userListAdapter);
 
-        deleteUser(userListAdapter);
+        deleteUser();
+
     }
 
-    private  void deleteUser(UserListAdapter userListAdapter){
+    private  void deleteUser(){
         userListAdapter.setOnItemClickListener(new UserListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(User user) {
@@ -102,5 +127,20 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
                 });
             }
         });
+    }
+
+    private void filterList(String text){
+        ArrayList<User> filteredList = new ArrayList<>();
+        for(User user : userList){
+            if(user.getStudentId().toLowerCase().contains(text.toLowerCase()) || user.getName().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(user);
+            }
+        }
+
+        if(filteredList.isEmpty()){
+
+        }else{
+            userListAdapter.setFilteredList(filteredList);
+        }
     }
 }

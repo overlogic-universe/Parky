@@ -51,18 +51,18 @@
 
         </LinearLayout>
 
-        <EditText
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_user_list"
             android:layout_width="match_parent"
+            app:theme="@style/AppSearchView"
+            app:queryHint="@string/search_by_student_id"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
-            android:autofillHints="search user"
             android:background="@drawable/border_radius_15"
-            android:drawableEnd="@drawable/baseline_search_24"
-            android:hint="@string/search_by_license_plate"
-            android:paddingHorizontal="20dp"
             android:textSize="14sp"
-            android:textColorHint="@color/grey" />
+            app:iconifiedByDefault="false"
+            />
 
     </LinearLayout>
 

@@ -9,8 +9,6 @@ public class User extends Authentication implements Parcelable {
     private String plate;
     private String studentId;
     private String parkStatus;
-    private String barcodeId;
-
     private String parkingTime;
 
     public User() {
@@ -20,12 +18,11 @@ public class User extends Authentication implements Parcelable {
         super(email, password);
     }
 
-    public User(String name, String studentId, String plate, String parkStatus, String barcodeId, String email, String password) {
+    public User(String name, String studentId, String plate, String parkStatus, String email, String password) {
         super(name, email, password);
         this.plate = plate;
         this.studentId = studentId;
         this.parkStatus = parkStatus;
-        this.barcodeId = barcodeId;
     }
     @Override
     public String getName() {
@@ -81,14 +78,6 @@ public class User extends Authentication implements Parcelable {
         this.plate = plate;
     }
 
-    public String getBarcodeId() {
-        return barcodeId;
-    }
-
-    public void setBarcodeId(String barcodeId) {
-        this.barcodeId = barcodeId;
-    }
-
     public String getParkingTime() {
         return parkingTime;
     }
@@ -102,7 +91,6 @@ public class User extends Authentication implements Parcelable {
         studentId = in.readString();
         plate = in.readString();
         parkStatus = in.readString();
-        barcodeId = in.readString();
         parkingTime = in.readString();
     }
 
@@ -131,7 +119,6 @@ public class User extends Authentication implements Parcelable {
         parcel.writeString(studentId);
         parcel.writeString(plate);
         parcel.writeString(parkStatus);
-        parcel.writeString(barcodeId);
         parcel.writeString(parkingTime);
     }
 

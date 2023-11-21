@@ -51,13 +51,23 @@
                         android:textSize="14sp" />
 
                     <TextView
+                        android:id="@+id/tv_student_id_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppinsbold"
+                        tools:text="License plate : D93256F1"
+                        android:textColor="@color/grey"
+                        android:translationY="-3dp"
+                        />
+
+                    <TextView
                         android:id="@+id/tv_license_plate_list"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppinsbold"
                         tools:text="License plate : D93256F1"
                         android:textColor="@color/grey"
-
+                        android:translationY="-8dp"
                         />
                 </LinearLayout>
 
