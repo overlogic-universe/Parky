@@ -8,7 +8,7 @@
     <string name="username">Username</string>
     <string name="scan_here">SCAN HERE</string>
     <string name="photo_profile">Photo profile</string>
-    <string name="submit">Submit</string>
+    <string name="ok">Ok</string>
     <string name="hello_admin">Hello Admin!</string>
     <string name="add_user_data">Add user data</string>
     <string name="name">Name</string>
@@ -29,4 +29,6 @@
     <string name="back_to_admin_home_page">Back to admin home page</string>
     <string name="photo_profile_default">photo profile default</string>
     <string name="add_user">Add User</string>
+    <string name="are_you_sure_to_delete_this_user">Are you sure to delete this user?</string>
+    <string name="cancel">Cancel</string>
 </resources>
