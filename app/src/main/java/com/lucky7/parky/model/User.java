@@ -9,16 +9,19 @@ public class User extends Authentication implements Parcelable {
     private String plate;
     private String studentId;
     private String parkStatus;
+    private String parkingDate;
     private String parkingTime;
 
     public User() {
     }
 
-    public User(String name, String studentId, String plate, String parkStatus, String email, String password) {
+    public User(String name, String studentId, String plate, String parkStatus, String parkingDate,String parkingTime,String email, String password) {
         super(name, email, password);
         this.plate = plate;
         this.studentId = studentId;
         this.parkStatus = parkStatus;
+        this.parkingDate = parkingDate;
+        this.parkingTime = parkingTime;
     }
 
     @Override
@@ -69,6 +72,14 @@ public class User extends Authentication implements Parcelable {
 
     public String getPlate() {
         return plate;
+    }
+
+    public String getParkingDate() {
+        return parkingDate;
+    }
+
+    public void setParkingDate(String parkingDate) {
+        this.parkingDate = parkingDate;
     }
 
     public void setPlate(String plate) {

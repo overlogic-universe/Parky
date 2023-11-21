@@ -59,7 +59,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             String email = edEmail.getText().toString();
             String password = edPassword.getText().toString();
 
-            User user = new User(username, studentId, plate, "Not Parked", email, password);
+            User user = new User(username, studentId, plate, "Not Parked","", "", email, password);
             reference.child("users").child(studentId).setValue(user)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

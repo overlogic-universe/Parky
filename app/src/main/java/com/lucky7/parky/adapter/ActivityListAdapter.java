@@ -27,12 +27,16 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         TextView licensePlate;
         TextView studentId;
         TextView status;
+        TextView parkingDate;
+        TextView parkingTime;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             licensePlate = itemView.findViewById(R.id.tv_license_plate_activity);
             studentId = itemView.findViewById(R.id.tv_student_id_activity);
             status = itemView.findViewById(R.id.tv_status_activity);
+            parkingDate = itemView.findViewById(R.id.tv_date_activity);
+            parkingTime = itemView.findViewById(R.id.tv_time_activity);
         }
     }
 
@@ -49,6 +53,8 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         holder.licensePlate.setText(user.getPlate());
         holder.studentId.setText(user.getStudentId());
         holder.status.setText(user.getParkStatus());
+        holder.parkingDate.setText(user.getParkingDate());
+        holder.parkingTime.setText(user.getParkingTime());
     }
 
     @Override

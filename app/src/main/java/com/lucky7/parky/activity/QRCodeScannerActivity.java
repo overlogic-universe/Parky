@@ -26,7 +26,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 import com.lucky7.parky.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class QRCodeScannerActivity extends AppCompatActivity implements View.OnClickListener {
@@ -96,7 +100,18 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
 
                     if (currentParkStatus != null) {
                         String updatedParkStatus = (currentParkStatus.equals("Parked")) ? "Not Parked" : "Parked";
-                        snapshot.getRef().child("parkStatus").setValue(updatedParkStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                        Calendar calendar = Calendar.getInstance();
+                        Date currentDate = calendar.getTime();
+
+                        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentDate);
+                        String time = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(currentDate);
+
+                        Map<String, Object> updates = new HashMap<>();
+                        updates.put("parkStatus", updatedParkStatus);
+                        updates.put("parkingDate", date);
+                        updates.put("parkingTime", time);
+                        snapshot.getRef().updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

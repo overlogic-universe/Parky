@@ -96,9 +96,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         String studentIdData = snapshot.child(studentId).child("studentId").getValue(String.class);
                         String plate = snapshot.child(studentId).child("plate").getValue(String.class);
                         String parkStatus = snapshot.child(studentId).child("parkStatus").getValue(String.class);
+                        String parkingDate = snapshot.child(studentId).child("parkingDate").getValue(String.class);
+                        String parkingTime = snapshot.child(studentId).child("parkingTime").getValue(String.class);
                         String email = snapshot.child(studentId).child("email").getValue(String.class);
 
-                        User user = new User(name, studentIdData, plate, parkStatus, email, studentPassword);
+                        User user = new User(name, studentIdData, plate, parkStatus, parkingDate, parkingTime, email, studentPassword);
 
                         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
                         intent.putExtra(UserHomeActivity.EXTRA_USER, user);
