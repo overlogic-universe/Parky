@@ -20,10 +20,6 @@ public class Authentication {
         this.password = password;
     }
 
-    public void dologin() {
-
-    }
-
     public String getName() {
         return name;
     }

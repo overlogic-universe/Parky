@@ -27,35 +27,32 @@ public class User extends Authentication implements Parcelable {
         this.parkStatus = parkStatus;
         this.barcodeId = barcodeId;
     }
-
-    public void changePass() {
-
-    }
-
-    public void dologin() {
-
-    }
-
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
 
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
+    @Override
     public void setPassword(String password) {
         this.password = password;
     }

@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +28,6 @@ import java.util.ArrayList;
 public class UserListActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivBackToHomeAdmin;
     private RecyclerView rvUserList;
-
     private final ArrayList<User> userList = new ArrayList<>();
 
     private void initView() {
@@ -81,5 +83,24 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
         rvUserList.setLayoutManager(new LinearLayoutManager(this));
         UserListAdapter userListAdapter = new UserListAdapter(userList);
         rvUserList.setAdapter(userListAdapter);
+
+        deleteUser(userListAdapter);
+    }
+
+    private  void deleteUser(UserListAdapter userListAdapter){
+        userListAdapter.setOnItemClickListener(new UserListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(User user) {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                DatabaseReference dataRef = reference.child(user.getStudentId());
+
+                dataRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(UserListActivity.this, "Successfully delete user", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 }
