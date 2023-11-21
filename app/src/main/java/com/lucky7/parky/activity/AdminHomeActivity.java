@@ -91,7 +91,6 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        //onclick listener
         ivHistory.setOnClickListener(this);
         ivUser.setOnClickListener(this);
         ivAdmin.setOnClickListener(this);
@@ -99,7 +98,6 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    //onclick listener
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_history) {

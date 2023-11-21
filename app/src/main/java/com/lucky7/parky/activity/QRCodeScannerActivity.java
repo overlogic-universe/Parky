@@ -84,22 +84,22 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private void checkUser(String studentId){
+    private void checkUser(String studentId) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         DatabaseReference userRef = reference.child(studentId);
 
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     String currentParkStatus = snapshot.child("parkStatus").getValue(String.class);
 
-                    if(currentParkStatus != null){
-                        String updatedParkStatus = (currentParkStatus.equals("Parked"))? "Not Parked" : "Parked";
+                    if (currentParkStatus != null) {
+                        String updatedParkStatus = (currentParkStatus.equals("Parked")) ? "Not Parked" : "Parked";
                         snapshot.getRef().child("parkStatus").setValue(updatedParkStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Toast.makeText(QRCodeScannerActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(QRCodeScannerActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
@@ -107,7 +107,7 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
                             }
                         });
                     }
-                }else {
+                } else {
                     Toast.makeText(QRCodeScannerActivity.this, "User not found", Toast.LENGTH_SHORT).show();
                 }
             }

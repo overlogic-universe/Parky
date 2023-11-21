@@ -1,7 +1,7 @@
 package com.lucky7.parky.model;
 
 public class SlideItem {
-    private int image;
+    private final int image;
 
     public SlideItem(int image) {
         this.image = image;

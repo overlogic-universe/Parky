@@ -194,8 +194,8 @@
                 android:id="@+id/iv_barcode"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:translationY="-50dp"
                 android:scaleType="fitCenter"
+                android:translationY="-50dp"
                 app:layout_constraintEnd_toEndOf="@id/ticket_shape"
                 app:layout_constraintStart_toStartOf="@id/ticket_shape"
                 app:layout_constraintTop_toBottomOf="@id/iv_line_ticket_shape" />

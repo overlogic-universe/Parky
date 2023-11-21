@@ -14,16 +14,13 @@ public class User extends Authentication implements Parcelable {
     public User() {
     }
 
-    public User(String email, String password) {
-        super(email, password);
-    }
-
     public User(String name, String studentId, String plate, String parkStatus, String email, String password) {
         super(name, email, password);
         this.plate = plate;
         this.studentId = studentId;
         this.parkStatus = parkStatus;
     }
+
     @Override
     public String getName() {
         return name;

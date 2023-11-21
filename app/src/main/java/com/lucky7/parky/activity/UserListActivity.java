@@ -67,10 +67,7 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-
         ivBackToHomeAdmin.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -80,7 +77,7 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void getUserList(){
+    private void getUserList() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -88,7 +85,7 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userList.clear();
 
-                for(DataSnapshot userSnapshot : snapshot.getChildren()){
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     User user = userSnapshot.getValue(User.class);
 
                     userList.add(user);
@@ -103,7 +100,7 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void showUserList(){
+    private void showUserList() {
         rvUserList.setLayoutManager(new LinearLayoutManager(this));
         userListAdapter = new UserListAdapter(userList);
         rvUserList.setAdapter(userListAdapter);
@@ -112,7 +109,7 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private  void deleteUser(){
+    private void deleteUser() {
         userListAdapter.setOnItemClickListener(new UserListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(User user) {
@@ -129,17 +126,14 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    private void filterList(String text){
+    private void filterList(String text) {
         ArrayList<User> filteredList = new ArrayList<>();
-        for(User user : userList){
-            if(user.getStudentId().toLowerCase().contains(text.toLowerCase()) || user.getName().toLowerCase().contains(text.toLowerCase())){
+        for (User user : userList) {
+            if (user.getStudentId().toLowerCase().contains(text.toLowerCase()) || user.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(user);
             }
         }
-
-        if(filteredList.isEmpty()){
-
-        }else{
+        if (!filteredList.isEmpty()) {
             userListAdapter.setFilteredList(filteredList);
         }
     }

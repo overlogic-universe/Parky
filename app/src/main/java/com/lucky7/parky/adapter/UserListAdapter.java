@@ -32,6 +32,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListVi
         TextView studentId;
         TextView licensePlate;
         ImageButton deleteUser;
+
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.tv_username_list);
@@ -40,6 +41,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListVi
             deleteUser = itemView.findViewById(R.id.ib_delete_user);
         }
     }
+
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -71,7 +73,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListVi
         this.itemClickListener = listener;
     }
 
-    public void setFilteredList(ArrayList<User> filteredList){
+    public void setFilteredList(ArrayList<User> filteredList) {
         this.userList = filteredList;
         notifyDataSetChanged();
     }

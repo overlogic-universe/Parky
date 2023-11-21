@@ -68,7 +68,7 @@ public class UserHomeActivity extends AppCompatActivity {
         convertToBarcode();
     }
 
-    private void convertToBarcode(){
+    private void convertToBarcode() {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
         try {
@@ -79,7 +79,7 @@ public class UserHomeActivity extends AppCompatActivity {
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
 
             ivBarcode.setImageBitmap(bitmap);
-        }catch (WriterException e){
+        } catch (WriterException e) {
             throw new RuntimeException(e);
         }
 

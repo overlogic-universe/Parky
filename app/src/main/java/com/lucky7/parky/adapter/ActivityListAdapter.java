@@ -17,11 +17,13 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapter.ListViewHolder> {
-    private final ArrayList<User> userList;
+    private ArrayList<User> userList;
 
-    public ActivityListAdapter(ArrayList<User> userList){this.userList = userList;}
+    public ActivityListAdapter(ArrayList<User> userList) {
+        this.userList = userList;
+    }
 
-    public static class ListViewHolder extends RecyclerView.ViewHolder{
+    public static class ListViewHolder extends RecyclerView.ViewHolder {
         TextView licensePlate;
         TextView studentId;
         TextView status;
@@ -33,6 +35,7 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
             status = itemView.findViewById(R.id.tv_status_activity);
         }
     }
+
     @NonNull
     @Override
     public ActivityListAdapter.ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,5 +54,10 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
     @Override
     public int getItemCount() {
         return userList.size();
+    }
+
+    public void setFilteredList(ArrayList<User> filteredList) {
+        this.userList = filteredList;
+        notifyDataSetChanged();
     }
 }

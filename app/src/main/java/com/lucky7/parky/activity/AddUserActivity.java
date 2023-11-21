@@ -46,7 +46,6 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         btnAddUser.setOnClickListener(this);
     }
 
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_back_from_add_user) {
@@ -54,13 +53,13 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         } else if (v.getId() == R.id.btn_add_user) {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-            String username =  edUsername.getText().toString();
-            String studentId =  edStudentId.getText().toString();
-            String plate =  edPlate.getText().toString();
-            String email =  edEmail.getText().toString();
-            String password =  edPassword.getText().toString();
+            String username = edUsername.getText().toString();
+            String studentId = edStudentId.getText().toString();
+            String plate = edPlate.getText().toString();
+            String email = edEmail.getText().toString();
+            String password = edPassword.getText().toString();
 
-            User user = new User(username,studentId, plate, "Not Parked" ,email, password );
+            User user = new User(username, studentId, plate, "Not Parked", email, password);
             reference.child("users").child(studentId).setValue(user)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {

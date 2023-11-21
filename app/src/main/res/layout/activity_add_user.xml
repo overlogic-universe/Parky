@@ -64,7 +64,7 @@
                 android:focusableInTouchMode="true"
                 android:hint="@string/username"
                 android:textColorHint="@color/grey"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/ed_user_student_id"
@@ -78,7 +78,7 @@
                 android:focusableInTouchMode="true"
                 android:hint="@string/student_id"
                 android:textColorHint="@color/grey"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/ed_user_plate"
@@ -92,7 +92,7 @@
                 android:focusableInTouchMode="true"
                 android:hint="@string/license_plate"
                 android:textColorHint="@color/grey"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/ed_user_email"
@@ -106,7 +106,7 @@
                 android:focusableInTouchMode="true"
                 android:hint="@string/email_address"
                 android:textColorHint="@color/grey"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/ed_user_pass"
@@ -119,7 +119,7 @@
                 android:focusableInTouchMode="true"
                 android:hint="@string/password"
                 android:textColorHint="@color/grey"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"

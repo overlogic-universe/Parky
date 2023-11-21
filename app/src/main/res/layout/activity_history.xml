@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/iv_back_to_home_admin"
                 android:layout_width="wrap_content"
@@ -49,19 +51,17 @@
 
         </LinearLayout>
 
-        <EditText
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_user_activity"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:autofillHints="search user"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/border_radius_15"
-            android:drawableEnd="@drawable/baseline_search_24"
-            android:hint="@string/search_by_student_id"
-            android:inputType="text"
-            android:paddingHorizontal="20dp"
             android:textSize="14sp"
-            android:textColorHint="@color/grey" />
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search_by_student_id"
+            app:theme="@style/AppSearchView" />
 
     </LinearLayout>
 
@@ -74,6 +74,6 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_activity_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </ScrollView>
 </RelativeLayout>
