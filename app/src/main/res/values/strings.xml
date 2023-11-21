@@ -17,7 +17,8 @@
     <string name="your_email_or_password_is_wrong">Your email or password is wrong</string>
     <string name="student_id">Student ID</string>
     <string name="muhammadiyah_university_of_surakarta">Muhammadiyah University of Surakarta</string>
-    <string name="search_by_student_id">Search by student id</string>
+    <string name="search_by_student_id_or_plate">Search by student ID or license plate</string>
+    <string name="search_by_student_id_or_name">Search by student ID or name</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="status">Status</string>
     <string name="date">Date</string>

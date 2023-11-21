@@ -60,7 +60,7 @@
             android:background="@drawable/border_radius_15"
             android:textSize="14sp"
             app:iconifiedByDefault="false"
-            app:queryHint="@string/search_by_student_id"
+            app:queryHint="@string/search_by_student_id_or_name"
             app:theme="@style/AppSearchView" />
 
     </LinearLayout>
