@@ -145,6 +145,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 dialog.dismiss();
             }
         }, 2000);
-
     }
 }
