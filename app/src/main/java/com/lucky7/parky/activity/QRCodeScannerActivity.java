@@ -132,8 +132,6 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
                 Toast.makeText(QRCodeScannerActivity.this, "Database error", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
     @Override
