@@ -52,7 +52,6 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
 
         initView();
 
-
         List<SlideItem> slideItems = new ArrayList<>();
 
         slideItems.add(new SlideItem(R.drawable.carousel_1));
