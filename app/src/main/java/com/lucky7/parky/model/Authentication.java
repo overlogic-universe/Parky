@@ -2,7 +2,7 @@ package com.lucky7.parky.model;
 
 import android.os.Parcel;
 
-public class Authentication {
+abstract public class Authentication {
     protected String name;
     protected String email;
     protected String password;

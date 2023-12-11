@@ -65,7 +65,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 showLoginFailedDialog("Please fill it in!");
             } else {
                 if (studentId.toLowerCase(Locale.ROOT).equals("a") || pass.toLowerCase(Locale.ROOT).equals("a")) {
-                    startActivity(new Intent(this, AdminHomeActivity.class));
+                    Intent intent = new Intent(this, AdminHomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 } else {
                     checkUser(studentId, pass);
                 }
@@ -104,6 +106,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
                         intent.putExtra(UserHomeActivity.EXTRA_USER, user);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                         startActivity(intent);
                     } else {
                         showLoginFailedDialog("Your student ID or password is wrong");

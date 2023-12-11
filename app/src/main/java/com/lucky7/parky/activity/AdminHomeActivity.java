@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener {
-    private ImageView ivHistory, ivUser, ivAdmin, ivScanCode;
+    private ImageView ivHistory, ivUser, ivAdmin, ivScanCode, ivLogout;
     ViewPager2 viewPager2;
     private final Handler slideHandler = new Handler();
     boolean isAccept = false;
@@ -42,6 +42,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         ivAdmin = findViewById(R.id.iv_admin);
         ivScanCode = findViewById(R.id.iv_scan_code_admin);
         viewPager2 = findViewById(R.id.viewPager);
+        ivLogout = findViewById(R.id.iv_logout_admin);
     }
 
     @Override
@@ -94,6 +95,7 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         ivUser.setOnClickListener(this);
         ivAdmin.setOnClickListener(this);
         ivScanCode.setOnClickListener(this);
+        ivLogout.setOnClickListener(this);
 
     }
 
@@ -107,6 +109,10 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
             startActivity(new Intent(this, QRCodeScannerActivity.class));
         } else if (v.getId() == R.id.iv_admin) {
             startActivity(new Intent(this, AddUserActivity.class));
+        } else if (v.getId() == R.id.iv_logout_admin) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 

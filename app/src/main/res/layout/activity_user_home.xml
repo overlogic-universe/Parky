@@ -7,220 +7,227 @@
     android:orientation="vertical"
     tools:context=".activity.UserHomeActivity">
 
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent">
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
-
-            <ImageView
-                android:id="@+id/iv_parky_logo_user"
-                android:layout_width="110dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:contentDescription="Parky logo"
-                android:src="@drawable/logo_parky_with_text"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="@color/primaryColor"
-                android:contentDescription="Decoration"
-                android:src="@drawable/circle2"
-                android:translationX="15dp"
-                app:layout_constraintStart_toStartOf="@id/iv_decoration_1"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/iv_decoration_1"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:backgroundTint="@color/primaryColor"
-                android:src="@drawable/circle1"
-                android:translationX="50dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_selamat_datang_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/poppinsbold"
-                android:text="@string/welcome_back"
-                android:textSize="25sp"
-                android:translationY="-20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_decoration_1" />
-
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:fontFamily="@font/poppinsbold"
-                android:textColor="@color/primaryColor"
-                android:textSize="30sp"
-                android:translationY="-30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_selamat_datang_user" />
-
-            <View
-                android:id="@+id/ticket_shape"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginHorizontal="20dp"
-                android:background="@drawable/border_radius_5"
-                android:backgroundTint="@color/lightGrey"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_username" />
-
-            <ImageView
-                android:id="@+id/iv_line_ticket_shape"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:src="@drawable/line"
-                android:translationY="-50dp"
-                app:layout_constraintBottom_toBottomOf="@id/ticket_shape"
-                app:layout_constraintEnd_toEndOf="@id/ticket_shape"
-                app:layout_constraintStart_toStartOf="@id/ticket_shape"
-                app:layout_constraintTop_toTopOf="@id/ticket_shape" />
-
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/poppinssemibold"
-                android:text="@string/date"
-                android:textColor="@color/grey"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/ticket_shape"
-                app:layout_constraintTop_toTopOf="@id/ticket_shape" />
-
-            <TextView
-                android:id="@+id/tv_the_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinssemibold"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/tv_date"
-                app:layout_constraintTop_toBottomOf="@id/tv_date" />
-
-            <TextView
-                android:id="@+id/tv_nim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginEnd="40dp"
-                android:fontFamily="@font/poppinssemibold"
-                android:gravity="start"
-                android:text="@string/student_id"
-                android:textColor="@color/grey"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/tv_the_nim"
-                app:layout_constraintTop_toTopOf="@id/ticket_shape" />
-
-            <TextView
-                android:id="@+id/tv_the_nim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:fontFamily="@font/poppinssemibold"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="@id/ticket_shape"
-                app:layout_constraintTop_toBottomOf="@id/tv_nim" />
-
-            <TextView
-                android:id="@+id/tv_plat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/poppinssemibold"
-                android:text="@string/license_plate"
-                android:textColor="@color/grey"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/tv_the_date"
-                app:layout_constraintTop_toBottomOf="@id/tv_the_date" />
-
-            <TextView
-                android:id="@+id/tv_the_plat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinssemibold"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/tv_the_date"
-                app:layout_constraintTop_toBottomOf="@id/tv_plat" />
-
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="50dp"
-                android:fontFamily="@font/poppinssemibold"
-                android:gravity="start"
-                android:text="@string/status"
-                android:textColor="@color/grey"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/tv_the_nim"
-                app:layout_constraintTop_toBottomOf="@id/tv_the_nim" />
-
-            <TextView
-                android:id="@+id/tv_the_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:background="@drawable/border_radius_5"
-                android:backgroundTint="@color/primaryColor"
-                android:fontFamily="@font/poppinssemibold"
-                android:paddingHorizontal="10dp"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/tv_the_nim"
-                app:layout_constraintTop_toBottomOf="@id/tv_status" />
-
-            <ImageView
-                android:id="@+id/iv_barcode"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="fitCenter"
-                android:translationY="-50dp"
-                app:layout_constraintEnd_toEndOf="@id/ticket_shape"
-                app:layout_constraintStart_toStartOf="@id/ticket_shape"
-                app:layout_constraintTop_toBottomOf="@id/iv_line_ticket_shape" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinssemibold"
-                android:text="@string/scan_here"
-                android:textColor="@color/grey"
-                android:textSize="10sp"
-                android:translationY="-50dp"
-                app:layout_constraintEnd_toEndOf="@id/ticket_shape"
-                app:layout_constraintStart_toStartOf="@id/ticket_shape"
-                app:layout_constraintTop_toBottomOf="@id/iv_barcode" />
+                android:paddingVertical="10dp">
 
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="90dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ticket_shape" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/iv_parky_logo_user"
+                    android:layout_width="110dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="Parky logo"
+                    android:src="@drawable/logo_parky_with_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </ScrollView>
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="15dp"
+                    android:backgroundTint="@color/primaryColor"
+                    android:contentDescription="Decoration"
+                    android:src="@drawable/circle2"
+                    android:translationX="15dp"
+                    app:layout_constraintStart_toStartOf="@id/iv_decoration_1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_decoration_1"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:backgroundTint="@color/primaryColor"
+                    android:src="@drawable/circle1"
+                    android:translationX="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_selamat_datang_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppinsbold"
+                    android:text="@string/welcome_back"
+                    android:textSize="25sp"
+                    android:translationY="-20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_decoration_1" />
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/poppinsbold"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="30sp"
+                    android:translationY="-30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_selamat_datang_user" />
+
+                <View
+                    android:id="@+id/ticket_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/border_radius_5"
+                    android:backgroundTint="@color/lightGrey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_username" />
+
+                <ImageView
+                    android:id="@+id/iv_line_ticket_shape"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:src="@drawable/line"
+                    android:translationY="-50dp"
+                    app:layout_constraintBottom_toBottomOf="@id/ticket_shape"
+                    app:layout_constraintEnd_toEndOf="@id/ticket_shape"
+                    app:layout_constraintStart_toStartOf="@id/ticket_shape"
+                    app:layout_constraintTop_toTopOf="@id/ticket_shape" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:text="@string/date"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/ticket_shape"
+                    app:layout_constraintTop_toTopOf="@id/ticket_shape" />
+
+                <TextView
+                    android:id="@+id/tv_the_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_date"
+                    app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+                <TextView
+                    android:id="@+id/tv_nim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:gravity="start"
+                    android:text="@string/student_id"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_the_nim"
+                    app:layout_constraintTop_toTopOf="@id/ticket_shape" />
+
+                <TextView
+                    android:id="@+id/tv_the_nim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@id/ticket_shape"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nim" />
+
+                <TextView
+                    android:id="@+id/tv_plat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:text="@string/license_plate"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_the_date"
+                    app:layout_constraintTop_toBottomOf="@id/tv_the_date" />
+
+                <TextView
+                    android:id="@+id/tv_the_plat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_the_date"
+                    app:layout_constraintTop_toBottomOf="@id/tv_plat" />
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:gravity="start"
+                    android:text="@string/status"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_the_nim"
+                    app:layout_constraintTop_toBottomOf="@id/tv_the_nim" />
+
+                <TextView
+                    android:id="@+id/tv_the_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/border_radius_5"
+                    android:backgroundTint="@color/primaryColor"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_the_nim"
+                    app:layout_constraintTop_toBottomOf="@id/tv_status" />
+
+                <ImageView
+                    android:id="@+id/iv_barcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="fitCenter"
+                    android:translationY="-50dp"
+                    app:layout_constraintEnd_toEndOf="@id/ticket_shape"
+                    app:layout_constraintStart_toStartOf="@id/ticket_shape"
+                    app:layout_constraintTop_toBottomOf="@id/iv_line_ticket_shape" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:text="@string/scan_here"
+                    android:textColor="@color/grey"
+                    android:textSize="10sp"
+                    android:translationY="-50dp"
+                    app:layout_constraintEnd_toEndOf="@id/ticket_shape"
+                    app:layout_constraintStart_toStartOf="@id/ticket_shape"
+                    app:layout_constraintTop_toBottomOf="@id/iv_barcode" />
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="90dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ticket_shape" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -247,6 +254,7 @@
             android:layout_weight="1" />
 
         <ImageView
+            android:id="@+id/iv_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_logout_24" />
