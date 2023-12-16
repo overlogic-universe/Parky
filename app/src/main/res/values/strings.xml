@@ -32,4 +32,9 @@
     <string name="add_user">Add User</string>
     <string name="are_you_sure_to_delete_this_user">Are you sure to delete this user?</string>
     <string name="cancel">Cancel</string>
+    <string name="login">Login</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="close">close</string>
+    <string name="change_password">Change Password</string>
+    <string name="save">Save</string>
 </resources>

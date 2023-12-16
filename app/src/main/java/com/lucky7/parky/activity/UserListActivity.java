@@ -124,7 +124,7 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void deleteUser(User user) {
-        TextView tvCancelDeleteUser = dialog.findViewById(R.id.tv_cancel_delete_user); // Inisialisasi ulang TextView dari dialog
+        TextView tvCancelDeleteUser = dialog.findViewById(R.id.tv_cancel_delete_user);
         TextView tvConfirmDeleteUser = dialog.findViewById(R.id.tv_confirm_delete_user);
         dialog.show();
 
