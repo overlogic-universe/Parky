@@ -1,19 +1,18 @@
 package com.lucky7.parky.activity;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,14 +35,9 @@ import com.lucky7.parky.R;
 import com.lucky7.parky.model.User;
 import com.lucky7.parky.util.BarcodeEncoder;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -85,8 +78,8 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
 
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_change_password);
-        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.border_radius_15));
+        Objects.requireNonNull(dialog.getWindow()).setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
 
         if (android.os.Build.VERSION.SDK_INT >= 33) {
@@ -120,15 +113,16 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
     private void changePass(User user) {
         TextView tvSubmit = dialog.findViewById(R.id.tv_submit_change_pass);
         EditText edtNewPass = dialog.findViewById(R.id.edt_massukan_pass_baru);
-        TextView ivClose = dialog.findViewById(R.id.iv_close_dialog_change_pass);
-        TextView tvUsername = dialog.findViewById(R.id.tv_username_on_change_pass);
-        TextView tvStudentId = dialog.findViewById(R.id.tv_user_id_on_change_pass);
-        tvUsername.setText(user.getName());
-        tvStudentId.setText(user.getStudentId());
+        CardView cvClose = dialog.findViewById(R.id.cv_back_from_change_pass);
+        TextView tvUsernameDialog = dialog.findViewById(R.id.tv_username_on_change_pass);
+        TextView tvStudentIdDialog = dialog.findViewById(R.id.tv_user_id_on_change_pass);
+        tvUsernameDialog.setText(user.getName());
+        tvStudentIdDialog.setText(user.getStudentId());
         dialog.show();
 
-        ivClose.setOnClickListener(view -> {
+        cvClose.setOnClickListener(view -> {
             dialog.dismiss();
+            edtNewPass.setText("");
         });
 
         tvSubmit.setOnClickListener(v -> {
@@ -139,18 +133,29 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
-                        Map<String, Object> updates = new HashMap<>();
-                        updates.put("password", edtNewPass.getText().toString().trim());
-                        snapshot.getRef().updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(UserHomeActivity.this, "Successfully changed password", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(UserHomeActivity.this, "Failed to change password", Toast.LENGTH_SHORT).show();
+                        String existingPassword = snapshot.child("password").getValue(String.class);
+                        String newPassword = edtNewPass.getText().toString().trim();
+
+                        if (!newPassword.equals(existingPassword)) {
+                            Map<String, Object> updates = new HashMap<>();
+                            updates.put("password", newPassword);
+                            snapshot.getRef().updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        dialog.dismiss();
+                                        edtNewPass.setText("");
+                                        Toast.makeText(UserHomeActivity.this, "Successfully changed password", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        dialog.dismiss();
+                                        edtNewPass.setText("");
+                                        Toast.makeText(UserHomeActivity.this, "Failed to change password", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        } else {
+                            Toast.makeText(UserHomeActivity.this, "Password remains unchanged", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 

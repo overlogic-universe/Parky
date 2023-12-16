@@ -1,91 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".activity.LoginActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="Header image login"
-        android:src="@drawable/login_img" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="40dp">
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="Header image login"
+            android:src="@drawable/login_img" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/poppinsbold"
-            android:text="@string/welcome_back"
-            android:textSize="30sp" />
+            android:orientation="vertical"
+            android:paddingHorizontal="40dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="50dp"
-            android:text="Log in to your existing account "
-            android:textColor="@color/grey" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/poppinsbold"
+                android:text="@string/welcome_back"
+                android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/ed_student_id"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginBottom="10dp"
-            android:drawableStart="@drawable/baseline_contact_emergency_24"
-            android:drawablePadding="10dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:hint="@string/student_id"
-            android:textColorHint="@color/grey"
-            android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="50dp"
+                android:text="Log in to your existing account "
+                android:textColor="@color/grey" />
 
-        <EditText
-            android:id="@+id/ed_pass"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="5dp"
-            android:drawableStart="@drawable/ic_baseline_lock_open_24"
-            android:drawablePadding="10dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:hint="@string/password"
-            android:textColorHint="@color/grey"
-            android:textSize="14sp" />
+            <EditText
+                android:id="@+id/ed_student_id"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginBottom="10dp"
+                android:drawableStart="@drawable/baseline_contact_emergency_24"
+                android:drawablePadding="10dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/student_id"
+                android:textColorHint="@color/grey"
+                android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:fontFamily="@font/poppinsmedium"
-            android:text="@string/forgot_your_password"
-            android:textColor="@color/primaryColor" />
+            <EditText
+                android:id="@+id/ed_pass"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="5dp"
+                android:drawableStart="@drawable/ic_baseline_lock_open_24"
+                android:drawablePadding="10dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColorHint="@color/grey"
+                android:textSize="14sp" />
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginVertical="20dp"
-            android:fontFamily="@font/poppinsmedium"
-            android:text="@string/login"
-            android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="@string/forgot_your_password"
+                android:textColor="@color/primaryColor" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="10dp"
-            android:background="@color/lightGrey" />
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginVertical="20dp"
+                android:fontFamily="@font/poppinsmedium"
+                android:text="@string/login"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/lightGrey" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
