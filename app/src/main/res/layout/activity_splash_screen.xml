@@ -34,8 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsmedium"
-
-            android:text="From"
+            android:text="@string/from"
             android:textColor="@color/lightGrey"
             android:textSize="14sp"
             android:translationY="5dp" />
@@ -45,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppinsbold"
-            android:text="Lucky Seven"
+            android:text="@string/overlogic_universe"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>

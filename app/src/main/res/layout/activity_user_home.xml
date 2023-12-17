@@ -10,7 +10,6 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
-
         android:layout_height="match_parent">
 
         <ScrollView
@@ -22,7 +21,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp">
-
 
                 <ImageView
                     android:id="@+id/iv_parky_logo_user"
@@ -96,6 +94,7 @@
                     android:layout_height="30dp"
                     android:src="@drawable/line"
                     android:translationY="-50dp"
+                    android:contentDescription="@string/ticket_shape"
                     app:layout_constraintBottom_toBottomOf="@id/ticket_shape"
                     app:layout_constraintEnd_toEndOf="@id/ticket_shape"
                     app:layout_constraintStart_toStartOf="@id/ticket_shape"
@@ -204,7 +203,8 @@
                     android:translationY="-50dp"
                     app:layout_constraintEnd_toEndOf="@id/ticket_shape"
                     app:layout_constraintStart_toStartOf="@id/ticket_shape"
-                    app:layout_constraintTop_toBottomOf="@id/iv_line_ticket_shape" />
+                    app:layout_constraintTop_toBottomOf="@id/iv_line_ticket_shape"
+                    android:contentDescription="@string/barcode"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -247,7 +247,8 @@
             android:id="@+id/iv_to_change_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_settings_24" />
+            android:src="@drawable/baseline_settings_24"
+            android:contentDescription="@string/button_to_show_dialog_change_pass"/>
 
         <View
             android:layout_width="0dp"
@@ -258,7 +259,8 @@
             android:id="@+id/iv_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_logout_24" />
+            android:src="@drawable/baseline_logout_24"
+            android:contentDescription="@string/button_to_logout"/>
     </LinearLayout>
 
 
