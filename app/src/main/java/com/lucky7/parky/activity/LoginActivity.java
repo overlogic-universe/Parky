@@ -102,12 +102,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         String parkingTime = snapshot.child(studentId).child("parkingTime").getValue(String.class);
                         String email = snapshot.child(studentId).child("email").getValue(String.class);
 
-                        User user = new User(name, studentIdData, plate, parkStatus, parkingDate, parkingTime, email, studentPassword);
+                        User user = new User(name, studentIdData, plate, parkStatus, parkingDate,
+                                parkingTime, email, studentPassword);
 
                         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
                         intent.putExtra(UserHomeActivity.EXTRA_USER, user);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
                         startActivity(intent);
                     } else {
                         showLoginFailedDialog("Your student ID or password is wrong");

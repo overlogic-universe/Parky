@@ -28,10 +28,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListVi
     }
 
     public static class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView username;
-        TextView studentId;
-        TextView licensePlate;
-        ImageButton deleteUser;
+        private TextView username;
+        private TextView studentId;
+        private TextView licensePlate;
+        private ImageButton deleteUser;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);

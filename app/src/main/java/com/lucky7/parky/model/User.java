@@ -15,7 +15,16 @@ public class User extends Authentication implements Parcelable {
     public User() {
     }
 
-    public User(String name, String studentId, String plate, String parkStatus, String parkingDate,String parkingTime,String email, String password) {
+    public User(Parcel in) {
+        super(in.readString(), in.readString(), in.readString());
+        studentId = in.readString();
+        plate = in.readString();
+        parkStatus = in.readString();
+        parkingTime = in.readString();
+    }
+
+    public User(String name, String studentId, String plate, String parkStatus, String parkingDate,String parkingTime,
+                String email, String password) {
         super(name, email, password);
         this.plate = plate;
         this.studentId = studentId;
@@ -92,14 +101,6 @@ public class User extends Authentication implements Parcelable {
 
     public void setParkingTime(String parkingTime) {
         this.parkingTime = parkingTime;
-    }
-
-    protected User(Parcel in) {
-        super(in.readString(), in.readString(), in.readString());
-        studentId = in.readString();
-        plate = in.readString();
-        parkStatus = in.readString();
-        parkingTime = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
