@@ -1,5 +1,5 @@
 # Parky
-Parky is an mobile app for parking system aimed at students of Universitas Muhammadiyah Surakarta. Parky has the main feature of scanning barcodes to record the entry and exit of student parking. 
+Parky is a mobile app for parking system aimed at students of Universitas Muhammadiyah Surakarta. Parky has the main feature of scanning barcodes to record the entry and exit of student parking. 
 
 # Technologies
 Technologies used in the development of the Parky app :
