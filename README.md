@@ -1,6 +1,26 @@
 # Parky
+Parky is an mobile app for parking system aimed at students of Universitas Muhammadiyah Surakarta. Parky has the main feature of scanning barcodes to record the entry and exit of student parking. 
 
-# Screenshot
+# Technologies
+Technologies used in the development of the Parky app :
+- Java
+- Xml
+- Firebase
+
+# Team
+
+- **Product Manager**
+  - Sulthon Kaffaah Al Farizzi
+
+- **Developers**
+  - Muhammad Rafli Silehu
+  - Mhd. Farhan Lubis	
+
+- **UI/UX Designers**
+  - Afrizal Putra Pratama	
+  - Lintang Myra Siva
+
+# Screenshots
 
 <img src= "https://github.com/overlogic-universe/parky/assets/129678009/3d6df52a-9b2c-441a-b4fb-3efc6c619231"  height = "470" width = "220"/>
 <img src= "https://github.com/overlogic-universe/parky/assets/129678009/192a2130-cf3d-422c-9b33-0bb6d53f857d"  height = "470" width = "220"/>
