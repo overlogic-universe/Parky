@@ -20,32 +20,32 @@
         android:theme="@style/Theme.Parky"
         tools:targetApi="33">
         <activity
-            android:name=".activity.AddUserActivity"
+            android:name=".features.auth.presentation.AddUserActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.QRCodeScannerActivity"
+            android:name=".features.auth.presentation.QRCodeScannerActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.UserHomeActivity"
+            android:name=".features.auth.presentation.UserHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.UserListActivity"
+            android:name=".features.auth.presentation.UserListActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.HistoryActivity"
+            android:name=".features.auth.presentation.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.AdminHomeActivity"
+            android:name=".features.auth.presentation.AdminHomeActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".features.auth.presentation.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SplashScreenActivity"
+            android:name=".features.auth.presentation.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

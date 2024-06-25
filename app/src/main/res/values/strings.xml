@@ -10,10 +10,10 @@
     <string name="photo_profile">Photo profile</string>
     <string name="ok">Ok</string>
     <string name="hello_admin">Hello Admin!</string>
-    <string name="add_user_data">Add user data</string>
+    <string name="add_user_data">Add userModel data</string>
     <string name="name">Name</string>
     <string name="license_plate">License Plate</string>
-    <string name="back_from_user_add_activity">Back from user add activity</string>
+    <string name="back_from_user_add_activity">Back from userModel add activity</string>
     <string name="your_email_or_password_is_wrong">Your email or password is wrong</string>
     <string name="student_id">Student ID</string>
     <string name="muhammadiyah_university_of_surakarta">Muhammadiyah University of Surakarta</string>
@@ -30,7 +30,7 @@
     <string name="back_to_admin_home_page">Back to admin home page</string>
     <string name="photo_profile_default">photo profile default</string>
     <string name="add_user">Add User</string>
-    <string name="are_you_sure_to_delete_this_user">Are you sure to delete this user?</string>
+    <string name="are_you_sure_to_delete_this_user">Are you sure to delete this userModel?</string>
     <string name="cancel">Cancel</string>
     <string name="login">Login</string>
     <string name="enter_new_password">Enter new password</string>
@@ -40,7 +40,7 @@
     <string name="header_image_login">Header image login</string>
     <string name="log_in_to_your_existing_account">Log in to your existing account</string>
     <string name="scan_admin">scan admin</string>
-    <string name="list_user">list user</string>
+    <string name="list_user">list userModel</string>
     <string name="point_your_camera_to_scan_the_qr_code">Point your camera to scan the QR code</string>
     <string name="from">From</string>
     <string name="overlogic_universe">Overlogic Universe</string>
