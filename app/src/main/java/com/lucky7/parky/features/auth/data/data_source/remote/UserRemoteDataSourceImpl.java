@@ -1,5 +1,7 @@
 package com.lucky7.parky.features.auth.data.data_source.remote;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,6 +22,7 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     @Override
     public Task<Void> addUser(UserModel userModel) {
+        Log.d("WOWOWOWO", "addUser: " + userModel);
         return CollectionReferenceUtil.getUsersCollection(firestore).document(userModel.getId()).set(userModel);
     }
 

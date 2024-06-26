@@ -11,6 +11,8 @@ import javax.inject.Inject;
 public interface AuthRemoteDataSource {
     Task<AuthResult> loginWithEmailAndPasswordAdmin(AdminModel adminModel);
     Task<AuthResult> loginWithEmailAndPasswordUser(UserModel userModel);
+
+    Task<AuthResult> signUpWithEmailAndPasswordUser(UserModel userModel);
     Task<QuerySnapshot> getUserFromFirestore(String userId);
     Task<QuerySnapshot> getAdminFromFirestore(String adminId);
 

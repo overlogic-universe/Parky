@@ -13,8 +13,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
 import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.di.AppComponent;
 import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.features.auth.data.repository.UserRepositoryImpl;
@@ -26,7 +28,7 @@ import javax.inject.Inject;
 public class AddUserActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Inject
-    UserRepository userRepository;
+    AuthRepository authRepository;
     private ImageView ivBackFromUserAdd;
     private EditText edUsername;
     private EditText edStudentId;
@@ -38,6 +40,9 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApp myApp = (MyApp) getApplicationContext();
+        AppComponent appComponent = myApp.getAppComponent();
+        appComponent.inject(this);
         setContentView(R.layout.activity_add_user);
 
         ivBackFromUserAdd = findViewById(R.id.iv_back_from_add_user);
@@ -66,10 +71,11 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
 
             UserModel userModel = new UserModel(null,username, studentId, plate, ParkStatus.NOT_PARKED,null, email, password);
 
-            userRepository.addUser(userModel, new RepositoryCallback<Void>() {
+            authRepository.signUpWithEmailAndPasswordUser(userModel, new RepositoryCallback<UserModel>() {
                 @Override
-                public void onSuccess(Void result) {
+                public void onSuccess(UserModel result) {
                     Toast.makeText(AddUserActivity.this, "User added successfully", Toast.LENGTH_SHORT).show();
+                    getOnBackPressedDispatcher().onBackPressed();
                 }
 
                 @Override

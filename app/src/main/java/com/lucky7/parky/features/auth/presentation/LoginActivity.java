@@ -35,8 +35,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Inject
     AuthRepository authRepository;
 
-    private AppComponent appComponent;
-
     private Button btnLogin;
     private EditText edStudentId, edPass;
     private boolean isLoginFailed;
@@ -51,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MyApp myApp = (MyApp) getApplicationContext();
-        appComponent = myApp.getAppComponent();
+        AppComponent appComponent = myApp.getAppComponent();
         appComponent.inject(this);
         setContentView(R.layout.activity_login);
         isLoginFailed = false;

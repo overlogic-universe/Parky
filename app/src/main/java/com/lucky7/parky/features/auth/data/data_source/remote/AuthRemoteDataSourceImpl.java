@@ -23,7 +23,6 @@ public class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     @Inject
     FirebaseFirestore firestore;
 
-
     @Inject
     public AuthRemoteDataSourceImpl(FirebaseFirestore firestore, FirebaseAuth auth){
         this.firestore = firestore;
@@ -38,6 +37,11 @@ public class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     @Override
     public Task<AuthResult> loginWithEmailAndPasswordUser(UserModel userModel) {
          return auth.signInWithEmailAndPassword(userModel.getEmail(), userModel.getPassword());
+    }
+
+    @Override
+    public Task<AuthResult> signUpWithEmailAndPasswordUser(UserModel userModel) {
+        return auth.createUserWithEmailAndPassword(userModel.getEmail(), userModel.getPassword());
     }
 
     @Override
