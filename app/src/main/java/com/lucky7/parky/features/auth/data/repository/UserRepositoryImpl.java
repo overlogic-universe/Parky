@@ -1,7 +1,10 @@
 package com.lucky7.parky.features.auth.data.repository;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.Task;
 import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.data.data_source.remote.UserRemoteDataSource;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.features.auth.domain.repository.UserRepository;

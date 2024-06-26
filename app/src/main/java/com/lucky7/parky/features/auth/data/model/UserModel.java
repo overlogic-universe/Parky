@@ -5,13 +5,17 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.lucky7.parky.core.constant.firestore.FieldConstant;
 import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.domain.entity.Authentication;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserModel extends Authentication implements Parcelable {
     private String studentId;
     private String plate;
-    private ParkStatus parkStatus;
+    private String parkStatus;
     private String parkDatetime;
 
     public UserModel() {
@@ -22,19 +26,51 @@ public class UserModel extends Authentication implements Parcelable {
     }
 
     public UserModel(Parcel in) {
-        super(in.readString(), in.readString(), in.readString(), in.readString());
+        super(in.readString(), in.readString(), in.readString());
         studentId = in.readString();
         plate = in.readString();
-        parkStatus = ParkStatus.fromString(in.readString());
+        parkStatus = in.readString();
         parkDatetime = in.readString();
     }
 
-    public UserModel(String id, String name, String studentId, String plate, ParkStatus parkStatus, String parkDatetime, String email, String password) {
+    public UserModel(String id, String name, String studentId, String plate, String parkStatus, String parkDatetime, String email, String password) {
         super(id, name, email, password);
         this.studentId = studentId;
         this.plate = plate;
         this.parkStatus = parkStatus;
         this.parkDatetime = parkDatetime;
+    }
+
+    public UserModel(String id, String name, String studentId, String plate, String parkStatus, String parkDatetime, String email) {
+        super(id, name, email);
+        this.studentId = studentId;
+        this.plate = plate;
+        this.parkStatus = parkStatus;
+        this.parkDatetime = parkDatetime;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        super.setId(id);
+    }
+
+    public String getEmail() {
+        return super.getEmail();
+    }
+
+    public void setEmail(String email) {
+        super.setEmail(email);
+    }
+
+    public String getPassword() {
+        return super.getPassword();
+    }
+
+    public void setPassword(String password) {
+        super.setPassword(password);
     }
 
     public String getStudentId() {
@@ -45,11 +81,11 @@ public class UserModel extends Authentication implements Parcelable {
         this.studentId = studentId;
     }
 
-    public ParkStatus getParkStatus() {
+    public String getParkStatus() {
         return parkStatus;
     }
 
-    public void setParkStatus(ParkStatus parkStatus) {
+    public void setParkStatus(String parkStatus) {
         this.parkStatus = parkStatus;
     }
 
@@ -76,11 +112,23 @@ public class UserModel extends Authentication implements Parcelable {
                 ", name='" + getName() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", password='" + getPassword() + '\'' +
-                ", studentId='" + studentId + '\'' +
-                ", plate='" + plate + '\'' +
-                ", parkStatus='" + parkStatus + '\'' +
-                ", parkDatetime='" + parkDatetime + '\'' +
+                ", studentId='" + getStudentId() + '\'' +
+                ", plate='" + getPlate() + '\'' +
+                ", parkStatus='" + getParkStatus() + '\'' +
+                ", parkDatetime='" + getParkDatetime() + '\'' +
                 '}';
+    }
+
+    public Map<String, Object> toFirestore() {
+        Map<String, Object> result = new HashMap<>();
+        result.put(FieldConstant.USER_ID, getId());
+        result.put(FieldConstant.NAME, getName());
+        result.put(FieldConstant.EMAIL, getEmail());
+        result.put(FieldConstant.STUDENT_ID, getStudentId());
+        result.put(FieldConstant.PLATE, getPlate());
+        result.put(FieldConstant.PARK_STATUS, getParkStatus());
+        result.put(FieldConstant.PARK_DATETIME, getParkDatetime());
+        return result;
     }
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
@@ -105,10 +153,9 @@ public class UserModel extends Authentication implements Parcelable {
         parcel.writeString(getId());
         parcel.writeString(getName());
         parcel.writeString(getEmail());
-        parcel.writeString(getPassword());
-        parcel.writeString(studentId);
-        parcel.writeString(plate);
-        parcel.writeString(parkStatus.toString());
-        parcel.writeString(parkDatetime);
+        parcel.writeString(getStudentId());
+        parcel.writeString(getPlate());
+        parcel.writeString(getParkStatus());
+        parcel.writeString(getParkDatetime());
     }
 }

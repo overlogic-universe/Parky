@@ -3,8 +3,8 @@ package com.lucky7.parky.core.entity;
 import androidx.annotation.NonNull;
 
 public enum ParkStatus {
-    PARKED("parked"),
-    NOT_PARKED("not parked");
+    PARKED("Parked"),
+    NOT_PARKED("Not Parked");
 
     private final String status;
 

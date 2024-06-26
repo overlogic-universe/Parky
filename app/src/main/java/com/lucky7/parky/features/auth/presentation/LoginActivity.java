@@ -34,7 +34,6 @@ import javax.inject.Inject;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     @Inject
     AuthRepository authRepository;
-
     private Button btnLogin;
     private EditText edStudentId, edPass;
     private boolean isLoginFailed;
@@ -61,8 +60,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        String email = edStudentId.getText().toString();
-        String pass = edPass.getText().toString();
+        String email = edStudentId.getText().toString().trim();
+        String pass = edPass.getText().toString().trim();
 
         if (v.getId() == R.id.btn_login) {
             if (!validateEmail(email) || !validatePassword(pass)) {
@@ -105,7 +104,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void performAdminLogin(String email, String password) {
 
         AdminModel adminModel = new AdminModel(email, password);
-        Log.d("WOWOWOWO", "onClick: " + email + "  jdafkjd: " + password);
 
         authRepository.loginWithEmailAndPasswordAdmin(adminModel, new RepositoryCallback<AdminModel>() {
             @Override

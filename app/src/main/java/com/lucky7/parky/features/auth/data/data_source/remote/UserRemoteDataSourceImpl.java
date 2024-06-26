@@ -22,8 +22,7 @@ public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
     @Override
     public Task<Void> addUser(UserModel userModel) {
-        Log.d("WOWOWOWO", "addUser: " + userModel);
-        return CollectionReferenceUtil.getUsersCollection(firestore).document(userModel.getId()).set(userModel);
+        return CollectionReferenceUtil.getUsersCollection(firestore).document(userModel.getId()).set(userModel.toFirestore());
     }
 
     @Override

@@ -63,13 +63,13 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             getOnBackPressedDispatcher().onBackPressed();
         } else if (v.getId() == R.id.btn_add_user) {
 
-            String username = edUsername.getText().toString();
-            String studentId = edStudentId.getText().toString();
-            String plate = edPlate.getText().toString();
-            String email = edEmail.getText().toString();
-            String password = edPassword.getText().toString();
+            String username = edUsername.getText().toString().trim();
+            String studentId = edStudentId.getText().toString().trim();
+            String plate = edPlate.getText().toString().trim();
+            String email = edEmail.getText().toString().trim();
+            String password = edPassword.getText().toString().trim();
 
-            UserModel userModel = new UserModel(null,username, studentId, plate, ParkStatus.NOT_PARKED,null, email, password);
+            UserModel userModel = new UserModel(null,username, studentId, plate, ParkStatus.NOT_PARKED.toString(),null, email, password);
 
             authRepository.signUpWithEmailAndPasswordUser(userModel, new RepositoryCallback<UserModel>() {
                 @Override
