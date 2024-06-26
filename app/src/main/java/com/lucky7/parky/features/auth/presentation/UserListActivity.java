@@ -130,25 +130,25 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
 
         tvConfirmDeleteUser.setOnClickListener(v -> {
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-            DatabaseReference dataRef = reference.child(userModel.getStudentId());
+//            DatabaseReference dataRef = reference.child(userModel.getStudentId());
 
-            dataRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(UserListActivity.this, "Successfully deleted user", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
-            });
+//            dataRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void unused) {
+//                    Toast.makeText(UserListActivity.this, "Successfully deleted user", Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
+//                }
+//            });
         });
     }
 
     private void filterList(String text) {
         ArrayList<UserModel> filteredList = new ArrayList<>();
-        for (UserModel userModel : userModelList) {
-            if (userModel.getStudentId().toLowerCase().contains(text.toLowerCase()) || userModel.getName().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(userModel);
-            }
-        }
+//        for (UserModel userModel : userModelList) {
+//            if (userModel.getStudentId().toLowerCase().contains(text.toLowerCase()) || userModel.getName().toLowerCase().contains(text.toLowerCase())) {
+//                filteredList.add(userModel);
+//            }
+//        }
         if (!filteredList.isEmpty()) {
             userListAdapter.setFilteredList(filteredList);
         }

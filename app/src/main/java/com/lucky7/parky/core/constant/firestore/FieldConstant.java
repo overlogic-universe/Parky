@@ -6,5 +6,9 @@ public class FieldConstant {
     public static String NAME = "name";
     public static String EMAIL = "email";
     public static String PASSWORD = "password";
+    public static String STUDENT_ID = "student_id";
+    public static String PLATE = "plate";
+    public static String PARK_DATETIME = "park_datetime";
+
     public static String PARK_STATUS = "park_status";
 }

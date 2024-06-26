@@ -1,6 +1,5 @@
 package com.lucky7.parky.features.auth.presentation;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
@@ -9,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,24 +16,30 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+
+import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
-import com.lucky7.parky.features.auth.data.model.UserModel;
+import com.lucky7.parky.core.callback.RepositoryCallback;
 
-import java.util.Locale;
+import com.lucky7.parky.core.di.AppComponent;
+import com.lucky7.parky.features.auth.data.model.AdminModel;
+import com.lucky7.parky.features.auth.data.model.UserModel;
+import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
+
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    @Inject
+    AuthRepository authRepository;
+
+    private AppComponent appComponent;
+
     private Button btnLogin;
     private EditText edStudentId, edPass;
-
+    private boolean isLoginFailed;
 
     private void initView() {
         btnLogin = findViewById(R.id.btn_login);
@@ -44,85 +50,90 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        MyApp myApp = (MyApp) getApplicationContext();
+        appComponent = myApp.getAppComponent();
+        appComponent.inject(this);
         setContentView(R.layout.activity_login);
+        isLoginFailed = false;
 
         initView();
 
         btnLogin.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v) {
-        String studentId = edStudentId.getText().toString();
+        String email = edStudentId.getText().toString();
         String pass = edPass.getText().toString();
 
         if (v.getId() == R.id.btn_login) {
-
-            if (!validateEmail(studentId) | !validatePassword(pass)) {
+            if (!validateEmail(email) || !validatePassword(pass)) {
                 showLoginFailedDialog("Please fill it in!");
             } else {
-                if (studentId.toLowerCase(Locale.ROOT).equals("a") || pass.toLowerCase(Locale.ROOT).equals("a")) {
-                    Intent intent = new Intent(this, AdminHomeActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                } else {
-                    checkUser(studentId, pass);
+                isLoginFailed = false;
+                performUserLogin(email, pass);
+                performAdminLogin(email, pass);
+                if(isLoginFailed){
+                    showLoginFailedDialog("Your email or password is wrong");
                 }
             }
         }
     }
 
-    public Boolean validateEmail(String studentId) {
-        return !studentId.isEmpty();
+    private Boolean validateEmail(String email) {
+        return !email.isEmpty();
     }
 
-    public Boolean validatePassword(String pass) {
+    private Boolean validatePassword(String pass) {
         return !pass.isEmpty();
     }
 
-    public void checkUser(String studentId, String studentPassword) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("studentId").equalTo(studentId);
-
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void performUserLogin(String email, String password) {
+        UserModel userModel = new UserModel(email, password);
+        authRepository.loginWithEmailAndPasswordUser(userModel, new RepositoryCallback<UserModel>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String passwordFromDB = snapshot.child(studentId).child("password").getValue(String.class);
-
-                    if (Objects.equals(passwordFromDB, studentPassword)) {
-                        String name = snapshot.child(studentId).child("name").getValue(String.class);
-                        String studentIdData = snapshot.child(studentId).child("studentId").getValue(String.class);
-                        String plate = snapshot.child(studentId).child("plate").getValue(String.class);
-                        String parkStatus = snapshot.child(studentId).child("parkStatus").getValue(String.class);
-                        String parkingDate = snapshot.child(studentId).child("parkingDate").getValue(String.class);
-                        String parkingTime = snapshot.child(studentId).child("parkingTime").getValue(String.class);
-                        String email = snapshot.child(studentId).child("email").getValue(String.class);
-
-                        UserModel userModel = new UserModel(name, studentIdData, plate, parkStatus, parkingDate,
-                                parkingTime, email, studentPassword);
-
-                        Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
-                        intent.putExtra(UserHomeActivity.EXTRA_USER, userModel);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    } else {
-                        showLoginFailedDialog("Your student ID or password is wrong");
-                        edPass.requestFocus();
-                    }
-                } else {
-                    showLoginFailedDialog("Your student ID or password is wrong");
-                    edStudentId.requestFocus();
-                }
+            public void onSuccess(UserModel result) {
+                navigateToUserHome(result);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(LoginActivity.this, "Database error", Toast.LENGTH_SHORT).show();
+            public void onError(Exception e) {
+                isLoginFailed = true;
+            }
+
+
+        });
+    }
+    private void performAdminLogin(String email, String password) {
+
+        AdminModel adminModel = new AdminModel(email, password);
+        Log.d("WOWOWOWO", "onClick: " + email + "  jdafkjd: " + password);
+
+        authRepository.loginWithEmailAndPasswordAdmin(adminModel, new RepositoryCallback<AdminModel>() {
+            @Override
+            public void onSuccess(AdminModel result) {
+                navigateToAdminHome(result);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                isLoginFailed = true;
             }
         });
+    }
+
+    private void navigateToAdminHome(AdminModel adminModel) {
+        Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+        intent.putExtra(AdminHomeActivity.EXTRA_ADMIN, adminModel);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void navigateToUserHome(UserModel userModel) {
+        Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
+        intent.putExtra(UserHomeActivity.EXTRA_USER, userModel);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void showLoginFailedDialog(String message) {

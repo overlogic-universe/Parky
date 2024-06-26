@@ -16,11 +16,14 @@ import android.widget.ImageView;
 import com.lucky7.parky.R;
 import com.lucky7.parky.core.adapter.SlideAdapter;
 import com.lucky7.parky.core.entity.SlideItem;
+import com.lucky7.parky.features.park.presentation.HistoryActivity;
+import com.lucky7.parky.features.park.presentation.QRCodeScannerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final String EXTRA_ADMIN = "extra_admin";
     private ImageView ivHistory, ivUser, ivAdmin, ivScanCode, ivLogout;
     ViewPager2 viewPager2;
     private final Handler slideHandler = new Handler();

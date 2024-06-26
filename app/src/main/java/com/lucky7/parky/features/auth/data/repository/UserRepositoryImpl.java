@@ -1,91 +1,60 @@
 package com.lucky7.parky.features.auth.data.repository;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.lucky7.parky.features.auth.data.data_resource.remote.UserRemoteDataResource;
+import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.features.auth.data.data_source.remote.UserRemoteDataSource;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.features.auth.domain.repository.UserRepository;
 
 import javax.inject.Inject;
 
 public class UserRepositoryImpl implements UserRepository {
-    private final UserRemoteDataResource userRemoteDataResource;
+    private final UserRemoteDataSource userRemoteDataSource;
 
     @Inject
-    public UserRepositoryImpl(UserRemoteDataResource userRemoteDataResource) {
-        this.userRemoteDataResource = userRemoteDataResource;
+    public UserRepositoryImpl(UserRemoteDataSource userRemoteDataSource) {
+        this.userRemoteDataSource = userRemoteDataSource;
     }
 
     @Override
-    public void addUser(UserModel userModel) {
-        userRemoteDataResource.addUser(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    // Handle success (e.g., user added successfully)
-                } else {
-                    // Handle error
-                    Exception exception = task.getException();
-                    if (exception != null) {
-                        // Handle specific error cases
-                    }
-                }
+    public void addUser(UserModel userModel, RepositoryCallback<Void> callback) {
+        userRemoteDataSource.addUser(userModel).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                callback.onSuccess(null);
+            } else {
+                callback.onError(task.getException());
             }
         });
     }
 
     @Override
-    public void deleteUser(UserModel userModel) {
-        userRemoteDataResource.deleteUser(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    // Handle success (e.g., user deleted successfully)
-                } else {
-                    // Handle error
-                    Exception exception = task.getException();
-                    if (exception != null) {
-                        // Handle specific error cases
-                    }
-                }
+    public void deleteUser(UserModel userModel, RepositoryCallback<Void> callback) {
+        userRemoteDataSource.deleteUser(userModel).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                callback.onSuccess(null);
+            } else {
+                callback.onError(task.getException());
             }
         });
     }
 
     @Override
-    public void updatePassword(UserModel userModel) {
-        userRemoteDataResource.updatePassword(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    // Handle success (e.g., password updated successfully)
-                } else {
-                    // Handle error
-                    Exception exception = task.getException();
-                    if (exception != null) {
-                        // Handle specific error cases
-                    }
-                }
+    public void updatePassword(UserModel userModel, RepositoryCallback<Void> callback) {
+        userRemoteDataSource.updatePassword(userModel).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                callback.onSuccess(null);
+            } else {
+                callback.onError(task.getException());
             }
         });
     }
 
     @Override
-    public void updateParkStatus(UserModel userModel) {
-        userRemoteDataResource.updateParkStatus(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    // Handle success (e.g., park status updated successfully)
-                } else {
-                    // Handle error
-                    Exception exception = task.getException();
-                    if (exception != null) {
-                        // Handle specific error cases
-                    }
-                }
+    public void updateParkStatus(UserModel userModel, RepositoryCallback<Void> callback) {
+        userRemoteDataSource.updateParkStatus(userModel).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                callback.onSuccess(null);
+            } else {
+                callback.onError(task.getException());
             }
         });
     }

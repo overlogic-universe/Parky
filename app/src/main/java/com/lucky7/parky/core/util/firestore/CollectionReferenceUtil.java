@@ -13,4 +13,8 @@ public class CollectionReferenceUtil {
         return firestore.collection(CollectionConstant.USERS);
     }
 
+    public static CollectionReference getParkHistoryCollection(FirebaseFirestore firestore) {
+        return firestore.collection(CollectionConstant.PARK_HISTORY);
+    }
+
 }

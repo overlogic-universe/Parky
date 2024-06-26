@@ -1,4 +1,4 @@
-package com.lucky7.parky.features.auth.presentation;
+package com.lucky7.parky.features.park.presentation;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

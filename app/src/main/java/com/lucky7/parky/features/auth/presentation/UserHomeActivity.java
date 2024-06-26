@@ -93,7 +93,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
             tvDate.setText(currentDate);
             tvStudentId.setText(userModel.getStudentId());
             tvPlate.setText(userModel.getPlate());
-            tvStatus.setText(userModel.getParkStatus());
+            tvStatus.setText(userModel.getParkStatus().toString());
         }
         refresh.setOnRefreshListener(this);
 
@@ -198,7 +198,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         UserModel userModel = snapshot.getValue(UserModel.class);
                         if (userModel != null) {
-                            tvStatus.setText(userModel.getParkStatus());
+                            tvStatus.setText(userModel.getParkStatus().toString());
                         }
                     }
                 }

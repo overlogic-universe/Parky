@@ -1,6 +1,5 @@
-package com.lucky7.parky.features.auth.presentation;
+package com.lucky7.parky.features.park.presentation;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,23 +8,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.lucky7.parky.R;
 import com.lucky7.parky.core.adapter.ActivityListAdapter;
+import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.entity.ParkStatus;
+import com.lucky7.parky.core.util.firestore.CollectionReferenceUtil;
 import com.lucky7.parky.features.auth.data.model.UserModel;
+import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
+import com.lucky7.parky.features.park.domain.repository.ParkHistoryRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class HistoryActivity extends AppCompatActivity implements View.OnClickListener {
+    @Inject
+    ParkHistoryRepository parkHistoryRepository;
     private ImageView ivArrowBack;
     private RecyclerView rvActivityList;
-    private final ArrayList<UserModel> userModelList = new ArrayList<>();
+    private final ArrayList<ParkHistoryModel> parkHistoryModelList = new ArrayList<>();
     private SearchView searchView;
     private ActivityListAdapter activityListAdapter;
 
@@ -71,40 +82,34 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void getActivityList() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-
-        reference.addValueEventListener(new ValueEventListener() {
+        parkHistoryRepository.getAllHistories(new RepositoryCallback<List<ParkHistoryModel>>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userModelList.clear();
-
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                    if (userModel != null && Objects.equals(userModel.getParkStatus().toLowerCase(), "parked")) {
-                        userModelList.add(userModel);
-                    }
-                }
+            public void onSuccess(List<ParkHistoryModel> parkHistories) {
+                parkHistoryModelList.clear();
+                parkHistoryModelList.addAll(parkHistories);
                 showActivityList();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onError(Exception e) {
+                Toast.makeText(HistoryActivity.this, "Failed to fetch park histories", Toast.LENGTH_SHORT).show();
             }
+
         });
+
     }
 
     private void showActivityList() {
         rvActivityList.setLayoutManager(new LinearLayoutManager(this));
-        activityListAdapter = new ActivityListAdapter(userModelList);
+        activityListAdapter = new ActivityListAdapter(parkHistoryModelList);
         rvActivityList.setAdapter(activityListAdapter);
     }
 
     private void filterList(String text) {
-        ArrayList<UserModel> filteredList = new ArrayList<>();
-        for (UserModel userModel : userModelList) {
-            if (userModel.getStudentId().toLowerCase().contains(text.toLowerCase()) || userModel.getPlate().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(userModel);
+        ArrayList<ParkHistoryModel> filteredList = new ArrayList<>();
+        for (ParkHistoryModel parkHistoryModel : parkHistoryModelList) {
+            if (parkHistoryModel.getUserModel().getStudentId().toLowerCase().contains(text.toLowerCase()) || parkHistoryModel.getUserModel().getPlate().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(parkHistoryModel);
             }
         }
 

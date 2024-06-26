@@ -9,31 +9,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lucky7.parky.R;
-import com.lucky7.parky.features.auth.data.model.UserModel;
+import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
 
 import java.util.ArrayList;
 
 public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapter.ListViewHolder> {
-    private ArrayList<UserModel> userModelList;
+    private ArrayList<ParkHistoryModel> parkHistoryList;
 
-    public ActivityListAdapter(ArrayList<UserModel> userModelList) {
-        this.userModelList = userModelList;
+    public ActivityListAdapter(ArrayList<ParkHistoryModel> parkHistoryList) {
+        this.parkHistoryList = parkHistoryList;
     }
 
     public static class ListViewHolder extends RecyclerView.ViewHolder {
         TextView licensePlate;
         TextView studentId;
         TextView status;
-        TextView parkingDate;
-        TextView parkingTime;
+        TextView parkingDateTime;
+
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             licensePlate = itemView.findViewById(R.id.tv_license_plate_activity);
             studentId = itemView.findViewById(R.id.tv_student_id_activity);
             status = itemView.findViewById(R.id.tv_status_activity);
-            parkingDate = itemView.findViewById(R.id.tv_date_activity);
-            parkingTime = itemView.findViewById(R.id.tv_time_activity);
+            parkingDateTime = itemView.findViewById(R.id.tv_date_activity);
         }
     }
 
@@ -46,21 +45,20 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ActivityListAdapter.ListViewHolder holder, int position) {
-        UserModel userModel = userModelList.get(position);
-        holder.licensePlate.setText(userModel.getPlate());
-        holder.studentId.setText(userModel.getStudentId());
-        holder.status.setText(userModel.getParkStatus());
-        holder.parkingDate.setText(userModel.getParkingDate());
-        holder.parkingTime.setText(userModel.getParkingTime());
+        ParkHistoryModel parkHistory = parkHistoryList.get(position);
+        holder.licensePlate.setText(parkHistory.getUserModel().getPlate());
+        holder.studentId.setText(parkHistory.getUserModel().getId());
+        holder.status.setText(parkHistory.getUserModel().getParkStatus().toString());
+        holder.parkingDateTime.setText(parkHistory.getUserModel().getParkDatetime());
     }
 
     @Override
     public int getItemCount() {
-        return userModelList.size();
+        return parkHistoryList.size();
     }
 
-    public void setFilteredList(ArrayList<UserModel> filteredList) {
-        this.userModelList = filteredList;
+    public void setFilteredList(ArrayList<ParkHistoryModel> filteredList) {
+        this.parkHistoryList = filteredList;
         notifyDataSetChanged();
     }
 }

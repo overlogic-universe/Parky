@@ -5,38 +5,51 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.domain.entity.Authentication;
 
-public class UserModel extends Authentication  implements Parcelable {
+public class UserModel extends Authentication implements Parcelable {
+    private String studentId;
     private String plate;
-    private String parkStatus;
-    private String parkingDate;
-    private String parkingTime;
+    private ParkStatus parkStatus;
+    private String parkDatetime;
 
     public UserModel() {
     }
 
+    public UserModel(String email, String password) {
+        super(email, password);
+    }
+
     public UserModel(Parcel in) {
         super(in.readString(), in.readString(), in.readString(), in.readString());
+        studentId = in.readString();
         plate = in.readString();
-        parkStatus = in.readString();
-        parkingTime = in.readString();
+        parkStatus = ParkStatus.fromString(in.readString());
+        parkDatetime = in.readString();
     }
 
-    public UserModel(String id, String name, String Id, String plate, String parkStatus, String parkingDate, String parkingTime,
-                     String email, String password) {
+    public UserModel(String id, String name, String studentId, String plate, ParkStatus parkStatus, String parkDatetime, String email, String password) {
         super(id, name, email, password);
+        this.studentId = studentId;
         this.plate = plate;
         this.parkStatus = parkStatus;
-        this.parkingDate = parkingDate;
-        this.parkingTime = parkingTime;
+        this.parkDatetime = parkDatetime;
     }
 
-    public String getParkStatus() {
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public ParkStatus getParkStatus() {
         return parkStatus;
     }
 
-    public void setParkStatus(String parkStatus) {
+    public void setParkStatus(ParkStatus parkStatus) {
         this.parkStatus = parkStatus;
     }
 
@@ -44,24 +57,30 @@ public class UserModel extends Authentication  implements Parcelable {
         return plate;
     }
 
-    public String getParkingDate() {
-        return parkingDate;
-    }
-
-    public void setParkingDate(String parkingDate) {
-        this.parkingDate = parkingDate;
-    }
-
     public void setPlate(String plate) {
         this.plate = plate;
     }
 
-    public String getParkingTime() {
-        return parkingTime;
+    public String getParkDatetime() {
+        return parkDatetime;
     }
 
-    public void setParkingTime(String parkingTime) {
-        this.parkingTime = parkingTime;
+    public void setParkDatetime(String parkDatetime) {
+        this.parkDatetime = parkDatetime;
+    }
+
+    @NonNull
+    public String toString() {
+        return "UserModel{" +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", studentId='" + studentId + '\'' +
+                ", plate='" + plate + '\'' +
+                ", parkStatus='" + parkStatus + '\'' +
+                ", parkDatetime='" + parkDatetime + '\'' +
+                '}';
     }
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
@@ -83,12 +102,13 @@ public class UserModel extends Authentication  implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeString(name);
-        parcel.writeString(email);
-        parcel.writeString(password);
+        parcel.writeString(getId());
+        parcel.writeString(getName());
+        parcel.writeString(getEmail());
+        parcel.writeString(getPassword());
+        parcel.writeString(studentId);
         parcel.writeString(plate);
-        parcel.writeString(parkStatus);
-        parcel.writeString(parkingTime);
+        parcel.writeString(parkStatus.toString());
+        parcel.writeString(parkDatetime);
     }
-
 }

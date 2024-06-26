@@ -9,12 +9,24 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.lucky7.parky.R;
+import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.data.model.UserModel;
+import com.lucky7.parky.features.auth.data.repository.UserRepositoryImpl;
+import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
+import com.lucky7.parky.features.auth.domain.repository.UserRepository;
+
+import javax.inject.Inject;
 
 public class AddUserActivity extends AppCompatActivity implements View.OnClickListener {
+
+    @Inject
+    UserRepository userRepository;
     private ImageView ivBackFromUserAdd;
     private EditText edUsername;
     private EditText edStudentId;
@@ -45,7 +57,6 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
         if (v.getId() == R.id.iv_back_from_add_user) {
             getOnBackPressedDispatcher().onBackPressed();
         } else if (v.getId() == R.id.btn_add_user) {
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
             String username = edUsername.getText().toString();
             String studentId = edStudentId.getText().toString();
@@ -53,19 +64,20 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             String email = edEmail.getText().toString();
             String password = edPassword.getText().toString();
 
-//            UserModel userModel = new UserModel(username, studentId, plate, "Not Parked","", "", email, password);
-            reference.child("users").child(studentId).setValue(userModel)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            getOnBackPressedDispatcher().onBackPressed();
-                            Toast.makeText(this, "User successfully added", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(this, "User failed to be added", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
+            UserModel userModel = new UserModel(null,username, studentId, plate, ParkStatus.NOT_PARKED,null, email, password);
+
+            userRepository.addUser(userModel, new RepositoryCallback<Void>() {
+                @Override
+                public void onSuccess(Void result) {
+                    Toast.makeText(AddUserActivity.this, "User added successfully", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    Toast.makeText(AddUserActivity.this, "Failed to add user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
     }
 }

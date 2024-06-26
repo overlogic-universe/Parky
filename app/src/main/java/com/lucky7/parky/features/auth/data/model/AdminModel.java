@@ -8,12 +8,38 @@ import androidx.annotation.NonNull;
 import com.lucky7.parky.features.auth.domain.entity.Authentication;
 
 public class AdminModel extends Authentication implements Parcelable {
+
+    public AdminModel(){}
+
+    public AdminModel(String email, String password) {
+        super(email, password);
+    }
+
     public AdminModel(Parcel in) {
         super(in.readString(), in.readString(), in.readString(), in.readString());
     }
-    public AdminModel(String id, String name,String email, String password) {
-        super(id, name, email, password);
 
+    public AdminModel(String id, String name, String email, String password) {
+        super(id, name, email, password);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "AdminModel{" +
+                "id='" + getId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                '}';
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(getId());
+        parcel.writeString(getName());
+        parcel.writeString(getEmail());
+        parcel.writeString(getPassword());
     }
 
     public static final Creator<AdminModel> CREATOR = new Creator<AdminModel>() {
@@ -31,9 +57,5 @@ public class AdminModel extends Authentication implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel parcel, int i) {
     }
 }

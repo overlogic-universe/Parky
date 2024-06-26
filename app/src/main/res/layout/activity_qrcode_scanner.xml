@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bottom_sheet_shape"
     android:padding="25dp"
-    tools:context=".features.auth.presentation.QRCodeScannerActivity">
+    tools:context=".features.park.presentation.QRCodeScannerActivity">
 
     <ImageView
         android:id="@+id/iv_parky_logo_bottom_sheet"

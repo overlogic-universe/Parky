@@ -1,4 +1,4 @@
-package com.lucky7.parky.features.auth.data.data_resource.remote;
+package com.lucky7.parky.features.auth.data.data_source.remote;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -9,11 +9,12 @@ import com.lucky7.parky.features.auth.data.model.UserModel;
 
 import javax.inject.Inject;
 
-public class UserRemoteDataResourceImpl implements  UserRemoteDataResource{
-    private final FirebaseFirestore firestore;
+public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
+    @Inject
+    FirebaseFirestore firestore;
 
     @Inject
-    public UserRemoteDataResourceImpl(FirebaseFirestore firestore) {
+    public UserRemoteDataSourceImpl(FirebaseFirestore firestore) {
         this.firestore = firestore;
     }
 
