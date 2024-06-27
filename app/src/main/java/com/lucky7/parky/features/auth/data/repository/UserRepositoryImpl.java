@@ -3,11 +3,17 @@ package com.lucky7.parky.features.auth.data.repository;
 import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.constant.firestore.FieldConstant;
 import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.data.data_source.remote.UserRemoteDataSource;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.features.auth.domain.repository.UserRepository;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -42,8 +48,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Task<Void> updatePassword(UserModel userModel, RepositoryCallback<Void> callback) {
-        return userRemoteDataSource.updatePassword(userModel).addOnCompleteListener(task -> {
+    public void updatePassword(UserModel userModel, RepositoryCallback<Void> callback) {
+        userRemoteDataSource.updatePassword(userModel).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 callback.onSuccess(null);
             } else {
@@ -53,8 +59,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Task<Void> updateParkStatus(UserModel userModel, RepositoryCallback<Void> callback) {
-        return userRemoteDataSource.updateParkStatus(userModel).addOnCompleteListener(task -> {
+    public void updateParkStatus(String userId, String currentDateTime, RepositoryCallback<Void> callback) {
+        userRemoteDataSource.updateParkStatus(userId, currentDateTime).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 callback.onSuccess(null);
             } else {

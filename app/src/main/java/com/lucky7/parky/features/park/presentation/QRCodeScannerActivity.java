@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,8 +22,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.zxing.Result;
+import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
+import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.di.AppComponent;
+import com.lucky7.parky.core.entity.ParkStatus;
+import com.lucky7.parky.features.auth.data.model.UserModel;
+import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
+import com.lucky7.parky.features.auth.domain.repository.UserRepository;
+import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
+import com.lucky7.parky.features.park.domain.repository.ParkHistoryRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,13 +42,29 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 public class QRCodeScannerActivity extends AppCompatActivity implements View.OnClickListener {
+    @Inject
+    AuthRepository authRepository;
+    @Inject
+    UserRepository userRepository;
+    @Inject
+    ParkHistoryRepository parkHistoryRepository;
     private CodeScanner mCodeScanner;
+    private String currentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApp myApp = (MyApp) getApplicationContext();
+        AppComponent appComponent = myApp.getAppComponent();
+        appComponent.inject(this);
+
         setContentView(R.layout.activity_qrcode_scanner);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
+        currentDate = dateFormat.format(calendar.getTime());
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         ImageView ivBackFromScanner = findViewById(R.id.iv_back_from_scanner);
         mCodeScanner = new CodeScanner(this, scannerView);
@@ -50,8 +77,8 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getOnBackPressedDispatcher().onBackPressed();
                         checkUser(result.getText());
+                        getOnBackPressedDispatcher().onBackPressed();
                     }
                 });
             }
@@ -86,48 +113,49 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    private void checkUser(String studentId) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        DatabaseReference userRef = reference.child(studentId);
+    private void checkUser(String userId) {
+        Log.d("FREEE", "checkUser: " + userId);
 
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        userRepository.updateParkStatus(userId, currentDate, new RepositoryCallback<Void>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String currentParkStatus = snapshot.child("parkStatus").getValue(String.class);
-
-                    if (currentParkStatus != null) {
-                        String updatedParkStatus = (currentParkStatus.equals("Parked")) ? "Not Parked" : "Parked";
-
-                        Calendar calendar = Calendar.getInstance();
-                        Date currentDate = calendar.getTime();
-
-                        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(currentDate);
-                        String time = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(currentDate);
-
-                        Map<String, Object> updates = new HashMap<>();
-                        updates.put("parkStatus", updatedParkStatus);
-                        updates.put("parkingDate", date);
-                        updates.put("parkingTime", time);
-                        snapshot.getRef().updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(QRCodeScannerActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(QRCodeScannerActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
-                } else {
-                    Toast.makeText(QRCodeScannerActivity.this, "User not found", Toast.LENGTH_SHORT).show();
-                }
+            public void onSuccess(Void result) {
+                getUserFromFirestore(userId);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(QRCodeScannerActivity.this, "Database error", Toast.LENGTH_SHORT).show();
+            public void onError(Exception e) {
+                Toast.makeText(QRCodeScannerActivity.this, "Scan failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void getUserFromFirestore(String userId){
+
+        authRepository.getUserFromFirestore(userId, new RepositoryCallback<UserModel>() {
+            @Override
+            public void onSuccess(UserModel result) {
+                addParkHistory(userId,  result) ;
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(QRCodeScannerActivity.this, "Scan failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void addParkHistory(String userId, UserModel userModel){
+
+        ParkHistoryModel parkHistoryModel = new ParkHistoryModel(null, userId, currentDate);
+        parkHistoryRepository.addParkHistory(parkHistoryModel, userModel, new RepositoryCallback<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference result) {
+                Toast.makeText(QRCodeScannerActivity.this, "Scan success", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(QRCodeScannerActivity.this, "Scan failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

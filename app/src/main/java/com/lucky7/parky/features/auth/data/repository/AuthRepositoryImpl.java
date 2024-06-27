@@ -39,7 +39,7 @@ public class AuthRepositoryImpl implements AuthRepository {
         authTask.continueWithTask(task -> {
             if (task.isSuccessful()) {
                 String adminId = Objects.requireNonNull(task.getResult().getUser()).getUid();
-
+                authLocalDataSource.saveLoginStatus(true, SharedPreferenceConstant.KEY_ADMIN, adminId);
                 return getAdminFromFirestore(adminId, callback);
             } else {
 
@@ -55,6 +55,7 @@ public class AuthRepositoryImpl implements AuthRepository {
         authTask.continueWithTask(task -> {
             if (task.isSuccessful()) {
                 String userId = Objects.requireNonNull(task.getResult().getUser()).getUid();
+                authLocalDataSource.saveLoginStatus(true, SharedPreferenceConstant.KEY_USER, userId);
                 return getUserFromFirestore(userId, callback);
             } else {
                 callback.onError(task.getException());
@@ -86,10 +87,10 @@ public class AuthRepositoryImpl implements AuthRepository {
                 QuerySnapshot querySnapshot = task.getResult();
                 if (!querySnapshot.isEmpty()) {
                     UserModel userModel = UserModel.fromFirestore(querySnapshot.getDocuments().get(0));
-                    assert userModel != null;
-                    userModel.setId(userId);
-                    Log.d("WOWOWO", "getUserFromFirestore: " + userModel);
-                    authLocalDataSource.saveLoginStatus(true, SharedPreferenceConstant.KEY_USER, userId);
+                    if(userModel.getId() == null){
+                        userModel.setId(userId);
+                    }
+                    Log.d("FREEEE", "getUserFromFirestore REPOOO: " + userModel);
                     callback.onSuccess(userModel);
                     return userModel;
                 } else {
@@ -112,7 +113,6 @@ public class AuthRepositoryImpl implements AuthRepository {
                     AdminModel adminModel=  querySnapshot.getDocuments().get(0).toObject(AdminModel.class);
                     assert adminModel != null;
                     adminModel.setId(adminId);
-                    authLocalDataSource.saveLoginStatus(true, SharedPreferenceConstant.KEY_ADMIN, adminId);
                     callback.onSuccess(adminModel);
                     return adminModel;
                 } else {

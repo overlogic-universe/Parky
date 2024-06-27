@@ -18,7 +18,7 @@ public class UserModel extends Authentication implements Parcelable {
     private String studentId;
     private String plate;
     private String parkStatus;
-    private Date lastActivity;
+    private String lastActivity;
 
     public UserModel() {
     }
@@ -32,10 +32,10 @@ public class UserModel extends Authentication implements Parcelable {
         studentId = in.readString();
         plate = in.readString();
         parkStatus = in.readString();
-        lastActivity = (Date) in.readSerializable();
+        lastActivity =  in.readString();
     }
 
-    public UserModel(String id, String name, String studentId, String plate, String parkStatus, Date lastActivity, String email, String password) {
+    public UserModel(String id, String name, String studentId, String plate, String parkStatus, String lastActivity, String email, String password) {
         super(id, name, email, password);
         this.studentId = studentId;
         this.plate = plate;
@@ -43,7 +43,7 @@ public class UserModel extends Authentication implements Parcelable {
         this.lastActivity = lastActivity;
     }
 
-    public UserModel(String id, String name, String studentId, String plate, String parkStatus, Date lastActivity, String email) {
+    public UserModel(String id, String name, String studentId, String plate, String parkStatus, String lastActivity, String email) {
         super(id, name, email);
         this.studentId = studentId;
         this.plate = plate;
@@ -75,11 +75,11 @@ public class UserModel extends Authentication implements Parcelable {
         this.plate = plate;
     }
 
-    public Date getLastActivity() {
+    public String getLastActivity() {
         return lastActivity;
     }
 
-    public void setLastActivity(Date lastActivity) {
+    public void setLastActivity(String lastActivity) {
         this.lastActivity = lastActivity;
     }
 
@@ -120,7 +120,7 @@ public class UserModel extends Authentication implements Parcelable {
         userModel.setStudentId(document.getString(FieldConstant.STUDENT_ID));
         userModel.setPlate(document.getString(FieldConstant.PLATE));
         userModel.setParkStatus(document.getString(FieldConstant.PARK_STATUS));
-        userModel.setLastActivity(document.getDate(FieldConstant.LAST_ACTIVITY));
+        userModel.setLastActivity(document.getString(FieldConstant.LAST_ACTIVITY));
         return userModel;
     }
 

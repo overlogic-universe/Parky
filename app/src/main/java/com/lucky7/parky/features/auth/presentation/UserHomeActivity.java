@@ -165,7 +165,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
         try {
-            BitMatrix bitMatrix = multiFormatWriter.encode(userModel.getStudentId(), BarcodeFormat.QR_CODE, 250, 250);
+            BitMatrix bitMatrix = multiFormatWriter.encode(userModel.getId(), BarcodeFormat.QR_CODE, 250, 250);
 
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             barcodeEncoder.setBackgroundColor(Color.TRANSPARENT);

@@ -40,7 +40,6 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
     private ImageView ivHistory, ivUser, ivAdmin, ivScanCode, ivLogout;
     ViewPager2 viewPager2;
     private Handler slideHandler;
-    boolean isAccept = false;
 
     private void initView() {
         ivHistory = findViewById(R.id.iv_history);

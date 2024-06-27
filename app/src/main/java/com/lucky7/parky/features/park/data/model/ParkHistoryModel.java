@@ -19,18 +19,19 @@ public class ParkHistoryModel implements Parcelable {
     private String id;
     private String userId;
     private UserModel userModel;
-    private Date parkDateTime;
+    private String parkDateTime;
 
     public ParkHistoryModel() {
     }
 
-    public ParkHistoryModel(String id,String userId, UserModel userModel, Date parkDateTime) {
+    public ParkHistoryModel(String id,String userId, UserModel userModel, String parkDateTime) {
         this.id = id;
         this.userId = userId;
         this.userModel = userModel;
         this.parkDateTime = parkDateTime;
     }
-    public ParkHistoryModel(String userId, Date parkDateTime) {
+    public ParkHistoryModel(String id,  String userId, String parkDateTime) {
+        this.id = id;
         this.userId = userId;
         this.parkDateTime = parkDateTime;
     }
@@ -39,7 +40,7 @@ public class ParkHistoryModel implements Parcelable {
         id = in.readString();
         userId = in.readString();
         userModel = in.readParcelable(UserModel.class.getClassLoader());
-        parkDateTime = (Date) in.readSerializable();
+        parkDateTime = in.readString();
     }
 
     public String getId() {
@@ -66,23 +67,23 @@ public class ParkHistoryModel implements Parcelable {
     }
 
     @ServerTimestamp
-    public Date getParkDateTime() {
+    public String getParkDateTime() {
         return parkDateTime;
     }
 
-    public void setParkDateTime(Date parkDateTime) {
+    public void setParkDateTime(String parkDateTime) {
         this.parkDateTime = parkDateTime;
     }
 
     public Map<String, Object> toFirestore() {
         Map<String, Object> result = new HashMap<>();
         result.put(FieldConstant.PARK_HISTORY_ID, getId());
-        result.put(FieldConstant.USER_ID, getId());
-        result.put(FieldConstant.PARK_DATE_TIME, getId());
+        result.put(FieldConstant.USER_ID, getUserId());
+        result.put(FieldConstant.PARK_DATE_TIME, getParkDateTime());
 
         return result;
     }
-    public static ParkHistoryModel fromString(String id, String userId, UserModel userModel, Date parkDateTime) {
+    public static ParkHistoryModel fromString(String id, String userId, UserModel userModel, String parkDateTime) {
         return new ParkHistoryModel(id, userId, userModel, parkDateTime);
     }
 
@@ -106,7 +107,7 @@ public class ParkHistoryModel implements Parcelable {
         dest.writeString(id);
         dest.writeString(userId);
         dest.writeParcelable(userModel, flags);
-        dest.writeSerializable(parkDateTime);
+        dest.writeString(parkDateTime);
     }
 
     public static final Creator<ParkHistoryModel> CREATOR = new Creator<ParkHistoryModel>() {
