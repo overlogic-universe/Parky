@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
@@ -91,6 +92,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void navigateToUserHome(UserModel userModel) {
+        Log.d("WOWOWO", "navigateToUserHome: " + userModel);
         Intent intent = new Intent(SplashScreenActivity.this, UserHomeActivity.class);
         intent.putExtra(UserHomeActivity.EXTRA_USER, userModel);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

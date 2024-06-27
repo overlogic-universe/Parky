@@ -1,5 +1,7 @@
 package com.lucky7.parky.features.auth.data.repository;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -83,9 +85,10 @@ public class AuthRepositoryImpl implements AuthRepository {
             if (task.isSuccessful()) {
                 QuerySnapshot querySnapshot = task.getResult();
                 if (!querySnapshot.isEmpty()) {
-                    UserModel userModel=  querySnapshot.getDocuments().get(0).toObject(UserModel.class);
+                    UserModel userModel = UserModel.fromFirestore(querySnapshot.getDocuments().get(0));
                     assert userModel != null;
                     userModel.setId(userId);
+                    Log.d("WOWOWO", "getUserFromFirestore: " + userModel);
                     authLocalDataSource.saveLoginStatus(true, SharedPreferenceConstant.KEY_USER, userId);
                     callback.onSuccess(userModel);
                     return userModel;

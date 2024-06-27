@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,9 +32,15 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
+import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.di.AppComponent;
+import com.lucky7.parky.features.auth.data.model.AdminModel;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.core.util.common.BarcodeEncoder;
+import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
+import com.lucky7.parky.features.auth.domain.repository.UserRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,7 +49,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+    @Inject
+    AuthRepository authRepository;
+    @Inject
+    UserRepository userRepository;
     public static final String EXTRA_USER = "extra_user";
     private UserModel userModel;
     private TextView tvUsername;
@@ -60,6 +73,9 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApp myApp = (MyApp) getApplicationContext();
+        AppComponent appComponent = myApp.getAppComponent();
+        appComponent.inject(this);
         setContentView(R.layout.activity_user_home);
 
         tvUsername = findViewById(R.id.tv_username);
@@ -100,9 +116,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
         convertToBarcode();
 
         ivLogout.setOnClickListener(view -> {
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            showLogoutDialog();
         });
 
         ivToChangePass.setOnClickListener(v -> {
@@ -126,47 +140,25 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
         });
 
         tvSubmit.setOnClickListener(v -> {
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-            DatabaseReference userRef = reference.child(userModel.getStudentId());
-
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        String existingPassword = snapshot.child("password").getValue(String.class);
-                        String newPassword = edtNewPass.getText().toString().trim();
-
-                        if (!newPassword.equals(existingPassword)) {
-                            Map<String, Object> updates = new HashMap<>();
-                            updates.put("password", newPassword);
-                            snapshot.getRef().updateChildren(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        dialog.dismiss();
-                                        edtNewPass.setText("");
-                                        Toast.makeText(UserHomeActivity.this, "Successfully changed password", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        dialog.dismiss();
-                                        edtNewPass.setText("");
-                                        Toast.makeText(UserHomeActivity.this, "Failed to change password", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                        } else {
-                            Toast.makeText(UserHomeActivity.this, "Password remains unchanged", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(UserHomeActivity.this, "Database error", Toast.LENGTH_SHORT).show();
-                }
-            });
+            userModel.setPassword(edtNewPass.getText().toString().trim());
+            changePassword();
         });
 
 
+    }
+
+    private  void changePassword(){
+        userRepository.updatePassword(userModel, new RepositoryCallback<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+                Toast.makeText(UserHomeActivity.this, "Successfully to change password", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(UserHomeActivity.this, "Failed to change password", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void convertToBarcode() {
@@ -189,29 +181,43 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
 
     @Override
     public void onRefresh() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("studentId").equalTo(userModel.getStudentId());
-        checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        authRepository.getUserFromFirestore(userModel.getId(), new RepositoryCallback<UserModel>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        UserModel userModel = snapshot.getValue(UserModel.class);
-                        if (userModel != null) {
-                            tvStatus.setText(userModel.getParkStatus().toString());
-                        }
-                    }
-                }
+            public void onSuccess(UserModel userModel) {
+                tvStatus.setText(userModel.getParkStatus());
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onError(Exception e) {
+                Toast.makeText(UserHomeActivity.this, "Failed to refresh data", Toast.LENGTH_SHORT).show();
             }
         });
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             refresh.setRefreshing(false);
         }, 1000);
+    }
+
+    private void showLogoutDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_confirm_logout);
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialog.findViewById(R.id.tv_confirm_logout).setOnClickListener(v -> {
+            logout();
+            dialog.dismiss();
+        });
+
+        dialog.findViewById(R.id.tv_cancel_logout).setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    private void logout(){
+        authRepository.logout();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

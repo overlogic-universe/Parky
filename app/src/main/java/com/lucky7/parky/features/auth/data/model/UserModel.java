@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.lucky7.parky.core.constant.firestore.FieldConstant;
 import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.domain.entity.Authentication;
@@ -106,6 +107,21 @@ public class UserModel extends Authentication implements Parcelable {
         result.put(FieldConstant.PARK_STATUS, getParkStatus());
         result.put(FieldConstant.LAST_ACTIVITY, getLastActivity());
         return result;
+    }
+
+    public static UserModel fromFirestore(DocumentSnapshot document) {
+        if (document == null || !document.exists()) {
+            return null;
+        }
+        UserModel userModel = new UserModel();
+        userModel.setId(document.getString(FieldConstant.USER_ID));
+        userModel.setName(document.getString(FieldConstant.NAME));
+        userModel.setEmail(document.getString(FieldConstant.EMAIL));
+        userModel.setStudentId(document.getString(FieldConstant.STUDENT_ID));
+        userModel.setPlate(document.getString(FieldConstant.PLATE));
+        userModel.setParkStatus(document.getString(FieldConstant.PARK_STATUS));
+        userModel.setLastActivity(document.getDate(FieldConstant.LAST_ACTIVITY));
+        return userModel;
     }
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
