@@ -48,8 +48,8 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
         ParkHistoryModel parkHistory = parkHistoryList.get(position);
         holder.licensePlate.setText(parkHistory.getUserModel().getPlate());
         holder.studentId.setText(parkHistory.getUserModel().getId());
-        holder.status.setText(parkHistory.getUserModel().getParkStatus().toString());
-        holder.parkingDateTime.setText(parkHistory.getUserModel().getParkDatetime());
+        holder.status.setText(parkHistory.getUserModel().getParkStatus());
+        holder.parkingDateTime.setText(parkHistory.getUserModel().getLastActivity().toString());
     }
 
     @Override

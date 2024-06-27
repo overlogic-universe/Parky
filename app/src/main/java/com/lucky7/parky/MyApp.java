@@ -7,6 +7,7 @@ import com.lucky7.parky.core.di.AuthModule;
 import com.lucky7.parky.core.di.DaggerAppComponent;
 import com.lucky7.parky.core.di.FirebaseModule;
 import com.lucky7.parky.core.di.ParkHistoryModule;
+import com.lucky7.parky.core.di.SharedPreferencesModule;
 import com.lucky7.parky.core.di.UserModule;
 
 public class MyApp extends Application {
@@ -20,6 +21,7 @@ public class MyApp extends Application {
                 .authModule(new AuthModule())
                 .userModule(new UserModule())
                 .parkHistoryModule(new ParkHistoryModule())
+                .sharedPreferencesModule(new SharedPreferencesModule(this))
                 .build();
 
         appComponent.inject(this);

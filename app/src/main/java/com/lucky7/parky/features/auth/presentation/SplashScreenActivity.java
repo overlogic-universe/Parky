@@ -2,25 +2,99 @@ package com.lucky7.parky.features.auth.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
+import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.constant.shared_preference.SharedPreferenceConstant;
+import com.lucky7.parky.core.di.AppComponent;
+import com.lucky7.parky.features.auth.data.data_source.local.AuthLocalDataSource;
+import com.lucky7.parky.features.auth.data.model.AdminModel;
+import com.lucky7.parky.features.auth.data.model.UserModel;
+import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
 
+import javax.inject.Inject;
+
+@SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
+
+    @Inject
+    AuthRepository authRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApp myApp = (MyApp) getApplicationContext();
+        AppComponent appComponent = myApp.getAppComponent();
+        appComponent.inject(this);
         setContentView(R.layout.activity_splash_screen);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
-                finish();
+                checkLoginStatus();
             }
         }, 3000);
+    }
+
+    private void checkLoginStatus() {
+        boolean isLoggedIn = authRepository.isLoggedIn();
+        String userType = authRepository.getUserType();
+        String userId = authRepository.getUserId();
+
+        if (isLoggedIn) {
+            if (SharedPreferenceConstant.KEY_ADMIN.equals(userType)) {
+                authRepository.getAdminFromFirestore(userId, new RepositoryCallback<AdminModel>() {
+                    @Override
+                    public void onSuccess(AdminModel adminModel) {
+                        navigateToAdminHome(adminModel);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        navigateToLogin();
+                    }
+                });
+            } else if (SharedPreferenceConstant.KEY_USER.equals(userType)) {
+                authRepository.getUserFromFirestore(userId, new RepositoryCallback<UserModel>() {
+                    @Override
+                    public void onSuccess(UserModel userModel) {
+                        navigateToUserHome(userModel);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        navigateToLogin();
+                    }
+                });
+            }
+        } else {
+            navigateToLogin();
+        }
+    }
+
+    private void navigateToLogin() {
+        startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
+        finish();
+    }
+
+    private void navigateToAdminHome(AdminModel adminModel) {
+        Intent intent = new Intent(SplashScreenActivity.this, AdminHomeActivity.class);
+        intent.putExtra(AdminHomeActivity.EXTRA_ADMIN, adminModel);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void navigateToUserHome(UserModel userModel) {
+        Intent intent = new Intent(SplashScreenActivity.this, UserHomeActivity.class);
+        intent.putExtra(UserHomeActivity.EXTRA_USER, userModel);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }

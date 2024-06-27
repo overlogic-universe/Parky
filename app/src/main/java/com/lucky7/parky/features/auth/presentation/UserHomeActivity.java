@@ -93,7 +93,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
             tvDate.setText(currentDate);
             tvStudentId.setText(userModel.getStudentId());
             tvPlate.setText(userModel.getPlate());
-            tvStatus.setText(userModel.getParkStatus().toString());
+            tvStatus.setText(userModel.getParkStatus());
         }
         refresh.setOnRefreshListener(this);
 

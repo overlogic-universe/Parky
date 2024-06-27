@@ -48,4 +48,7 @@
     <string name="barcode">barcode</string>
     <string name="button_to_show_dialog_change_pass">button to show dialog change pass</string>
     <string name="button_to_logout">button to logout</string>
+    <string name="are_you_sure_to_logout">Are you sure to logout?</string>
+    <string name="logout">Logout</string>
+    <string name="email">Email</string>
 </resources>

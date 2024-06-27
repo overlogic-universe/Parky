@@ -9,6 +9,7 @@ import com.lucky7.parky.core.constant.firestore.FieldConstant;
 import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.domain.entity.Authentication;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class UserModel extends Authentication implements Parcelable {
     private String studentId;
     private String plate;
     private String parkStatus;
-    private String parkDatetime;
+    private Date lastActivity;
 
     public UserModel() {
     }
@@ -30,47 +31,23 @@ public class UserModel extends Authentication implements Parcelable {
         studentId = in.readString();
         plate = in.readString();
         parkStatus = in.readString();
-        parkDatetime = in.readString();
+        lastActivity = (Date) in.readSerializable();
     }
 
-    public UserModel(String id, String name, String studentId, String plate, String parkStatus, String parkDatetime, String email, String password) {
+    public UserModel(String id, String name, String studentId, String plate, String parkStatus, Date lastActivity, String email, String password) {
         super(id, name, email, password);
         this.studentId = studentId;
         this.plate = plate;
         this.parkStatus = parkStatus;
-        this.parkDatetime = parkDatetime;
+        this.lastActivity = lastActivity;
     }
 
-    public UserModel(String id, String name, String studentId, String plate, String parkStatus, String parkDatetime, String email) {
+    public UserModel(String id, String name, String studentId, String plate, String parkStatus, Date lastActivity, String email) {
         super(id, name, email);
         this.studentId = studentId;
         this.plate = plate;
         this.parkStatus = parkStatus;
-        this.parkDatetime = parkDatetime;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        super.setId(id);
-    }
-
-    public String getEmail() {
-        return super.getEmail();
-    }
-
-    public void setEmail(String email) {
-        super.setEmail(email);
-    }
-
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    public void setPassword(String password) {
-        super.setPassword(password);
+        this.lastActivity = lastActivity;
     }
 
     public String getStudentId() {
@@ -97,12 +74,12 @@ public class UserModel extends Authentication implements Parcelable {
         this.plate = plate;
     }
 
-    public String getParkDatetime() {
-        return parkDatetime;
+    public Date getLastActivity() {
+        return lastActivity;
     }
 
-    public void setParkDatetime(String parkDatetime) {
-        this.parkDatetime = parkDatetime;
+    public void setLastActivity(Date lastActivity) {
+        this.lastActivity = lastActivity;
     }
 
     @NonNull
@@ -115,7 +92,7 @@ public class UserModel extends Authentication implements Parcelable {
                 ", studentId='" + getStudentId() + '\'' +
                 ", plate='" + getPlate() + '\'' +
                 ", parkStatus='" + getParkStatus() + '\'' +
-                ", parkDatetime='" + getParkDatetime() + '\'' +
+                ", lastActivity='" + getLastActivity() + '\'' +
                 '}';
     }
 
@@ -127,7 +104,7 @@ public class UserModel extends Authentication implements Parcelable {
         result.put(FieldConstant.STUDENT_ID, getStudentId());
         result.put(FieldConstant.PLATE, getPlate());
         result.put(FieldConstant.PARK_STATUS, getParkStatus());
-        result.put(FieldConstant.PARK_DATETIME, getParkDatetime());
+        result.put(FieldConstant.LAST_ACTIVITY, getLastActivity());
         return result;
     }
 
@@ -156,6 +133,6 @@ public class UserModel extends Authentication implements Parcelable {
         parcel.writeString(getStudentId());
         parcel.writeString(getPlate());
         parcel.writeString(getParkStatus());
-        parcel.writeString(getParkDatetime());
+        parcel.writeSerializable(getLastActivity());
     }
 }

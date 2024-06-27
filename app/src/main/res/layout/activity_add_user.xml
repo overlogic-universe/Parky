@@ -121,13 +121,13 @@
                 android:textColorHint="@color/grey"
                 android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:fontFamily="@font/poppinsmedium"
-                android:text="@string/forgot_your_password"
-                android:textColor="@color/primaryColor" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="end"-->
+<!--                android:fontFamily="@font/poppinsmedium"-->
+<!--                android:text="@string/forgot_your_password"-->
+<!--                android:textColor="@color/primaryColor" />-->
 
             <Button
                 android:id="@+id/btn_add_user"

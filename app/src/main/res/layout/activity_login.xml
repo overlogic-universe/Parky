@@ -47,11 +47,11 @@
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="5dp"
                 android:layout_marginBottom="10dp"
-                android:drawableStart="@drawable/baseline_contact_emergency_24"
+                android:drawableStart="@drawable/ic_baseline_alternate_email_24"
                 android:drawablePadding="10dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="@string/student_id"
+                android:hint="@string/email"
                 android:textColorHint="@color/grey"
                 android:textSize="14sp" />
 
@@ -69,13 +69,13 @@
                 android:textColorHint="@color/grey"
                 android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:fontFamily="@font/poppinsmedium"
-                android:text="@string/forgot_your_password"
-                android:textColor="@color/primaryColor" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="end"-->
+<!--                android:fontFamily="@font/poppinsmedium"-->
+<!--                android:text="@string/forgot_your_password"-->
+<!--                android:textColor="@color/primaryColor" />-->
 
             <Button
                 android:id="@+id/btn_login"

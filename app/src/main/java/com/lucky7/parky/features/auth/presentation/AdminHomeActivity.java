@@ -7,26 +7,39 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 
+import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
 import com.lucky7.parky.core.adapter.SlideAdapter;
+import com.lucky7.parky.core.di.AppComponent;
 import com.lucky7.parky.core.entity.SlideItem;
+import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
 import com.lucky7.parky.features.park.presentation.HistoryActivity;
 import com.lucky7.parky.features.park.presentation.QRCodeScannerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import javax.inject.Inject;
 
 public class AdminHomeActivity extends AppCompatActivity implements View.OnClickListener {
+    @Inject
+    AuthRepository authRepository;
     public static final String EXTRA_ADMIN = "extra_admin";
     private ImageView ivHistory, ivUser, ivAdmin, ivScanCode, ivLogout;
     ViewPager2 viewPager2;
-    private final Handler slideHandler = new Handler();
+    private Handler slideHandler;
     boolean isAccept = false;
 
     private void initView() {
@@ -41,10 +54,15 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApp myApp = (MyApp) getApplicationContext();
+        AppComponent appComponent = myApp.getAppComponent();
+        appComponent.inject(this);
 
         setContentView(R.layout.activity_admin_home);
 
         initView();
+
+        slideHandler = new Handler();
 
         List<SlideItem> slideItems = new ArrayList<>();
 
@@ -103,10 +121,31 @@ public class AdminHomeActivity extends AppCompatActivity implements View.OnClick
         } else if (v.getId() == R.id.iv_admin) {
             startActivity(new Intent(this, AddUserActivity.class));
         } else if (v.getId() == R.id.iv_logout_admin) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            showLogoutDialog();
         }
+    }
+
+    private void showLogoutDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_confirm_logout);
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialog.findViewById(R.id.tv_confirm_logout).setOnClickListener(v -> {
+            logout();
+            dialog.dismiss();
+        });
+
+        dialog.findViewById(R.id.tv_cancel_logout).setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    private void logout(){
+        authRepository.logout();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private final Runnable sliderRunnable = new Runnable() {
