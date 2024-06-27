@@ -158,6 +158,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
             public void onError(Exception e) {
                 Toast.makeText(UserHomeActivity.this, "Failed to change password", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 

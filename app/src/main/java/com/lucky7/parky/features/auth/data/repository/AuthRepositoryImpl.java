@@ -19,12 +19,9 @@ import java.util.Objects;
 import javax.inject.Inject;
 
 public class AuthRepositoryImpl implements AuthRepository {
-    @Inject
-    AuthRemoteDataSource authRemoteDataSource;
-    @Inject
-    AuthLocalDataSource authLocalDataSource;
-    @Inject
-    UserRepository userRepository;
+    private final AuthRemoteDataSource authRemoteDataSource;
+    private final AuthLocalDataSource authLocalDataSource;
+    private final UserRepository userRepository;
 
     @Inject
     public AuthRepositoryImpl(AuthRemoteDataSource authRemoteDataSource, AuthLocalDataSource authLocalDataSource, UserRepository userRepository) {

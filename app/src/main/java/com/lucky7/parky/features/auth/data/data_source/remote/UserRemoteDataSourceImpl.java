@@ -4,30 +4,53 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.auth.User;
 import com.lucky7.parky.core.constant.firestore.FieldConstant;
 import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.core.util.firestore.CollectionReferenceUtil;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import javax.inject.Inject;
 
 public class UserRemoteDataSourceImpl implements UserRemoteDataSource {
-    @Inject
-    FirebaseFirestore firestore;
-    @Inject
-    FirebaseAuth auth;
+    private final FirebaseFirestore firestore;
+    private final FirebaseAuth auth;
 
     @Inject
     public UserRemoteDataSourceImpl(FirebaseFirestore firestore, FirebaseAuth auth) {
         this.firestore = firestore;
         this.auth = auth;
+    }
+
+    @Override
+    public Task<List<UserModel>> getAllUsers() {
+        final CollectionReference usersRef = CollectionReferenceUtil.getUsersCollection(firestore);
+        return usersRef.get().continueWith(task -> {
+            List<UserModel> userList = new ArrayList<>();
+            if (task.isSuccessful()) {
+                QuerySnapshot querySnapshot = task.getResult();
+                for (DocumentSnapshot documentSnapshot : querySnapshot.getDocuments()) {
+                    UserModel userModel = UserModel.fromFirestore(documentSnapshot);
+                    if (userModel != null) {
+                        userList.add(userModel);
+                    }
+                }
+                return userList;
+            } else {
+                throw Objects.requireNonNull(task.getException());
+            }
+        });
     }
 
     @Override

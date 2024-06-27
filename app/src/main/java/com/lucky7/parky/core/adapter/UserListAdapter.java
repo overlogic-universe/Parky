@@ -48,7 +48,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ListVi
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         UserModel userModel = userModelList.get(position);
         holder.username.setText(userModel.getName());
-        holder.studentId.setText(userModel.getId());
+        holder.studentId.setText(userModel.getStudentId());
         holder.licensePlate.setText(userModel.getPlate());
         holder.deleteUser.setOnClickListener(view -> {
             itemClickListener.onItemClick(userModelList.get(position));

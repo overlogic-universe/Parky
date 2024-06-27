@@ -20,14 +20,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
 import com.lucky7.parky.core.adapter.UserListAdapter;
+import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.di.AppComponent;
 import com.lucky7.parky.features.auth.data.model.UserModel;
+import com.lucky7.parky.features.auth.domain.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 public class UserListActivity extends AppCompatActivity implements View.OnClickListener {
+    @Inject
+    UserRepository userRepository;
     private ImageView ivBackToHomeAdmin;
     private RecyclerView rvUserList;
     private final ArrayList<UserModel> userModelList = new ArrayList<>();
@@ -44,6 +53,10 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApp myApp = (MyApp) getApplicationContext();
+        AppComponent appComponent = myApp.getAppComponent();
+        appComponent.inject(this);
+
         setContentView(R.layout.activity_user_list);
 
         initView();
@@ -83,26 +96,20 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void getUserList() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
-        reference.addValueEventListener(new ValueEventListener() {
+        userRepository.getAllUsers(new RepositoryCallback<List<UserModel>>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onSuccess(List<UserModel> result) {
                 userModelList.clear();
-
-                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    UserModel userModel = userSnapshot.getValue(UserModel.class);
-
-                    userModelList.add(userModel);
-                }
+                userModelList.addAll(result);
                 showUserList();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onError(Exception e) {
+                Toast.makeText(UserListActivity.this, "Failed to get users", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void showUserList() {
@@ -129,26 +136,32 @@ public class UserListActivity extends AppCompatActivity implements View.OnClickL
         });
 
         tvConfirmDeleteUser.setOnClickListener(v -> {
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-//            DatabaseReference dataRef = reference.child(userModel.getStudentId());
+            userRepository.deleteUser(userModel, new RepositoryCallback<Void>() {
+                @Override
+                public void onSuccess(Void result) {
+                    userModelList.remove(userModel);
+                    showUserList();
+                    Toast.makeText(UserListActivity.this, "Successfully deleted user", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
 
-//            dataRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                @Override
-//                public void onSuccess(Void unused) {
-//                    Toast.makeText(UserListActivity.this, "Successfully deleted user", Toast.LENGTH_SHORT).show();
-//                    dialog.dismiss();
-//                }
-//            });
+                @Override
+                public void onError(Exception e) {
+                    Toast.makeText(UserListActivity.this, "Failed to delete user", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+
         });
     }
 
     private void filterList(String text) {
         ArrayList<UserModel> filteredList = new ArrayList<>();
-//        for (UserModel userModel : userModelList) {
-//            if (userModel.getStudentId().toLowerCase().contains(text.toLowerCase()) || userModel.getName().toLowerCase().contains(text.toLowerCase())) {
-//                filteredList.add(userModel);
-//            }
-//        }
+        for (UserModel userModel : userModelList) {
+            if (userModel.getStudentId().toLowerCase().contains(text.toLowerCase()) || userModel.getName().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(userModel);
+            }
+        }
         if (!filteredList.isEmpty()) {
             userListAdapter.setFilteredList(filteredList);
         }

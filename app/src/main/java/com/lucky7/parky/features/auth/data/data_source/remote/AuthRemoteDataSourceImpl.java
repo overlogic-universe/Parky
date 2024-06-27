@@ -18,10 +18,8 @@ import java.util.Objects;
 import javax.inject.Inject;
 
 public class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-    @Inject
-    FirebaseAuth auth;
-    @Inject
-    FirebaseFirestore firestore;
+    private final FirebaseAuth auth;
+    private final FirebaseFirestore firestore;
 
     @Inject
     public AuthRemoteDataSourceImpl(FirebaseFirestore firestore, FirebaseAuth auth){
