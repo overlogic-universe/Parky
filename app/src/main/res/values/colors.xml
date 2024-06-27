@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lightBlue">#6B85C1</color>
     <color name="darkBlue">#4a5c86</color>
+    <color name="selected_tab_color">#6B85C1</color>
+    <color name="unselected_tab_color">#0064D3</color>
 </resources>

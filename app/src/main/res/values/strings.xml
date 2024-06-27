@@ -52,4 +52,7 @@
     <string name="logout">Logout</string>
     <string name="email">Email</string>
     <string name="delete">Delete</string>
+    <string name="parked">Parked</string>
+    <string name="parking_history">Parking History</string>
+    <string name="empty_data">Empty data</string>
 </resources>

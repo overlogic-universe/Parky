@@ -13,6 +13,8 @@ import com.lucky7.parky.features.park.presentation.HistoryActivity;
 import com.lucky7.parky.features.auth.presentation.LoginActivity;
 import com.lucky7.parky.features.park.data.data_source.remote.ParkHistoryRemoteDataSourceImpl;
 import com.lucky7.parky.features.park.data.repository.ParkHistoryRepositoryImpl;
+import com.lucky7.parky.features.park.presentation.ParkedUserFragment;
+import com.lucky7.parky.features.park.presentation.ParkingHistoryFragment;
 import com.lucky7.parky.features.park.presentation.QRCodeScannerActivity;
 import com.lucky7.parky.features.auth.presentation.UserHomeActivity;
 import com.lucky7.parky.features.auth.presentation.UserListActivity;
@@ -45,4 +47,6 @@ public interface AppComponent {
     void inject(UserHomeActivity userHomeActivity);
     void inject(AdminHomeActivity adminHomeActivity);
     void inject(UserListActivity userListActivity);
+    void inject(ParkedUserFragment parkedUserFragment);
+    void inject(ParkingHistoryFragment parkingHistoryFragment);
 }

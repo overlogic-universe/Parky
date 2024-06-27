@@ -107,8 +107,7 @@ public class AuthRepositoryImpl implements AuthRepository {
                 QuerySnapshot querySnapshot = task.getResult();
 
                 if (!querySnapshot.isEmpty()) {
-                    AdminModel adminModel=  querySnapshot.getDocuments().get(0).toObject(AdminModel.class);
-                    assert adminModel != null;
+                    AdminModel adminModel= AdminModel.fromFirestore(querySnapshot.getDocuments().get(0));
                     adminModel.setId(adminId);
                     callback.onSuccess(adminModel);
                     return adminModel;

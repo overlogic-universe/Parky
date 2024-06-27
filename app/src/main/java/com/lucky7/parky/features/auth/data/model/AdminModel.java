@@ -5,8 +5,10 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.lucky7.parky.core.constant.firestore.FieldConstant;
 import com.lucky7.parky.features.auth.domain.entity.Authentication;
+import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,6 +70,14 @@ public class AdminModel extends Authentication implements Parcelable {
         result.put(FieldConstant.NAME, getName());
         result.put(FieldConstant.EMAIL, getEmail());
         return result;
+    }
+
+    public static AdminModel fromFirestore(DocumentSnapshot document) {
+        AdminModel adminModel = new AdminModel();
+        adminModel.setId(document.getString(FieldConstant.ADMIN_ID));
+        adminModel.setName(document.getString(FieldConstant.NAME));
+        adminModel.setEmail(document.getString(FieldConstant.EMAIL));
+        return adminModel;
     }
 
     @Override

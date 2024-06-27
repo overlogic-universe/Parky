@@ -14,6 +14,7 @@ import java.util.List;
 
 public interface ParkHistoryRepository {
     void getAllHistories(RepositoryCallback<List<ParkHistoryModel>> callback);
+    void getUserModelsForParkHistories(List<ParkHistoryModel> parkHistories, RepositoryCallback<List<ParkHistoryModel>> callback);
     void getUserParkHistory(UserModel userModel, RepositoryCallback<QuerySnapshot> callback);
     void addParkHistory(ParkHistoryModel parkHistoryModel, UserModel userModel, RepositoryCallback<DocumentReference> callback);
 

@@ -114,7 +114,6 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
     }
 
     private void checkUser(String userId) {
-        Log.d("FREEE", "checkUser: " + userId);
 
         userRepository.updateParkStatus(userId, currentDate, new RepositoryCallback<Void>() {
             @Override

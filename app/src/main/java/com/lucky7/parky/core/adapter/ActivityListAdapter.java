@@ -9,15 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lucky7.parky.R;
-import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
+import com.lucky7.parky.features.auth.data.model.UserModel;
 
 import java.util.ArrayList;
 
 public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapter.ListViewHolder> {
-    private ArrayList<ParkHistoryModel> parkHistoryList;
+    private ArrayList<UserModel> userModelList;
 
-    public ActivityListAdapter(ArrayList<ParkHistoryModel> parkHistoryList) {
-        this.parkHistoryList = parkHistoryList;
+    public ActivityListAdapter(ArrayList<UserModel> userModelList) {
+        this.userModelList = userModelList;
     }
 
     public static class ListViewHolder extends RecyclerView.ViewHolder {
@@ -45,20 +45,20 @@ public class ActivityListAdapter extends RecyclerView.Adapter<ActivityListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ActivityListAdapter.ListViewHolder holder, int position) {
-        ParkHistoryModel parkHistory = parkHistoryList.get(position);
-        holder.licensePlate.setText(parkHistory.getUserModel().getPlate());
-        holder.studentId.setText(parkHistory.getUserModel().getId());
-        holder.status.setText(parkHistory.getUserModel().getParkStatus());
-        holder.parkingDateTime.setText(parkHistory.getUserModel().getLastActivity().toString());
+        UserModel userModel = userModelList.get(position);
+        holder.licensePlate.setText(userModel.getPlate());
+        holder.studentId.setText(userModel.getStudentId());
+        holder.status.setText(userModel.getParkStatus());
+        holder.parkingDateTime.setText(userModel.getLastActivity());
     }
 
     @Override
     public int getItemCount() {
-        return parkHistoryList.size();
+        return userModelList.size();
     }
 
-    public void setFilteredList(ArrayList<ParkHistoryModel> filteredList) {
-        this.parkHistoryList = filteredList;
+    public void setFilteredList(ArrayList<UserModel> filteredList) {
+        this.userModelList = filteredList;
         notifyDataSetChanged();
     }
 }

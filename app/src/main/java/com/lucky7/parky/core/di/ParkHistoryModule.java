@@ -1,6 +1,7 @@
 package com.lucky7.parky.core.di;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
 import com.lucky7.parky.features.park.data.data_source.remote.ParkHistoryRemoteDataSource;
 import com.lucky7.parky.features.park.data.data_source.remote.ParkHistoryRemoteDataSourceImpl;
 import com.lucky7.parky.features.park.data.repository.ParkHistoryRepositoryImpl;
@@ -22,7 +23,7 @@ public class ParkHistoryModule{
 
     @Provides
     @Singleton
-    public ParkHistoryRepository provideParkHistoryRepository(ParkHistoryRemoteDataSource authRemoteDataSource) {
-        return new ParkHistoryRepositoryImpl(authRemoteDataSource);
+    public ParkHistoryRepository provideParkHistoryRepository(ParkHistoryRemoteDataSource authRemoteDataSource, AuthRepository authRepository) {
+        return new ParkHistoryRepositoryImpl(authRemoteDataSource, authRepository);
     }
 }

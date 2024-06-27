@@ -63,17 +63,44 @@
             app:queryHint="@string/search_by_student_id_or_plate"
             app:theme="@style/AppSearchView" />
 
+        <LinearLayout
+            android:id="@+id/tab_buttons"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_parked"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/parked"
+                android:background="@drawable/tab_selector"
+                />
+
+            <Button
+                android:id="@+id/btn_parking_history"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="@string/parking_history"
+                android:background="@drawable/tab_selector"
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
 
-    <ScrollView
+    <FrameLayout
+        android:layout_below="@+id/ll_header_history"
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_header_history"
-        android:scrollbars="none">
+        android:layout_height="match_parent"
+         />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_activity_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
 </RelativeLayout>

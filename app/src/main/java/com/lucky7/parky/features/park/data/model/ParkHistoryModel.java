@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.ServerTimestamp;
 import com.google.firebase.firestore.auth.User;
 import com.lucky7.parky.core.constant.firestore.FieldConstant;
@@ -83,6 +84,15 @@ public class ParkHistoryModel implements Parcelable {
 
         return result;
     }
+    public static ParkHistoryModel fromFirestore(DocumentSnapshot document) {
+        ParkHistoryModel parkHistoryModel = new ParkHistoryModel();
+        parkHistoryModel.setId(document.getString(FieldConstant.PARK_HISTORY_ID));
+        parkHistoryModel.setUserId(document.getString(FieldConstant.USER_ID));
+        parkHistoryModel.setParkDateTime(document.getString(FieldConstant.PARK_DATE_TIME));
+
+        return parkHistoryModel;
+    }
+
     public static ParkHistoryModel fromString(String id, String userId, UserModel userModel, String parkDateTime) {
         return new ParkHistoryModel(id, userId, userModel, parkDateTime);
     }

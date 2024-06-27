@@ -33,7 +33,7 @@ public class ParkHistoryRemoteDataSourceImpl implements ParkHistoryRemoteDataSou
 
     @Override
     public Task<QuerySnapshot> getUserParkHistory(UserModel userModel) {
-        CollectionReference ref =  CollectionReferenceUtil.getParkHistoryCollection(firestore);
+        CollectionReference ref = CollectionReferenceUtil.getParkHistoryCollection(firestore);
         return QueryUtil.whereIsEqualToUserId(FieldConstant.USER_ID,userModel.getId(), ref).get();
     }
 

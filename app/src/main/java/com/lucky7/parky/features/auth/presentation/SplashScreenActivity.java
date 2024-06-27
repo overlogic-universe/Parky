@@ -22,17 +22,16 @@ import javax.inject.Inject;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
-
     @Inject
     AuthRepository authRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash_screen);
         MyApp myApp = (MyApp) getApplicationContext();
         AppComponent appComponent = myApp.getAppComponent();
         appComponent.inject(this);
-        setContentView(R.layout.activity_splash_screen);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -92,7 +91,6 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void navigateToUserHome(UserModel userModel) {
-        Log.d("WOWOWO", "navigateToUserHome: " + userModel);
         Intent intent = new Intent(SplashScreenActivity.this, UserHomeActivity.class);
         intent.putExtra(UserHomeActivity.EXTRA_USER, userModel);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
