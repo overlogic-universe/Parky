@@ -95,7 +95,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
     private void performAdminLogin(String email, String password) {
-
         AdminModel adminModel = new AdminModel(email, password);
 
         authRepository.loginWithEmailAndPasswordAdmin(adminModel, new RepositoryCallback<AdminModel>() {

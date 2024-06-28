@@ -6,6 +6,7 @@
     <color name="lightGrey">#DFDFDF</color>
     <color name="grey">#808080</color>
     <color name="black">#FF000000</color>
+    <color name="splashScreenColor">#171717</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lightBlue">#6B85C1</color>
     <color name="darkBlue">#4a5c86</color>
