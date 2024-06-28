@@ -1,5 +1,6 @@
 package com.lucky7.parky.core.adapter;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lucky7.parky.R;
+import com.lucky7.parky.core.entity.HistoryStatus;
 import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class ParkHistoryListAdapter extends RecyclerView.Adapter<ParkHistoryList
             licensePlate = itemView.findViewById(R.id.tv_license_plate_activity);
             studentId = itemView.findViewById(R.id.tv_student_id_activity);
             parkingDateTime = itemView.findViewById(R.id.tv_date_activity);
+            status = itemView.findViewById(R.id.tv_status_activity);
         }
     }
 
@@ -47,7 +50,14 @@ public class ParkHistoryListAdapter extends RecyclerView.Adapter<ParkHistoryList
         ParkHistoryModel parkHistory = parkHistoryList.get(position);
         holder.licensePlate.setText(parkHistory.getUserModel().getPlate());
         holder.studentId.setText(parkHistory.getUserModel().getStudentId());
-        holder.parkingDateTime.setText(parkHistory.getUserModel().getLastActivity());
+        holder.parkingDateTime.setText(parkHistory.getParkDateTime());
+        holder.status.setText(parkHistory.getHistoryStatus());
+
+        if (HistoryStatus.IN.toString().equals(parkHistory.getHistoryStatus())) {
+            holder.status.setBackgroundResource(R.drawable.border_in);
+        } else if (HistoryStatus.OUT.toString().equals(parkHistory.getHistoryStatus())) {
+            holder.status.setBackgroundResource(R.drawable.border_out);
+        }
     }
 
     @Override

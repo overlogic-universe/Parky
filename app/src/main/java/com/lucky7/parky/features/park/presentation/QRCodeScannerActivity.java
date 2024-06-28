@@ -28,6 +28,7 @@ import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
 import com.lucky7.parky.core.callback.RepositoryCallback;
 import com.lucky7.parky.core.di.AppComponent;
+import com.lucky7.parky.core.entity.HistoryStatus;
 import com.lucky7.parky.core.entity.ParkStatus;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
@@ -41,6 +42,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -145,8 +147,9 @@ public class QRCodeScannerActivity extends AppCompatActivity implements View.OnC
     }
 
     private void addParkHistory(String userId, UserModel userModel){
+        String historyStatus = Objects.equals(userModel.getParkStatus(), ParkStatus.PARKED.toString()) ? HistoryStatus.IN.toString() :  HistoryStatus.OUT.toString();
 
-        ParkHistoryModel parkHistoryModel = new ParkHistoryModel(null, userId, currentDate);
+        ParkHistoryModel parkHistoryModel = new ParkHistoryModel(null, userId, currentDate, historyStatus);
         parkHistoryRepository.addParkHistory(parkHistoryModel, userModel, new RepositoryCallback<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference result) {

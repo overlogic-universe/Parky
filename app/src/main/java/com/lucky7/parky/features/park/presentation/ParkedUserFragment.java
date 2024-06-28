@@ -18,6 +18,7 @@ import com.lucky7.parky.R;
 import com.lucky7.parky.core.adapter.ActivityListAdapter;
 import com.lucky7.parky.core.callback.RepositoryCallback;
 import com.lucky7.parky.core.entity.ParkStatus;
+import com.lucky7.parky.core.entity.SearchableFragment;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.features.auth.domain.repository.UserRepository;
 
@@ -27,7 +28,7 @@ import java.util.Objects;
 
 import javax.inject.Inject;
 
-public class ParkedUserFragment extends Fragment {
+public class ParkedUserFragment extends Fragment implements SearchableFragment {
     @Inject
     UserRepository userRepository;
     private RecyclerView rvUserList;
@@ -93,6 +94,18 @@ public class ParkedUserFragment extends Fragment {
         if(userModelList.isEmpty()){
             tvEmptyData.setText(R.string.empty_data);
         }
+    }
+
+    @Override
+    public void filterList(String query) {
+        ArrayList<UserModel> filteredList = new ArrayList<>();
+        for (UserModel userModel : userModelList) {
+            if (userModel.getStudentId().toLowerCase().contains(query.toLowerCase()) ||
+                    userModel.getPlate().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(userModel);
+            }
+        }
+        activityListAdapter.setFilteredList(filteredList);
     }
 }
 

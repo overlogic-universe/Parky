@@ -33,15 +33,12 @@ public class AuthRepositoryImpl implements AuthRepository {
     @Override
     public void loginWithEmailAndPasswordAdmin(AdminModel adminModel, RepositoryCallback<AdminModel> callback) {
         Task<AuthResult> authTask = authRemoteDataSource.loginWithEmailAndPasswordAdmin(adminModel);
-        authTask.continueWithTask(task -> {
+        authTask.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 String adminId = Objects.requireNonNull(task.getResult().getUser()).getUid();
-                authLocalDataSource.saveLoginStatus(true, SharedPreferenceConstant.KEY_ADMIN, adminId);
-                return getAdminFromFirestore(adminId, callback);
+                 getAdminFromFirestore(adminId, callback);
             } else {
-
                 callback.onError(task.getException());
-                throw Objects.requireNonNull(task.getException());
             }
         });
     }
@@ -49,14 +46,12 @@ public class AuthRepositoryImpl implements AuthRepository {
     @Override
     public void loginWithEmailAndPasswordUser(UserModel userModel, RepositoryCallback<UserModel> callback) {
         Task<AuthResult> authTask = authRemoteDataSource.loginWithEmailAndPasswordUser(userModel);
-        authTask.continueWithTask(task -> {
+        authTask.addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 String userId = Objects.requireNonNull(task.getResult().getUser()).getUid();
-                authLocalDataSource.saveLoginStatus(true, SharedPreferenceConstant.KEY_USER, userId);
-                return getUserFromFirestore(userId, callback);
+                getUserFromFirestore(userId, callback);
             } else {
                 callback.onError(task.getException());
-                throw Objects.requireNonNull(task.getException());
             }
         });
     }
@@ -77,17 +72,16 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
 
     @Override
-    public Task<UserModel> getUserFromFirestore(String userId, RepositoryCallback<UserModel> callback) {
+    public void getUserFromFirestore(String userId, RepositoryCallback<UserModel> callback) {
         Task<QuerySnapshot> userQuery = authRemoteDataSource.getUserFromFirestore(userId);
-        return userQuery.continueWith(task -> {
+        userQuery.continueWith(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot querySnapshot = task.getResult();
                 if (!querySnapshot.isEmpty()) {
                     UserModel userModel = UserModel.fromFirestore(querySnapshot.getDocuments().get(0));
-                    if(userModel.getId() == null){
+                    if (userModel.getId() == null) {
                         userModel.setId(userId);
                     }
-                    Log.d("FREEEE", "getUserFromFirestore REPOOO: " + userModel);
                     callback.onSuccess(userModel);
                     return userModel;
                 } else {
@@ -100,14 +94,14 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
 
     @Override
-    public Task<AdminModel> getAdminFromFirestore(String adminId, RepositoryCallback<AdminModel> callback) {
+    public void getAdminFromFirestore(String adminId, RepositoryCallback<AdminModel> callback) {
         Task<QuerySnapshot> userQuery = authRemoteDataSource.getAdminFromFirestore(adminId);
-        return userQuery.continueWith(task -> {
+        userQuery.continueWith(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot querySnapshot = task.getResult();
 
                 if (!querySnapshot.isEmpty()) {
-                    AdminModel adminModel= AdminModel.fromFirestore(querySnapshot.getDocuments().get(0));
+                    AdminModel adminModel = AdminModel.fromFirestore(querySnapshot.getDocuments().get(0));
                     adminModel.setId(adminId);
                     callback.onSuccess(adminModel);
                     return adminModel;
@@ -119,6 +113,11 @@ public class AuthRepositoryImpl implements AuthRepository {
                 throw Objects.requireNonNull(task.getException());
             }
         });
+    }
+
+    @Override
+    public void saveLoginStatus(boolean isLoggedIn, String userType, String userId) {
+        authLocalDataSource.saveLoginStatus(isLoggedIn, userType, userId);
     }
 
     @Override
@@ -139,6 +138,7 @@ public class AuthRepositoryImpl implements AuthRepository {
     @Override
     public void clearLoginStatus() {
         authLocalDataSource.clearLoginStatus();
+
     }
 
     @Override

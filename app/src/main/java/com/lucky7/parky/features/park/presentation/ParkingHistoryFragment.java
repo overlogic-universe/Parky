@@ -19,6 +19,7 @@ import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
 import com.lucky7.parky.core.adapter.ParkHistoryListAdapter;
 import com.lucky7.parky.core.callback.RepositoryCallback;
+import com.lucky7.parky.core.entity.SearchableFragment;
 import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
 import com.lucky7.parky.features.park.domain.repository.ParkHistoryRepository;
 
@@ -27,7 +28,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ParkingHistoryFragment extends Fragment {
+public class ParkingHistoryFragment extends Fragment implements SearchableFragment {
     @Inject
     ParkHistoryRepository parkHistoryRepository;
     private RecyclerView rvHistoryList;
@@ -85,10 +86,15 @@ public class ParkingHistoryFragment extends Fragment {
         }
     }
 
-    public void setHistoryList(ArrayList<ParkHistoryModel> historyList) {
-        this.historyList = historyList;
-        if (parkHistoryListAdapter != null) {
-            parkHistoryListAdapter.notifyDataSetChanged();
+    @Override
+    public void filterList(String query) {
+        ArrayList<ParkHistoryModel> filteredList = new ArrayList<>();
+        for (ParkHistoryModel parkHistoryModel : historyList) {
+            if (parkHistoryModel.getUserModel().getStudentId().toLowerCase().contains(query.toLowerCase()) ||
+                    parkHistoryModel.getUserModel().getPlate().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(parkHistoryModel);
+            }
         }
+        parkHistoryListAdapter.setFilteredList(filteredList);
     }
 }

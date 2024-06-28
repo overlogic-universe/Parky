@@ -25,6 +25,7 @@ import com.lucky7.parky.core.adapter.ActivityListAdapter;
 import com.lucky7.parky.core.callback.RepositoryCallback;
 import com.lucky7.parky.core.di.AppComponent;
 import com.lucky7.parky.core.entity.ParkStatus;
+import com.lucky7.parky.core.entity.SearchableFragment;
 import com.lucky7.parky.core.util.firestore.CollectionReferenceUtil;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
@@ -79,7 +80,10 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterList(newText);
+                Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                if (currentFragment instanceof SearchableFragment) {
+                    ((SearchableFragment) currentFragment).filterList(newText);
+                }
                 return false;
             }
         });
@@ -91,14 +95,18 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v.getId() == R.id.iv_back_to_home_admin) {
             super.getOnBackPressedDispatcher().onBackPressed();
-        }else if (v.getId() == R.id.btn_parked) {
+        } else if (v.getId() == R.id.btn_parked) {
             setActiveFragment(parkedUserFragment);
             btnParked.setSelected(true);
             btnParkingHistory.setSelected(false);
+            btnParked.invalidate();
+            btnParkingHistory.invalidate();
         } else if (v.getId() == R.id.btn_parking_history) {
             setActiveFragment(parkingHistoryFragment);
             btnParked.setSelected(false);
             btnParkingHistory.setSelected(true);
+            btnParked.invalidate();
+            btnParkingHistory.invalidate();
         }
     }
 
@@ -108,6 +116,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
 
         setActiveFragment(parkedUserFragment);
         btnParked.setSelected(true);
+        btnParkingHistory.setSelected(false);
     }
 
 
@@ -116,6 +125,7 @@ public class HistoryActivity extends AppCompatActivity implements View.OnClickLi
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
+
 
 
     private void filterList(String text) {

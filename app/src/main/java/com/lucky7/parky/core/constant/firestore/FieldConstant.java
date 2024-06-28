@@ -12,4 +12,5 @@ public class FieldConstant {
     public static String PARK_DATE_TIME = "park_datetime";
     public static String LAST_ACTIVITY = "last_activity";
     public static String PARK_STATUS = "park_status";
+    public static String HISTORY_STATUS = "history_status";
 }

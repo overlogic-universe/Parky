@@ -22,6 +22,7 @@ import com.lucky7.parky.MyApp;
 import com.lucky7.parky.R;
 import com.lucky7.parky.core.callback.RepositoryCallback;
 
+import com.lucky7.parky.core.constant.shared_preference.SharedPreferenceConstant;
 import com.lucky7.parky.core.di.AppComponent;
 import com.lucky7.parky.features.auth.data.model.AdminModel;
 import com.lucky7.parky.features.auth.data.model.UserModel;
@@ -36,7 +37,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     AuthRepository authRepository;
     private Button btnLogin;
     private EditText edStudentId, edPass;
-    private boolean isLoginFailed;
 
     private void initView() {
         btnLogin = findViewById(R.id.btn_login);
@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         AppComponent appComponent = myApp.getAppComponent();
         appComponent.inject(this);
         setContentView(R.layout.activity_login);
-        isLoginFailed = false;
 
         initView();
 
@@ -67,12 +66,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (!validateEmail(email) || !validatePassword(pass)) {
                 showLoginFailedDialog("Please fill it in!");
             } else {
-                isLoginFailed = false;
-                performUserLogin(email, pass);
                 performAdminLogin(email, pass);
-                if(isLoginFailed){
-                    showLoginFailedDialog("Your email or password is wrong");
-                }
             }
         }
     }
@@ -95,9 +89,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onError(Exception e) {
-                isLoginFailed = true;
+                showLoginFailedDialog("Your email or password is wrong");
             }
-
 
         });
     }
@@ -113,12 +106,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onError(Exception e) {
-                isLoginFailed = true;
+                performUserLogin(email, password);
             }
         });
     }
 
     private void navigateToAdminHome(AdminModel adminModel) {
+        authRepository.saveLoginStatus(true, SharedPreferenceConstant.KEY_ADMIN, adminModel.getId());
         Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
         intent.putExtra(AdminHomeActivity.EXTRA_ADMIN, adminModel);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -126,6 +120,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void navigateToUserHome(UserModel userModel) {
+        authRepository.saveLoginStatus(true, SharedPreferenceConstant.KEY_USER, userModel.getId());
         Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
         intent.putExtra(UserHomeActivity.EXTRA_USER, userModel);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

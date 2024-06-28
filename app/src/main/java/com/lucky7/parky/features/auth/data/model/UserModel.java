@@ -149,6 +149,6 @@ public class UserModel extends Authentication implements Parcelable {
         parcel.writeString(getStudentId());
         parcel.writeString(getPlate());
         parcel.writeString(getParkStatus());
-        parcel.writeSerializable(getLastActivity());
+        parcel.writeString(getLastActivity());
     }
 }

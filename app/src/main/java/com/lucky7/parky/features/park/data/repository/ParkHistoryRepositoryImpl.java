@@ -13,6 +13,7 @@ import com.lucky7.parky.features.park.data.model.ParkHistoryModel;
 import com.lucky7.parky.features.park.domain.repository.ParkHistoryRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,6 +37,8 @@ public class ParkHistoryRepositoryImpl implements ParkHistoryRepository {
                         ParkHistoryModel parkHistory =ParkHistoryModel.fromFirestore(document);
                         parkHistories.add(parkHistory);
                     }
+                    parkHistories.sort((p1, p2) -> p2.getParkDateTime().compareTo(p1.getParkDateTime()));
+
                     getUserModelsForParkHistories(parkHistories, callback);
                 } else {
                     callback.onError(task.getException());

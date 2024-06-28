@@ -107,7 +107,7 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="40dp"
                     android:fontFamily="@font/poppinssemibold"
-                    android:text="@string/date"
+                    android:text="@string/last_activity"
                     android:textColor="@color/grey"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/ticket_shape"
@@ -118,9 +118,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssemibold"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/tv_date"
                     app:layout_constraintTop_toBottomOf="@id/tv_date" />
+                <TextView
+                    android:id="@+id/tv_the_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@id/tv_the_date"
+                    app:layout_constraintTop_toBottomOf="@id/tv_the_date" />
 
                 <TextView
                     android:id="@+id/tv_nim"
@@ -155,8 +163,8 @@
                     android:text="@string/license_plate"
                     android:textColor="@color/grey"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/tv_the_date"
-                    app:layout_constraintTop_toBottomOf="@id/tv_the_date" />
+                    app:layout_constraintStart_toStartOf="@id/tv_the_time"
+                    app:layout_constraintTop_toBottomOf="@id/tv_the_time" />
 
                 <TextView
                     android:id="@+id/tv_the_plat"
@@ -164,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinssemibold"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="@id/tv_the_date"
+                    app:layout_constraintStart_toStartOf="@id/tv_the_time"
                     app:layout_constraintTop_toBottomOf="@id/tv_plat" />
 
                 <TextView
@@ -217,7 +225,6 @@
                     app:layout_constraintEnd_toEndOf="@id/ticket_shape"
                     app:layout_constraintStart_toStartOf="@id/ticket_shape"
                     app:layout_constraintTop_toBottomOf="@id/iv_barcode" />
-
 
                 <View
                     android:layout_width="0dp"

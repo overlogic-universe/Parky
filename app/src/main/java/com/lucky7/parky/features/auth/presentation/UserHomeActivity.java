@@ -13,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
@@ -43,8 +44,10 @@ import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
 import com.lucky7.parky.features.auth.domain.repository.UserRepository;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -60,6 +63,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
     private UserModel userModel;
     private TextView tvUsername;
     private TextView tvDate;
+    private TextView tvTime;
     private TextView tvStudentId;
     private TextView tvPlate;
     private TextView tvStatus;
@@ -80,6 +84,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
 
         tvUsername = findViewById(R.id.tv_username);
         tvDate = findViewById(R.id.tv_the_date);
+        tvTime = findViewById(R.id.tv_the_time);
         tvStudentId = findViewById(R.id.tv_the_nim);
         tvPlate = findViewById(R.id.tv_the_plat);
         tvStatus = findViewById(R.id.tv_the_status);
@@ -87,10 +92,6 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
         refresh = findViewById(R.id.refresh);
         ivLogout = findViewById(R.id.iv_logout);
         ivToChangePass = findViewById(R.id.iv_to_change_pass);
-
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        currentDate = dateFormat.format(calendar.getTime());
 
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_change_password);
@@ -105,8 +106,13 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
         }
 
         if (userModel != null) {
+            final String lastActivity = userModel.getLastActivity();
+            List<String> splittedLastActivity = Arrays.asList(lastActivity.split(" "));
+            String dateActivity = splittedLastActivity.get(0);
+            String timeActivity = splittedLastActivity.get(1);
             tvUsername.setText(userModel.getName());
-            tvDate.setText(currentDate);
+            tvDate.setText(dateActivity);
+            tvTime.setText(timeActivity);
             tvStudentId.setText(userModel.getStudentId());
             tvPlate.setText(userModel.getPlate());
             tvStatus.setText(userModel.getParkStatus());
@@ -186,6 +192,7 @@ public class UserHomeActivity extends AppCompatActivity implements SwipeRefreshL
             @Override
             public void onSuccess(UserModel userModel) {
                 tvStatus.setText(userModel.getParkStatus());
+                tvDate.setText(userModel.getLastActivity());
             }
 
             @Override
