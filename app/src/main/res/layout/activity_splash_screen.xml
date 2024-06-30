@@ -5,49 +5,49 @@
     android:id="@+id/motion_splash_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/splashScreenColor"
+    android:background="@drawable/splash_screen_pict"
     tools:context=".features.auth.presentation.SplashScreenActivity">
 
-    <ImageView
-        android:id="@+id/iv_white_parky_logo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/logo_parky_transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_white_parky_logo"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:src="@drawable/logo_parky_transparent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:tint="@color/white" />-->
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="15dp"-->
+<!--        android:gravity="center"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
 
-        <TextView
-            android:id="@+id/tv_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsregular"
-            android:text="@string/from"
-            android:textColor="@color/lightGrey"
-            android:textSize="13sp"
-             />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_from"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/poppinsregular"-->
+<!--            android:text="@string/from"-->
+<!--            android:textColor="@color/lightGrey"-->
+<!--            android:textSize="13sp"-->
+<!--             />-->
 
-        <TextView
-            android:id="@+id/tv_lucky_seven"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppinsregular"
-            android:text="@string/overlogic_universe"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-    </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_lucky_seven"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fontFamily="@font/poppinsregular"-->
+<!--            android:text="@string/overlogic_universe"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="14sp" />-->
+<!--    </LinearLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

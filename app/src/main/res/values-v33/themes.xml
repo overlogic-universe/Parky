@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SplashTheme" parent="Theme.Design.NoActionBar">
+        <item name="android:windowBackground">@color/splashScreenColor</item>
+        <item name="android:logo">@drawable/logo_parky_transparent</item>
+        <item name="android:windowSplashScreenBehavior">icon_preferred</item>
+    </style>
+</resources>

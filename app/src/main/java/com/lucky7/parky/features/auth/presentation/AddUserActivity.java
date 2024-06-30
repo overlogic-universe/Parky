@@ -18,6 +18,7 @@ import com.lucky7.parky.R;
 import com.lucky7.parky.core.callback.RepositoryCallback;
 import com.lucky7.parky.core.di.AppComponent;
 import com.lucky7.parky.core.entity.ParkStatus;
+import com.lucky7.parky.core.util.common.EmailSender;
 import com.lucky7.parky.features.auth.data.model.UserModel;
 import com.lucky7.parky.features.auth.data.repository.UserRepositoryImpl;
 import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
@@ -74,6 +75,8 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             authRepository.signUpWithEmailAndPasswordUser(userModel, new RepositoryCallback<UserModel>() {
                 @Override
                 public void onSuccess(UserModel result) {
+                    EmailSender emailSender = new EmailSender(email, password);
+                    emailSender.sendEmail();
                     Toast.makeText(AddUserActivity.this, "User added successfully", Toast.LENGTH_SHORT).show();
                     getOnBackPressedDispatcher().onBackPressed();
                 }

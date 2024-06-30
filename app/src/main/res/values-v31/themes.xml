@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/splashScreenColor</item>
+        <item name="android:logo">@drawable/logo_parky_transparent</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/from_overlogic</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo_parky_transparent</item>
+    </style>
+</resources>

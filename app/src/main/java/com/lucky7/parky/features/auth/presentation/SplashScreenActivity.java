@@ -29,7 +29,6 @@ import javax.inject.Inject;
 public class SplashScreenActivity extends AppCompatActivity {
     @Inject
     AuthRepository authRepository;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +70,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         boolean isLoggedIn = authRepository.isLoggedIn();
         String userType = authRepository.getUserType();
         String userId = authRepository.getUserId();
-        Log.d("FREEE", "=====================: " );
-        Log.d("FREEE", "userType: "  + userType);
-        Log.d("FREEE", "userId: " + userId);
-        Log.d("FREEE", "isLoggedIn: " + isLoggedIn);
+//        Log.d("FREEE", "=====================: " );
+//        Log.d("FREEE", "userType: "  + userType);
+//        Log.d("FREEE", "userId: " + userId);
+//        Log.d("FREEE", "isLoggedIn: " + isLoggedIn);
 
         if (isLoggedIn) {
             if (SharedPreferenceConstant.KEY_ADMIN.equals(userType)) {
