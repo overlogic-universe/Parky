@@ -78,7 +78,7 @@ public class EmailSender {
                     + "<ol>"
                     + "<li><b>Login ke Aplikasi Parky:</b></li>"
                     + "<ul>"
-                    + "<li>Unduh dan instal aplikasi Parky dari <a href='https://drive.google.com/file/d/1yef-MsBDr4k_j9i5Qac02RgbcsYtKDH-/view?usp=sharing'>link ini</a>.</li>"
+                    + "<li>Unduh dan instal aplikasi Parky dari <a href='https://drive.google.com/drive/folders/1Uywot9T_bV-c_xyT1o1b8xl2OpxDkWjA?usp=drive_link'>link ini</a>.</li>"
                     + "<li>Buka aplikasi Parky di perangkat Anda.</li>"
                     + "<li>Masukkan email dan password yang telah diberikan di atas.</li>"
                     + "<li>Klik tombol <b>\"Login\"</b> untuk masuk ke dalam sistem.</li>"

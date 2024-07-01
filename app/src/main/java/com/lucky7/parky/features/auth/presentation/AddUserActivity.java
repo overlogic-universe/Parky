@@ -24,6 +24,10 @@ import com.lucky7.parky.features.auth.data.repository.UserRepositoryImpl;
 import com.lucky7.parky.features.auth.domain.repository.AuthRepository;
 import com.lucky7.parky.features.auth.domain.repository.UserRepository;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 public class AddUserActivity extends AppCompatActivity implements View.OnClickListener {
@@ -70,7 +74,7 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
             String email = edEmail.getText().toString().trim();
             String password = edPassword.getText().toString().trim();
 
-            UserModel userModel = new UserModel(null,username, studentId, plate, ParkStatus.NOT_PARKED.toString(),null, email, password);
+            UserModel userModel = new UserModel(null,username, studentId, plate, ParkStatus.NOT_PARKED.toString(),"No Activity", email, password);
 
             authRepository.signUpWithEmailAndPasswordUser(userModel, new RepositoryCallback<UserModel>() {
                 @Override
